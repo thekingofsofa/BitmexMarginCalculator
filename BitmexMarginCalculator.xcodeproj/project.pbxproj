@@ -1,0 +1,459 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		793401B0233CC81300FB082F /* InfoTextViewDataFiller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 793401AF233CC81300FB082F /* InfoTextViewDataFiller.swift */; };
+		7936C8B523390D54004AD81A /* NSMutableAttributedString+link.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7936C8B423390D54004AD81A /* NSMutableAttributedString+link.swift */; };
+		79732E562302DE7B0035E18F /* SegmentedControlExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79732E552302DE7B0035E18F /* SegmentedControlExtension.swift */; };
+		79862FFD2341E8FB00323FD8 /* LabelWithInfoButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79862FFC2341E8FB00323FD8 /* LabelWithInfoButton.swift */; };
+		79862FFF2341F7AD00323FD8 /* PopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79862FFE2341F7AD00323FD8 /* PopUpViewController.swift */; };
+		799D56B6231D670600FB9078 /* DoubleRemoveZerosExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 799D56B5231D670600FB9078 /* DoubleRemoveZerosExtension.swift */; };
+		79A7DAAB2334C43C000FE2B0 /* FontHandling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A7DAAA2334C43C000FE2B0 /* FontHandling.swift */; };
+		79A7DAAD2334CFD7000FE2B0 /* SettingsLauncher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A7DAAC2334CFD7000FE2B0 /* SettingsLauncher.swift */; };
+		79A7DAAF2334DE91000FE2B0 /* SettingsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A7DAAE2334DE91000FE2B0 /* SettingsTableViewCell.swift */; };
+		79A7DAB123350919000FE2B0 /* InfoTextViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A7DAB023350919000FE2B0 /* InfoTextViewController.swift */; };
+		79A7DAB323361812000FE2B0 /* LabelSegmentedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A7DAB223361812000FE2B0 /* LabelSegmentedView.swift */; };
+		79B97E79232A3803008F91FD /* ResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B97E78232A3803008F91FD /* ResultView.swift */; };
+		79B97E7F232BA1FA008F91FD /* Roboto-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 79B97E7B232BA1FA008F91FD /* Roboto-Medium.ttf */; };
+		79B97E80232BA1FA008F91FD /* Roboto-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 79B97E7C232BA1FA008F91FD /* Roboto-Light.ttf */; };
+		79B97E81232BA1FA008F91FD /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 79B97E7D232BA1FA008F91FD /* Roboto-Regular.ttf */; };
+		79B97E82232BA1FA008F91FD /* Roboto-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 79B97E7E232BA1FA008F91FD /* Roboto-Bold.ttf */; };
+		79B97E84232BA76C008F91FD /* UITextFieldWithDoneButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B97E83232BA76C008F91FD /* UITextFieldWithDoneButton.swift */; };
+		79D50FEA22F35A2E00719A72 /* TextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D50FE922F35A2E00719A72 /* TextFieldView.swift */; };
+		79D50FED22F35E5B00719A72 /* AutoLayoutEasyExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D50FEC22F35E5B00719A72 /* AutoLayoutEasyExtension.swift */; };
+		79D50FEF22F44D2F00719A72 /* OutputLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D50FEE22F44D2F00719A72 /* OutputLabelView.swift */; };
+		79D50FF122F46D2E00719A72 /* MarginCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D50FF022F46D2E00719A72 /* MarginCalculator.swift */; };
+		79EA03E0230A7AB9003DA9AE /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79EA03DF230A7AB9003DA9AE /* Settings.swift */; };
+		79FACA2D22F1D27D007F1445 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79FACA2C22F1D27D007F1445 /* AppDelegate.swift */; };
+		79FACA2F22F1D27D007F1445 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79FACA2E22F1D27D007F1445 /* MainViewController.swift */; };
+		79FACA3422F1D27F007F1445 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 79FACA3322F1D27F007F1445 /* Assets.xcassets */; };
+		79FACA3722F1D27F007F1445 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 79FACA3522F1D27F007F1445 /* LaunchScreen.storyboard */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		793401AF233CC81300FB082F /* InfoTextViewDataFiller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoTextViewDataFiller.swift; sourceTree = "<group>"; };
+		7936C8B423390D54004AD81A /* NSMutableAttributedString+link.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSMutableAttributedString+link.swift"; sourceTree = "<group>"; };
+		79732E552302DE7B0035E18F /* SegmentedControlExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentedControlExtension.swift; sourceTree = "<group>"; };
+		79862FFC2341E8FB00323FD8 /* LabelWithInfoButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelWithInfoButton.swift; sourceTree = "<group>"; };
+		79862FFE2341F7AD00323FD8 /* PopUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpViewController.swift; sourceTree = "<group>"; };
+		799D56B5231D670600FB9078 /* DoubleRemoveZerosExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleRemoveZerosExtension.swift; sourceTree = "<group>"; };
+		79A7DAAA2334C43C000FE2B0 /* FontHandling.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FontHandling.swift; sourceTree = "<group>"; };
+		79A7DAAC2334CFD7000FE2B0 /* SettingsLauncher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsLauncher.swift; sourceTree = "<group>"; };
+		79A7DAAE2334DE91000FE2B0 /* SettingsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewCell.swift; sourceTree = "<group>"; };
+		79A7DAB023350919000FE2B0 /* InfoTextViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoTextViewController.swift; sourceTree = "<group>"; };
+		79A7DAB223361812000FE2B0 /* LabelSegmentedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelSegmentedView.swift; sourceTree = "<group>"; };
+		79B97E78232A3803008F91FD /* ResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultView.swift; sourceTree = "<group>"; };
+		79B97E7B232BA1FA008F91FD /* Roboto-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Medium.ttf"; sourceTree = "<group>"; };
+		79B97E7C232BA1FA008F91FD /* Roboto-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Light.ttf"; sourceTree = "<group>"; };
+		79B97E7D232BA1FA008F91FD /* Roboto-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Regular.ttf"; sourceTree = "<group>"; };
+		79B97E7E232BA1FA008F91FD /* Roboto-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Bold.ttf"; sourceTree = "<group>"; };
+		79B97E83232BA76C008F91FD /* UITextFieldWithDoneButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextFieldWithDoneButton.swift; sourceTree = "<group>"; };
+		79D50FE922F35A2E00719A72 /* TextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldView.swift; sourceTree = "<group>"; };
+		79D50FEC22F35E5B00719A72 /* AutoLayoutEasyExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoLayoutEasyExtension.swift; sourceTree = "<group>"; };
+		79D50FEE22F44D2F00719A72 /* OutputLabelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutputLabelView.swift; sourceTree = "<group>"; };
+		79D50FF022F46D2E00719A72 /* MarginCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarginCalculator.swift; sourceTree = "<group>"; };
+		79EA03DF230A7AB9003DA9AE /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
+		79FACA2922F1D27D007F1445 /* BitmexMarginCalculator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BitmexMarginCalculator.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		79FACA2C22F1D27D007F1445 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		79FACA2E22F1D27D007F1445 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		79FACA3322F1D27F007F1445 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		79FACA3622F1D27F007F1445 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		79FACA3822F1D27F007F1445 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		79FACA2622F1D27D007F1445 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		79A7DAA72334C3BB000FE2B0 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				79FACA2E22F1D27D007F1445 /* MainViewController.swift */,
+				79A7DAAC2334CFD7000FE2B0 /* SettingsLauncher.swift */,
+				79A7DAB023350919000FE2B0 /* InfoTextViewController.swift */,
+				79862FFE2341F7AD00323FD8 /* PopUpViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		79B97E7A232BA1FA008F91FD /* fonts */ = {
+			isa = PBXGroup;
+			children = (
+				79B97E7B232BA1FA008F91FD /* Roboto-Medium.ttf */,
+				79B97E7C232BA1FA008F91FD /* Roboto-Light.ttf */,
+				79B97E7D232BA1FA008F91FD /* Roboto-Regular.ttf */,
+				79B97E7E232BA1FA008F91FD /* Roboto-Bold.ttf */,
+			);
+			path = fonts;
+			sourceTree = "<group>";
+		};
+		79D50FE422F358A500719A72 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				79B97E83232BA76C008F91FD /* UITextFieldWithDoneButton.swift */,
+				79D50FE922F35A2E00719A72 /* TextFieldView.swift */,
+				79D50FEE22F44D2F00719A72 /* OutputLabelView.swift */,
+				79B97E78232A3803008F91FD /* ResultView.swift */,
+				79A7DAAE2334DE91000FE2B0 /* SettingsTableViewCell.swift */,
+				79A7DAB223361812000FE2B0 /* LabelSegmentedView.swift */,
+				79862FFC2341E8FB00323FD8 /* LabelWithInfoButton.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		79D50FEB22F35D1E00719A72 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				79D50FEC22F35E5B00719A72 /* AutoLayoutEasyExtension.swift */,
+				79732E552302DE7B0035E18F /* SegmentedControlExtension.swift */,
+				799D56B5231D670600FB9078 /* DoubleRemoveZerosExtension.swift */,
+				79A7DAAA2334C43C000FE2B0 /* FontHandling.swift */,
+				7936C8B423390D54004AD81A /* NSMutableAttributedString+link.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		79EA03E1230A7CB9003DA9AE /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				79D50FF022F46D2E00719A72 /* MarginCalculator.swift */,
+				79EA03DF230A7AB9003DA9AE /* Settings.swift */,
+				793401AF233CC81300FB082F /* InfoTextViewDataFiller.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		79FACA2022F1D27D007F1445 = {
+			isa = PBXGroup;
+			children = (
+				79FACA2B22F1D27D007F1445 /* BitmexMarginCalculator */,
+				79FACA2A22F1D27D007F1445 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		79FACA2A22F1D27D007F1445 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				79FACA2922F1D27D007F1445 /* BitmexMarginCalculator.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		79FACA2B22F1D27D007F1445 /* BitmexMarginCalculator */ = {
+			isa = PBXGroup;
+			children = (
+				79EA03E1230A7CB9003DA9AE /* Model */,
+				79D50FE422F358A500719A72 /* Views */,
+				79A7DAA72334C3BB000FE2B0 /* Controller */,
+				79FACA2C22F1D27D007F1445 /* AppDelegate.swift */,
+				79D50FEB22F35D1E00719A72 /* Extension */,
+				79FACA3322F1D27F007F1445 /* Assets.xcassets */,
+				79FACA3522F1D27F007F1445 /* LaunchScreen.storyboard */,
+				79B97E7A232BA1FA008F91FD /* fonts */,
+				79FACA3822F1D27F007F1445 /* Info.plist */,
+			);
+			path = BitmexMarginCalculator;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		79FACA2822F1D27D007F1445 /* BitmexMarginCalculator */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 79FACA3B22F1D27F007F1445 /* Build configuration list for PBXNativeTarget "BitmexMarginCalculator" */;
+			buildPhases = (
+				79FACA2522F1D27D007F1445 /* Sources */,
+				79FACA2622F1D27D007F1445 /* Frameworks */,
+				79FACA2722F1D27D007F1445 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = BitmexMarginCalculator;
+			productName = BTCMarginCalc;
+			productReference = 79FACA2922F1D27D007F1445 /* BitmexMarginCalculator.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		79FACA2122F1D27D007F1445 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1010;
+				LastUpgradeCheck = 1010;
+				ORGANIZATIONNAME = "Ivan Barabanshchykov";
+				TargetAttributes = {
+					79FACA2822F1D27D007F1445 = {
+						CreatedOnToolsVersion = 10.1;
+					};
+				};
+			};
+			buildConfigurationList = 79FACA2422F1D27D007F1445 /* Build configuration list for PBXProject "BitmexMarginCalculator" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 79FACA2022F1D27D007F1445;
+			productRefGroup = 79FACA2A22F1D27D007F1445 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				79FACA2822F1D27D007F1445 /* BitmexMarginCalculator */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		79FACA2722F1D27D007F1445 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				79FACA3722F1D27F007F1445 /* LaunchScreen.storyboard in Resources */,
+				79FACA3422F1D27F007F1445 /* Assets.xcassets in Resources */,
+				79B97E82232BA1FA008F91FD /* Roboto-Bold.ttf in Resources */,
+				79B97E81232BA1FA008F91FD /* Roboto-Regular.ttf in Resources */,
+				79B97E80232BA1FA008F91FD /* Roboto-Light.ttf in Resources */,
+				79B97E7F232BA1FA008F91FD /* Roboto-Medium.ttf in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		79FACA2522F1D27D007F1445 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7936C8B523390D54004AD81A /* NSMutableAttributedString+link.swift in Sources */,
+				79732E562302DE7B0035E18F /* SegmentedControlExtension.swift in Sources */,
+				799D56B6231D670600FB9078 /* DoubleRemoveZerosExtension.swift in Sources */,
+				79FACA2F22F1D27D007F1445 /* MainViewController.swift in Sources */,
+				79B97E84232BA76C008F91FD /* UITextFieldWithDoneButton.swift in Sources */,
+				79EA03E0230A7AB9003DA9AE /* Settings.swift in Sources */,
+				79D50FF122F46D2E00719A72 /* MarginCalculator.swift in Sources */,
+				79FACA2D22F1D27D007F1445 /* AppDelegate.swift in Sources */,
+				79A7DAB123350919000FE2B0 /* InfoTextViewController.swift in Sources */,
+				79A7DAAF2334DE91000FE2B0 /* SettingsTableViewCell.swift in Sources */,
+				79A7DAB323361812000FE2B0 /* LabelSegmentedView.swift in Sources */,
+				79D50FEF22F44D2F00719A72 /* OutputLabelView.swift in Sources */,
+				79B97E79232A3803008F91FD /* ResultView.swift in Sources */,
+				79A7DAAD2334CFD7000FE2B0 /* SettingsLauncher.swift in Sources */,
+				79D50FED22F35E5B00719A72 /* AutoLayoutEasyExtension.swift in Sources */,
+				79862FFF2341F7AD00323FD8 /* PopUpViewController.swift in Sources */,
+				793401B0233CC81300FB082F /* InfoTextViewDataFiller.swift in Sources */,
+				79D50FEA22F35A2E00719A72 /* TextFieldView.swift in Sources */,
+				79A7DAAB2334C43C000FE2B0 /* FontHandling.swift in Sources */,
+				79862FFD2341E8FB00323FD8 /* LabelWithInfoButton.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		79FACA3522F1D27F007F1445 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				79FACA3622F1D27F007F1445 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		79FACA3922F1D27F007F1445 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		79FACA3A22F1D27F007F1445 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		79FACA3C22F1D27F007F1445 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = C2L6Q7FQ8V;
+				INFOPLIST_FILE = BitmexMarginCalculator/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = BroApp.BitMEXMarginCalculator;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		79FACA3D22F1D27F007F1445 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = C2L6Q7FQ8V;
+				INFOPLIST_FILE = BitmexMarginCalculator/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = BroApp.BitMEXMarginCalculator;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		79FACA2422F1D27D007F1445 /* Build configuration list for PBXProject "BitmexMarginCalculator" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				79FACA3922F1D27F007F1445 /* Debug */,
+				79FACA3A22F1D27F007F1445 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		79FACA3B22F1D27F007F1445 /* Build configuration list for PBXNativeTarget "BitmexMarginCalculator" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				79FACA3C22F1D27F007F1445 /* Debug */,
+				79FACA3D22F1D27F007F1445 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 79FACA2122F1D27D007F1445 /* Project object */;
+}
