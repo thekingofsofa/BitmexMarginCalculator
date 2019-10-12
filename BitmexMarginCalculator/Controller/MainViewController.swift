@@ -8,13 +8,17 @@
 
 import UIKit
 
-class MainViewController: UIViewController, UITextFieldDelegate {
+class MainViewController: UIViewController {
     
     var mainScrollView = UIScrollView()
+    var mainScrollViewTopConstraint = NSLayoutConstraint()
     var mainStackView = UIStackView()
+    var navDropMenu = NavDropMenu(items: Settings.shared.listOfAllTradingPairs)
+    var lastPriceView = LastPriceView()
+    var bottomLabel = UILabel()
     
     var longShortSwitcher = UISegmentedControl()
-    var quantityXBT = TextFieldView(textFieldName: "Quantity XBT($)")
+    var quantityXBT = TextFieldView(textFieldName: "Quantity ($)")
     var entryPrice = TextFieldView(textFieldName: "Entry price")
     var exitPrice = TextFieldView(textFieldName: "Exit price")
     var leverageSize = TextFieldView(textFieldName: "Leverage")
@@ -36,11 +40,11 @@ class MainViewController: UIViewController, UITextFieldDelegate {
     @objc func positionSideChanged(_ sender: UISegmentedControl) {
         switch sender.selectedSegmentIndex{
         case 0:
-            marginCalc.longShortSwitcher = .long
+            marginCalc.calcEntryData.longShortSwitcher = .long
             marginCalc.saveEnteredData()
             calculate()
         case 1:
-            marginCalc.longShortSwitcher = .short
+            marginCalc.calcEntryData.longShortSwitcher = .short
             marginCalc.saveEnteredData()
             calculate()
         default:
@@ -53,12 +57,49 @@ class MainViewController: UIViewController, UITextFieldDelegate {
         setupView()
         setupLayout()
         showHideFees()
+        setupNavigationBar()
+        calculate()
+        _ = Timer.scheduledTimer(timeInterval: 5.0,
+                                 target: self,
+                                 selector: #selector(execute),
+                                 userInfo: nil,
+                                 repeats: true)
+    }
+    // method
+    
+    @objc func execute() {
+        // do logic here
+        let network = ServiceLayer()
+        network.request(router: Router.getXBTUSD) { (result: Result<[LastPrice]>) in
+            switch result {
+            case .success(let data):
+                self.lastPriceView.statusIcon.image = UIImage(named: "ic_trending_up.png")
+                UIView.animate(withDuration: 0.3, animations: {
+                    self.lastPriceView.priceLabel.alpha = 0.0
+                }, completion: { (bool) in
+                    self.lastPriceView.priceLabel.text = "Last BTC price: \(data[0].price)$"
+                    UIView.animate(withDuration: 0.3, animations: {
+                        self.lastPriceView.priceLabel.alpha = 1.0
+                    })
+                })
+                
+            case .failure:
+                self.noInternet()
+                print(result)
+            }
+        }
+    }
+    
+    func noInternet() {
+        // do here
+        DispatchQueue.main.async {
+            self.lastPriceView.priceLabel.text = "No internet connection"
+            self.lastPriceView.statusIcon.image = UIImage(named: "no_connection.png")
+        }
     }
     
     // MARK: Setup View
     func setupView() {
-        setupNavigationBar()
-        
         // Manage colors
         guard let backgroundImage = UIImage(named: "background_light") else { return }
         self.view.backgroundColor = UIColor(patternImage: backgroundImage)
@@ -70,6 +111,7 @@ class MainViewController: UIViewController, UITextFieldDelegate {
         longShortSwitcher = UISegmentedControl(items: ["Long", "Short"])
         longShortSwitcher.updateTintColor(firstSection: UIColor(red:0.21, green:0.75, blue:0.00, alpha:1.0), secondSection: UIColor.red)
         longShortSwitcher.addTarget(self, action: #selector(positionSideChanged), for: .valueChanged)
+        
         // Info Buttons
         showInfoButtons()
         
@@ -78,19 +120,24 @@ class MainViewController: UIViewController, UITextFieldDelegate {
         closeOrder.segmentedControl.addTarget(self, action: #selector(changeFeeType), for: .valueChanged)
         
         // Load last entered data via UserDefaults
-        longShortSwitcher.selectedSegmentIndex = UserDefaults.standard.bool(forKey: "longShortSwitcher") == true ? 0 : 1
-        quantityXBT.textFieldInputView.text = String(UserDefaults.standard.double(forKey: "quantityXBT").removeZerosFromEnd())
-        entryPrice.textFieldInputView.text = String(UserDefaults.standard.double(forKey: "entryPrice").removeZerosFromEnd())
-        exitPrice.textFieldInputView.text = String(UserDefaults.standard.double(forKey: "exitPrice").removeZerosFromEnd())
-        leverageSize.textFieldInputView.text = String(UserDefaults.standard.double(forKey: "leverageSize").removeZerosFromEnd())
-        enterOrder.segmentedControl.selectedSegmentIndex = UserDefaults.standard.bool(forKey: "entryLimit") == true ? 0 : 1
-        closeOrder.segmentedControl.selectedSegmentIndex = UserDefaults.standard.bool(forKey: "closeLimit") == true ? 0 : 1
+        loadUserDefaults()
         determineFeeType()
         
         // If keyboard appeard above textfield(iphone 5s,SE), setContentOffset
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+        
+        // Last BTC price view
+        setupLastPriceView()
+        
+        // Bottom label
+        bottomLabel.text = "All currency units denominated in XBT"
+        bottomLabel.setScaledCustomFont(forFont: .RobotoLight, textStyle: .footnote)
+        bottomLabel.textColor = .gray
+        bottomLabel.textAlignment = .center
+        mainScrollView.addSubview(bottomLabel)
     }
+    
     // MARK: Layout View
     func setupLayout() {
         let entryDataStackView = UIStackView(arrangedSubviews: [longShortSwitcher, quantityXBT, entryPrice, exitPrice, leverageSize, enterOrder, closeOrder])
@@ -103,41 +150,72 @@ class MainViewController: UIViewController, UITextFieldDelegate {
             $0.heightAnchor.constraint(equalToConstant: 30).isActive = true
         }
         
+        lastPriceView.anchor(top: view.safeAreaLayoutGuide.topAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor)
+        lastPriceView.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        
         mainStackView = UIStackView(arrangedSubviews: [entryDataStackView, resultBorderView])
         mainStackView.spacing = 12
         view.addSubview(mainScrollView)
         mainScrollView.addSubview(mainStackView)
         
-        mainScrollView.anchor(top: view.safeAreaLayoutGuide.topAnchor, leading: view.safeAreaLayoutGuide.leadingAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, trailing: view.safeAreaLayoutGuide.trailingAnchor)
+        mainScrollView.anchor(top: nil, leading: view.safeAreaLayoutGuide.leadingAnchor, bottom: view.bottomAnchor, trailing: view.safeAreaLayoutGuide.trailingAnchor)
+        showLastPrice()
         
-        mainStackView.anchor(top: mainScrollView.topAnchor, leading: mainScrollView.leadingAnchor, bottom: mainScrollView.bottomAnchor, trailing: mainScrollView.trailingAnchor, padding: .init(top: 12, left: 12, bottom: 12, right: 12))
+        mainStackView.anchor(top: mainScrollView.topAnchor, leading: mainScrollView.leadingAnchor, bottom: mainScrollView.bottomAnchor, trailing: mainScrollView.trailingAnchor, padding: .init(top: 12, left: 12, bottom: 28, right: 12))
         mainStackView.widthAnchor.constraint(equalTo: mainScrollView.widthAnchor, constant: -24).isActive = true
+        bottomLabel.anchor(top: resultBorderView.bottomAnchor, leading: mainScrollView.leadingAnchor, bottom: nil, trailing: mainScrollView.trailingAnchor, padding: .init(top: 4, left: 12, bottom: 0, right: 12))
     }
     
     // MARK: Setup NavigationBar
     private func setupNavigationBar() {
-        self.title = "USD / XBT"
         let configButton = UIBarButtonItem(image: UIImage(named: "settings"), style: .plain, target: self, action: #selector(configButtonPressed))
         navigationItem.rightBarButtonItem = configButton
+        navigationItem.titleView = navDropMenu.navBarButton
+        navDropMenu.delegate = self
+        
+        view.addSubview(navDropMenu)
+        navDropMenu.anchor(top: view.safeAreaLayoutGuide.topAnchor, leading: view.leadingAnchor, bottom: view.bottomAnchor, trailing: view.trailingAnchor)
     }
     
     @objc private func configButtonPressed() {
         settingsLauncher.showSettings()
     }
     
+    func setupLastPriceView() {
+        view.addSubview(lastPriceView)
+        lastPriceView.backgroundColor = UIColor(red:0.96, green:0.96, blue:0.96, alpha:1.0)
+        
+        let network = ServiceLayer()
+        network.request(router: Router.getXBTUSD) { (result: Result<[LastPrice]>) in
+            switch result {
+            case .success(let data):
+                print(result)
+                self.lastPriceView.priceLabel.text = "Last BTC price: \(data[0].price)$"
+            case .failure:
+                print(result)
+            }
+        }
+    }
+    
     // MARK: Calculator
     func calculate() {
-        marginCalc.longShortSwitcher = longShortSwitcher.selectedSegmentIndex == 0 ? .long : .short
-        marginCalc.quantityXBT = Double(quantityXBT.textFieldInputView.text!) ?? 0
-        marginCalc.enterPrice = Double(entryPrice.textFieldInputView.text!) ?? 0
-        marginCalc.closePrice = Double(exitPrice.textFieldInputView.text!) ?? 0
-        marginCalc.leverageSize = Double(leverageSize.textFieldInputView.text!) ?? 0
-        marginCalc.feeType = feeType
+        // Check max leverage
+        if Int(leverageSize.textFieldInputView.text ?? "0")! > Settings.shared.selectedTradingPair.maxLeverage {
+            leverageSize.textFieldInputView.backgroundColor = UIColor(red:1.00, green:0.80, blue:0.80, alpha:1.0)
+        } else {
+            leverageSize.textFieldInputView.backgroundColor = UIColor.white
+        }
+        
+        marginCalc.calcEntryData.longShortSwitcher = longShortSwitcher.selectedSegmentIndex == 0 ? .long : .short
+        marginCalc.calcEntryData.quantity = Double(quantityXBT.textFieldInputView.text!) ?? 0
+        marginCalc.calcEntryData.enterPrice = Double(entryPrice.textFieldInputView.text!) ?? 0
+        marginCalc.calcEntryData.closePrice = Double(exitPrice.textFieldInputView.text!) ?? 0
+        marginCalc.calcEntryData.leverageSize = Double(leverageSize.textFieldInputView.text!) ?? 0
+        marginCalc.calcEntryData.feeType = feeType
         marginCalc.calculate()
         
-        resultBorderView.quantityBTC.resultLabel.text = String(format: "%.4f", marginCalc.initialBTC)
-        resultBorderView.btcPriceChange.resultLabel.text = String(format: "%.2f", marginCalc.btcPriceChangePercentage)  + "%"
-        
+        resultBorderView.quantityBTC.resultLabel.text = String(format: "%.4f", marginCalc.initialMarginBTC)
+        resultBorderView.btcPriceChange.resultLabel.text = String(format: "%.2f", marginCalc.priceChangePercentage)  + "%"
         resultBorderView.profitLossBTC.resultLabel.text = String(format: "%.4f", marginCalc.profitLossBTC)
         resultBorderView.profitLossUSD.resultLabel.text = String(format: "%.2f", marginCalc.profitLossUSD) + "$"
         resultBorderView.roe.resultLabel.text = String(format: "%.2f", marginCalc.roe) + "%"
@@ -164,7 +242,6 @@ class MainViewController: UIViewController, UITextFieldDelegate {
     
     // MARK: Show/hide fee method
     func showHideFees() {
-        
         if Settings.shared.showFees {
             enterOrder.isHidden = false
             closeOrder.isHidden = false
@@ -174,6 +251,19 @@ class MainViewController: UIViewController, UITextFieldDelegate {
             closeOrder.isHidden = true
             resultBorderView.fees.isHidden = true
         }
+    }
+    
+    // MARK: Show/hide fee method
+    func showLastPrice() {
+        mainScrollViewTopConstraint.isActive = false
+        if Settings.shared.showLastPrice {
+            mainScrollViewTopConstraint = mainScrollView.topAnchor.constraint(equalTo: lastPriceView.bottomAnchor)
+            lastPriceView.isHidden = false
+        } else {
+            mainScrollViewTopConstraint = mainScrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor)
+            lastPriceView.isHidden = true
+        }
+        mainScrollViewTopConstraint.isActive = true
     }
     
     // MARK: Show info Button
@@ -187,16 +277,6 @@ class MainViewController: UIViewController, UITextFieldDelegate {
         infoVC.modalPresentationStyle = .overCurrentContext
         infoVC.modalTransitionStyle = .crossDissolve
         present(infoVC, animated: true, completion: nil)
-    }
-    
-    // MARK: UITextfield methods
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        calculate()
-    }
-    
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-        return true
     }
     
     // MARK: Define constraints based on device and orientation
@@ -240,5 +320,57 @@ class MainViewController: UIViewController, UITextFieldDelegate {
         if self.view.frame.origin.y != 0 {
             self.view.frame.origin.y = 0
         }
+    }
+    
+    // Load UserDefaults method
+    func loadUserDefaults() {
+        let defaults = UserDefaults.standard
+        let selectedPair = Settings.shared.selectedTradingPair.rawValue
+        if let savedData = defaults.object(forKey: selectedPair) as? Data {
+            let decoder = JSONDecoder()
+            if let loadedData = try? decoder.decode(CalculatorEntryData.self, from: savedData) {
+                longShortSwitcher.selectedSegmentIndex = loadedData.longShortSwitcher == .long ? 0 : 1
+                quantityXBT.textFieldInputView.text = String(loadedData.quantity.removeZerosFromEnd())
+                entryPrice.textFieldInputView.text = String(loadedData.enterPrice.removeZerosFromEnd())
+                exitPrice.textFieldInputView.text = String(loadedData.closePrice.removeZerosFromEnd())
+                leverageSize.textFieldInputView.text = String(loadedData.leverageSize.removeZerosFromEnd())
+                
+                switch loadedData.feeType {
+                case .enteredLimitClosedMarket:
+                    enterOrder.segmentedControl.selectedSegmentIndex = 0
+                    closeOrder.segmentedControl.selectedSegmentIndex = 1
+                case .twoLimits:
+                    enterOrder.segmentedControl.selectedSegmentIndex = 0
+                    closeOrder.segmentedControl.selectedSegmentIndex = 0
+                case .twoMarkets:
+                    enterOrder.segmentedControl.selectedSegmentIndex = 1
+                    closeOrder.segmentedControl.selectedSegmentIndex = 1
+                case .enteredMarketClosedLimit:
+                    enterOrder.segmentedControl.selectedSegmentIndex = 1
+                    closeOrder.segmentedControl.selectedSegmentIndex = 0
+                }
+            }
+        }
+    }
+}
+
+// MARK: UITextfield methods
+extension MainViewController: UITextFieldDelegate {
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        calculate()
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+}
+
+// MARK: NavDropMenuDelegate methods
+extension MainViewController: NavDropMenuDelegate {
+    func navDropMenuCellSelected(selectedRowInt: Int) {
+        loadUserDefaults()
+        calculate()
     }
 }

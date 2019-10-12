@@ -40,7 +40,15 @@ class InfoTextViewDataFiller {
         return fullString
     }
     
-    func noticeAboutLiquidationPrice() -> String {
+    func liquidationPriceNotice() -> String {
         return "  When price reach Liquidation price you lose assigned Deposit BTC for this trade.\n\n  Liquidation might be slightly different comparing to Bitmex, so double check it."
+    }
+    
+    func feesNotice() -> NSMutableAttributedString {
+        let paragraph = NSMutableParagraphStyle()
+        paragraph.firstLineHeadIndent = 18
+        // create an NSMutableAttributedString that we'll append everything to
+        let fullString = NSMutableAttributedString(string: "For more detail information read Bitmex documentation.", attributes: [NSAttributedString.Key.paragraphStyle : paragraph])
+        return fullString
     }
 }

@@ -32,7 +32,7 @@ class SettingsLauncher: NSObject, UITableViewDataSource, UITableViewDelegate {
     
     var tableViewBottomConstraint: NSLayoutConstraint?
     
-    let cells : [(SettingsCellType, SettingsButtons)] = [(SettingsCellType.withSwither, .showHideFees), (SettingsCellType.separator, .separator), (SettingsCellType.onlyTitle, .aboutApp), (SettingsCellType.onlyTitle, .aboutLiqudation), (SettingsCellType.onlyTitle, .cancel)]
+    let cells : [(SettingsCellType, SettingsButtons)] = [(SettingsCellType.withSwither, .showHideLastPrice), (SettingsCellType.withSwither, .showHideFees), (SettingsCellType.separator, .separator), (SettingsCellType.onlyTitle, .aboutApp), (SettingsCellType.onlyTitle, .feesInfo), (SettingsCellType.onlyTitle, .aboutLiqudation), (SettingsCellType.onlyTitle, .cancel)]
     
     override init() {
         super.init()
@@ -102,6 +102,9 @@ class SettingsLauncher: NSObject, UITableViewDataSource, UITableViewDelegate {
         cell.configureCell(text: cells[indexPath.row].1.title, cellType: cells[indexPath.row].0)
         
         if indexPath.row == 0 {
+            cell.switcher.addTarget(self, action: #selector(switchShowLastPrice), for: .valueChanged)
+            cell.switcher.isOn = Settings.shared.showLastPrice ? true : false
+        } else if indexPath.row == 1 {
             cell.switcher.addTarget(self, action: #selector(switchShowFees), for: .valueChanged)
             cell.switcher.isOn = Settings.shared.showFees ? true : false
         }
@@ -116,11 +119,21 @@ class SettingsLauncher: NSObject, UITableViewDataSource, UITableViewDelegate {
         UserDefaults.standard.set(Settings.shared.showFees, forKey: "showFees")
     }
     
+    @objc func switchShowLastPrice() {
+        
+        Settings.shared.showLastPrice = !Settings.shared.showLastPrice
+        homeController.showLastPrice()
+        UserDefaults.standard.set(Settings.shared.showLastPrice, forKey: "showLastPrice")
+    }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         if let cell = tableView.cellForRow(at: indexPath) as? SettingsTableViewCell {
             
             switch cells[indexPath.row].1 {
+            case .showHideLastPrice:
+                switchShowLastPrice()
+                cell.switcher.setOn(!cell.switcher.isOn, animated: true)
             case .showHideFees:
                 switchShowFees()
                 cell.switcher.setOn(!cell.switcher.isOn, animated: true)
@@ -138,6 +151,9 @@ class SettingsLauncher: NSObject, UITableViewDataSource, UITableViewDelegate {
                 homeController.navigationController?.pushViewController(vc, animated: true)
             case .cancel:
                 handleDismiss()
+            case .feesInfo:
+                let vc = FeesViewController()
+                homeController.navigationController?.pushViewController(vc, animated: true)
             }
         }
     }

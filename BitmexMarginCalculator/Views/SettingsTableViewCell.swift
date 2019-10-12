@@ -18,6 +18,7 @@ class SettingsTableViewCell: UITableViewCell {
     let titleLabel = UILabel()
     let switcher = UISwitch()
     let separatorLine = UIView()
+    var settingsButton: SettingsButtons!
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)

@@ -11,7 +11,7 @@ import UIKit
 enum FontName: String {
     
     case RobotoBold             = "Roboto-Bold"
-    case RobotoLight            = "Roboto_Light"
+    case RobotoLight            = "Roboto-Light"
     case RobotoMedium           = "Roboto-Medium"
     case RobotoRegular          = "Roboto-Regular"
 }

@@ -25,16 +25,70 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UIBarButtonItem.appearance().setTitleTextAttributes([ NSAttributedString.Key.foregroundColor : UIColor.black ], for: .normal)
         UIBarButtonItem.appearance().setTitleTextAttributes([ NSAttributedString.Key.foregroundColor : UIColor.gray ], for: .highlighted)
         
-        if isAppAlreadyLaunchedOnce() == false {
-            UserDefaults.standard.set(true, forKey: "longShortSwitcher")
-            UserDefaults.standard.set(1000, forKey: "quantityXBT")
-            UserDefaults.standard.set(10000, forKey: "entryPrice")
-            UserDefaults.standard.set(10500, forKey: "exitPrice")
-            UserDefaults.standard.set(5, forKey: "leverageSize")
-            UserDefaults.standard.set(false, forKey: "entryLimit")
-            UserDefaults.standard.set(false, forKey: "closeLimit")
+        let defaults = UserDefaults.standard
+        let selectedPair = TradingPair.XBTUSD.rawValue
+        
+        // updateXBTUSDDefault for comfort update to 1.1
+        var updateXBTUSDDefault = true
+        if let savedData = defaults.object(forKey: selectedPair) as? Data {
+            let decoder = JSONDecoder()
+            if let loadedData = try? decoder.decode(CalculatorEntryData.self, from: savedData) {
+                updateXBTUSDDefault = false
+            }
+        }
+        
+        if isAppAlreadyLaunchedOnce() == false || updateXBTUSDDefault == true {
+            let XBTUSDDefault = CalculatorEntryData.init(longShortSwitcher: .long, quantity: 10000, enterPrice: 10000, closePrice: 10500, leverageSize: 10, feeType: .twoMarkets)
+            let XBTZ19Default = CalculatorEntryData.init(longShortSwitcher: .long, quantity: 10000, enterPrice: 10000, closePrice: 10500, leverageSize: 10, feeType: .twoMarkets)
+            let XBTH20Default = CalculatorEntryData.init(longShortSwitcher: .long, quantity: 10000, enterPrice: 10000, closePrice: 10500, leverageSize: 10, feeType: .twoMarkets)
+            let ADAZ19Default = CalculatorEntryData.init(longShortSwitcher: .long, quantity: 10000, enterPrice: 0.00000500, closePrice: 0.00000510, leverageSize: 10, feeType: .twoMarkets)
+            let BCHZ19Default = CalculatorEntryData.init(longShortSwitcher: .long, quantity: 10000, enterPrice: 0.02800, closePrice: 0.02850, leverageSize: 10, feeType: .twoMarkets)
+            let EOSZ19Default = CalculatorEntryData.init(longShortSwitcher: .long, quantity: 10000, enterPrice: 0.0003800, closePrice: 0.0003850, leverageSize: 10, feeType: .twoMarkets)
+            let ETHUSDDefault = CalculatorEntryData.init(longShortSwitcher: .long, quantity: 10000, enterPrice: 180, closePrice: 200, leverageSize: 10, feeType: .twoMarkets)
+            let ETHZ19Default = CalculatorEntryData.init(longShortSwitcher: .long, quantity: 10000, enterPrice: 0.02200, closePrice: 0.02250, leverageSize: 10, feeType: .twoMarkets)
+            let LTCZ19Default = CalculatorEntryData.init(longShortSwitcher: .long, quantity: 10000, enterPrice: 0.007000, closePrice: 0.007150, leverageSize: 10, feeType: .twoMarkets)
+            let TRXZ19Default = CalculatorEntryData.init(longShortSwitcher: .long, quantity: 10000, enterPrice: 0.00000200, closePrice: 0.00000220, leverageSize: 10, feeType: .twoMarkets)
+            let XRPZ19Default = CalculatorEntryData.init(longShortSwitcher: .long, quantity: 10000, enterPrice: 0.00003350, closePrice: 0.00003500, leverageSize: 10, feeType: .twoMarkets)
+            
+            let encoder = JSONEncoder()
+            let defaults = UserDefaults.standard
+            if let encoded = try? encoder.encode(XBTUSDDefault) {
+                defaults.set(encoded, forKey: TradingPair.XBTUSD.rawValue)
+            }
+            if let encoded = try? encoder.encode(XBTZ19Default) {
+                defaults.set(encoded, forKey: TradingPair.XBTZ19.rawValue)
+            }
+            if let encoded = try? encoder.encode(XBTH20Default) {
+                defaults.set(encoded, forKey: TradingPair.XBTH20.rawValue)
+            }
+            if let encoded = try? encoder.encode(ADAZ19Default) {
+                defaults.set(encoded, forKey: TradingPair.ADAZ19.rawValue)
+            }
+            if let encoded = try? encoder.encode(BCHZ19Default) {
+                defaults.set(encoded, forKey: TradingPair.BCHZ19.rawValue)
+            }
+            if let encoded = try? encoder.encode(EOSZ19Default) {
+                defaults.set(encoded, forKey: TradingPair.EOSZ19.rawValue)
+            }
+            if let encoded = try? encoder.encode(ETHUSDDefault) {
+                defaults.set(encoded, forKey: TradingPair.ETHUSD.rawValue)
+            }
+            if let encoded = try? encoder.encode(ETHZ19Default) {
+                defaults.set(encoded, forKey: TradingPair.ETHZ19.rawValue)
+            }
+            if let encoded = try? encoder.encode(LTCZ19Default) {
+                defaults.set(encoded, forKey: TradingPair.LTCZ19.rawValue)
+            }
+            if let encoded = try? encoder.encode(TRXZ19Default) {
+                defaults.set(encoded, forKey: TradingPair.TRXZ19.rawValue)
+            }
+            if let encoded = try? encoder.encode(XRPZ19Default) {
+                defaults.set(encoded, forKey: TradingPair.XRPZ19.rawValue)
+            }
         } else {
             Settings.shared.showFees = UserDefaults.standard.bool(forKey: "showFees")
+//            Settings.shared.showLastPrice = UserDefaults.standard.bool(forKey: "showLastPrice")
+            Settings.shared.selectedTradingPair = TradingPair(rawValue: UserDefaults.standard.string(forKey: "tradingPair") ?? "") ?? .XBTUSD
         }
         
         return true

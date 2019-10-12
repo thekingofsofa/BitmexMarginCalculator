@@ -26,6 +26,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background_light" translatesAutoresizingMaskIntoConstraints="NO" id="VtB-hL-gmx">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bitmex Margin Calculator" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D3j-mP-7z2">
                                 <rect key="frame" x="125" y="238.5" width="220" height="150.5"/>
                                 <constraints>
@@ -35,7 +38,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Version 1.0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="21V-2m-uuX">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Version 1.1" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="21V-2m-uuX">
                                 <rect key="frame" x="276" y="397" width="69" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="pBV-ws-KCr"/>
@@ -51,8 +54,12 @@
                             <constraint firstItem="21V-2m-uuX" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="6Tk-OE-BBY" secondAttribute="leading" symbolic="YES" id="5nw-Ze-1Al"/>
                             <constraint firstItem="21V-2m-uuX" firstAttribute="top" secondItem="D3j-mP-7z2" secondAttribute="bottom" constant="8" id="8dD-dP-eib"/>
                             <constraint firstItem="D3j-mP-7z2" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" constant="-30" id="9Q7-Dk-86e"/>
+                            <constraint firstItem="VtB-hL-gmx" firstAttribute="trailing" secondItem="Ze5-6b-2t3" secondAttribute="trailing" id="BWq-GI-DSC"/>
+                            <constraint firstItem="VtB-hL-gmx" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="EmO-B1-Mwt"/>
                             <constraint firstItem="D3j-mP-7z2" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="6Tk-OE-BBY" secondAttribute="leading" symbolic="YES" id="e7d-Rp-h8g"/>
+                            <constraint firstItem="VtB-hL-gmx" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="qKg-Hp-Ymy"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="D3j-mP-7z2" secondAttribute="trailing" constant="30" id="sR6-Wx-tWP"/>
+                            <constraint firstItem="VtB-hL-gmx" firstAttribute="bottom" secondItem="Ze5-6b-2t3" secondAttribute="bottom" id="veg-Fc-x2P"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
@@ -62,4 +69,7 @@
             <point key="canvasLocation" x="52" y="374.66266866566718"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="background_light" width="375" height="667"/>
+    </resources>
 </document>
