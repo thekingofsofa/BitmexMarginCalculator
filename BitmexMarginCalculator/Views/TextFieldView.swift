@@ -32,12 +32,12 @@ class TextFieldView: UIView {
         stackView.anchor(top: topAnchor, leading: leadingAnchor, bottom: bottomAnchor, trailing: trailingAnchor)
         
         textFieldNameLabel.text = textFieldName
-        
+        textFieldNameLabel.adjustsFontSizeToFitWidth = true
         textFieldNameLabel.setScaledCustomFont(forFont: .RobotoRegular, textStyle: .body)
-        textFieldInputView.font = textFieldNameLabel.font
         
+        textFieldInputView.font = textFieldNameLabel.font
         textFieldInputView.backgroundColor = .white
-        textFieldInputView.keyboardType = .numberPad
+        textFieldInputView.keyboardType = .decimalPad
         textFieldInputView.returnKeyType = .done
         textFieldInputView.layer.masksToBounds = true
         textFieldInputView.layer.cornerRadius = 8.0

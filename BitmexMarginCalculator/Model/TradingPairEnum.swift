@@ -101,4 +101,50 @@ enum TradingPair: String, CaseIterable {
             return 20
         }
     }
+    
+    var router: Router {
+        switch self {
+        case .XBTUSD, .XBTZ19, .XBTH20:
+            return .getXBTUSD
+        case .ADAZ19:
+            return .getADABTC
+        case .BCHZ19:
+            return .getBCHBTC
+        case .EOSZ19:
+            return .getEOSBTC
+        case .ETHUSD:
+            return .getETHUSD
+        case .ETHZ19:
+            return .getETHBTC
+        case .LTCZ19:
+            return .getLTCBTC
+        case .TRXZ19:
+            return .getTRXBTC
+        case .XRPZ19:
+            return .getXRPBTC
+        }
+    }
+    
+    var formatStyle: String {
+        switch self {
+        case .XBTUSD, .XBTH20, .XBTZ19:
+            return "%.2f"
+        case .ADAZ19:
+            return "%.8f"
+        case .BCHZ19:
+            return "%.5f"
+        case .EOSZ19:
+            return "%.7f"
+        case .ETHUSD:
+            return "%.2f"
+        case .ETHZ19:
+            return "%.5f"
+        case .LTCZ19:
+            return "%.6f"
+        case .TRXZ19:
+            return "%.8f"
+        case .XRPZ19:
+            return "%.8f"
+        }
+    }
 }

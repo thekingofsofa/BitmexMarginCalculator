@@ -25,7 +25,6 @@ class MainViewController: UIViewController {
     var enterOrder = LabelSegmentedView(titleText: "Enter order", segmentedOptions: ["Limit", "Market"])
     var closeOrder = LabelSegmentedView(titleText: "Close order", segmentedOptions: ["Limit", "Market"])
     var feeType = FeeType.twoMarkets
-    // For altcoins
     var btcPriceWhenEnter = TextFieldView(textFieldName: "BTC price when entry")
     var btcPriceWhenExit = TextFieldView(textFieldName: "BTC price when exit")
     
@@ -69,24 +68,26 @@ class MainViewController: UIViewController {
                                  userInfo: nil,
                                  repeats: true)
     }
-    // method
     
     @objc func execute() {
         
+        let traidingPair = Settings.shared.selectedTradingPair
         let network = ServiceLayer()
-        network.request(router: Router.getXBTUSD) { (result: Result<[LastPrice]>) in
+        network.request(router: traidingPair.router) { (result: Result<[LastPrice]>) in
             switch result {
             case .success(let data):
                 self.lastPriceView.statusIcon.image = UIImage(named: "ic_trending_up.png")
                 UIView.animate(withDuration: 0.3, animations: {
                     self.lastPriceView.priceLabel.alpha = 0.0
                 }, completion: { (bool) in
-                    self.lastPriceView.priceLabel.text = "Last BTC price: \(data[0].price)$"
+                    let formatLiquidationStringStyle = Settings.shared.selectedTradingPair.formatStyle
+                    let price = Double(truncating: NSDecimalNumber(decimal: data[0].price))
+                    let priceString = String(format: formatLiquidationStringStyle, price)
+                    self.lastPriceView.priceLabel.text = "Last \(traidingPair.rawValue) price: " + priceString
                     UIView.animate(withDuration: 0.3, animations: {
                         self.lastPriceView.priceLabel.alpha = 1.0
                     })
                 })
-                
             case .failure:
                 self.noInternet()
                 print(result)
@@ -167,7 +168,7 @@ class MainViewController: UIViewController {
         
         mainStackView.anchor(top: mainScrollView.topAnchor, leading: mainScrollView.leadingAnchor, bottom: mainScrollView.bottomAnchor, trailing: mainScrollView.trailingAnchor, padding: .init(top: 12, left: 12, bottom: 28, right: 12))
         mainStackView.widthAnchor.constraint(equalTo: mainScrollView.widthAnchor, constant: -24).isActive = true
-        bottomLabel.anchor(top: resultBorderView.bottomAnchor, leading: mainScrollView.leadingAnchor, bottom: nil, trailing: mainScrollView.trailingAnchor, padding: .init(top: 4, left: 12, bottom: 0, right: 12))
+        bottomLabel.anchor(top: resultBorderView.bottomAnchor, leading: resultBorderView.leadingAnchor, bottom: nil, trailing: resultBorderView.trailingAnchor, padding: .init(top: 4, left: 12, bottom: 0, right: 12))
     }
     
     // MARK: Setup NavigationBar
@@ -186,6 +187,7 @@ class MainViewController: UIViewController {
     }
     
     func setupLastPriceView() {
+        let traidingPair = Settings.shared.selectedTradingPair
         view.addSubview(lastPriceView)
         lastPriceView.backgroundColor = UIColor(red:0.96, green:0.96, blue:0.96, alpha:1.0)
         
@@ -194,7 +196,7 @@ class MainViewController: UIViewController {
             switch result {
             case .success(let data):
                 print(result)
-                self.lastPriceView.priceLabel.text = "Last BTC price: \(data[0].price)$"
+                self.lastPriceView.priceLabel.text = "Last \(traidingPair.rawValue) price: \(data[0].price)"
             case .failure:
                 print(result)
             }
@@ -220,34 +222,14 @@ class MainViewController: UIViewController {
         marginCalc.calcEntryData.btcPriceWhenExit = Double(btcPriceWhenExit.textFieldInputView.text!) ?? 0
         marginCalc.calculate()
         
-        var numbersAfterPointForLiquidation = String()
-        switch Settings.shared.selectedTradingPair {
-        case .XBTUSD, .XBTH20, .XBTZ19:
-            numbersAfterPointForLiquidation = "%.2f"
-        case .ADAZ19:
-            numbersAfterPointForLiquidation = "%.8f"
-        case .BCHZ19:
-            numbersAfterPointForLiquidation = "%.5f"
-        case .EOSZ19:
-            numbersAfterPointForLiquidation = "%.7f"
-        case .ETHUSD:
-            numbersAfterPointForLiquidation = "%.2f"
-        case .ETHZ19:
-            numbersAfterPointForLiquidation = "%.5f"
-        case .LTCZ19:
-            numbersAfterPointForLiquidation = "%.6f"
-        case .TRXZ19:
-            numbersAfterPointForLiquidation = "%.8f"
-        case .XRPZ19:
-            numbersAfterPointForLiquidation = "%.8f"
-        }
+        let formatLiquidationStringStyle = Settings.shared.selectedTradingPair.formatStyle
         
         resultBorderView.quantityBTC.resultLabel.text = String(format: "%.4f", marginCalc.initialMarginBTC)
         resultBorderView.btcPriceChange.resultLabel.text = String(format: "%.2f", marginCalc.priceChangePercentage)  + "%"
         resultBorderView.profitLossBTC.resultLabel.text = String(format: "%.4f", marginCalc.profitLossBTC)
         resultBorderView.profitLossUSD.resultLabel.text = String(format: "%.2f", marginCalc.profitLossUSD) + "$"
         resultBorderView.roe.resultLabel.text = String(format: "%.2f", marginCalc.roe) + "%"
-        resultBorderView.liqudationPrice.resultLabel.text = String(format: numbersAfterPointForLiquidation, marginCalc.liqudationPrice)
+        resultBorderView.liqudationPrice.resultLabel.text = String(format: formatLiquidationStringStyle, marginCalc.liqudationPrice)
         resultBorderView.fees.resultLabel.text = String(format: "%.2f", marginCalc.feesInUSD) + "$"
     }
     
@@ -335,14 +317,12 @@ class MainViewController: UIViewController {
     }
     
     func setupConstraintForCompactEnviromnentIphone() {
-        print("iphoneLandscape")
         self.mainStackView.axis = .horizontal
         self.mainStackView.alignment = .top
         self.mainStackView.distribution = .fillEqually
     }
     
     func setupConstraintForRegularEnviromnentIphone() {
-        print("iphonePortrait")
         self.mainStackView.axis = .vertical
         self.mainStackView.alignment = .fill
         self.mainStackView.distribution = .fill
@@ -408,6 +388,14 @@ extension MainViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
+    }
+    
+    // Restricts textfields only to numbers
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        
+        let allowedCharacters = CharacterSet(charactersIn:".0123456789 ")//Here change this characters based on your requirement
+        let characterSet = CharacterSet(charactersIn: string)
+        return allowedCharacters.isSuperset(of: characterSet)
     }
 }
 

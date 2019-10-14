@@ -11,5 +11,5 @@ import Foundation
 struct LastPrice: Codable {
     var timestamp: String
     var symbol: String
-    var price: Double
+    var price: Decimal
 }
