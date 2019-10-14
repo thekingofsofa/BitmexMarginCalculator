@@ -32,23 +32,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         var updateXBTUSDDefault = true
         if let savedData = defaults.object(forKey: selectedPair) as? Data {
             let decoder = JSONDecoder()
-            if let loadedData = try? decoder.decode(CalculatorEntryData.self, from: savedData) {
+            if (try? decoder.decode(CalculatorEntryData.self, from: savedData)) != nil {
                 updateXBTUSDDefault = false
             }
         }
         
         if isAppAlreadyLaunchedOnce() == false || updateXBTUSDDefault == true {
-            let XBTUSDDefault = CalculatorEntryData.init(longShortSwitcher: .long, quantity: 10000, enterPrice: 10000, closePrice: 10500, leverageSize: 10, feeType: .twoMarkets)
-            let XBTZ19Default = CalculatorEntryData.init(longShortSwitcher: .long, quantity: 10000, enterPrice: 10000, closePrice: 10500, leverageSize: 10, feeType: .twoMarkets)
-            let XBTH20Default = CalculatorEntryData.init(longShortSwitcher: .long, quantity: 10000, enterPrice: 10000, closePrice: 10500, leverageSize: 10, feeType: .twoMarkets)
-            let ADAZ19Default = CalculatorEntryData.init(longShortSwitcher: .long, quantity: 10000, enterPrice: 0.00000500, closePrice: 0.00000510, leverageSize: 10, feeType: .twoMarkets)
-            let BCHZ19Default = CalculatorEntryData.init(longShortSwitcher: .long, quantity: 10000, enterPrice: 0.02800, closePrice: 0.02850, leverageSize: 10, feeType: .twoMarkets)
-            let EOSZ19Default = CalculatorEntryData.init(longShortSwitcher: .long, quantity: 10000, enterPrice: 0.0003800, closePrice: 0.0003850, leverageSize: 10, feeType: .twoMarkets)
-            let ETHUSDDefault = CalculatorEntryData.init(longShortSwitcher: .long, quantity: 10000, enterPrice: 180, closePrice: 200, leverageSize: 10, feeType: .twoMarkets)
-            let ETHZ19Default = CalculatorEntryData.init(longShortSwitcher: .long, quantity: 10000, enterPrice: 0.02200, closePrice: 0.02250, leverageSize: 10, feeType: .twoMarkets)
-            let LTCZ19Default = CalculatorEntryData.init(longShortSwitcher: .long, quantity: 10000, enterPrice: 0.007000, closePrice: 0.007150, leverageSize: 10, feeType: .twoMarkets)
-            let TRXZ19Default = CalculatorEntryData.init(longShortSwitcher: .long, quantity: 10000, enterPrice: 0.00000200, closePrice: 0.00000220, leverageSize: 10, feeType: .twoMarkets)
-            let XRPZ19Default = CalculatorEntryData.init(longShortSwitcher: .long, quantity: 10000, enterPrice: 0.00003350, closePrice: 0.00003500, leverageSize: 10, feeType: .twoMarkets)
+            let XBTUSDDefault = CalculatorEntryData.init(longShortSwitcher: .long, quantity: 10000, enterPrice: 10000, closePrice: 10500, leverageSize: 10, feeType: .twoMarkets, btcPriceWhenEnter: 0, btcPriceWhenExit: 0)
+            let XBTZ19Default = CalculatorEntryData.init(longShortSwitcher: .long, quantity: 10000, enterPrice: 10000, closePrice: 10500, leverageSize: 10, feeType: .twoMarkets, btcPriceWhenEnter: 0, btcPriceWhenExit: 0)
+            let XBTH20Default = CalculatorEntryData.init(longShortSwitcher: .long, quantity: 10000, enterPrice: 10000, closePrice: 10500, leverageSize: 10, feeType: .twoMarkets, btcPriceWhenEnter: 0, btcPriceWhenExit: 0)
+            let ADAZ19Default = CalculatorEntryData.init(longShortSwitcher: .long, quantity: 80000, enterPrice: 0.00000500, closePrice: 0.00000510, leverageSize: 10, feeType: .twoMarkets, btcPriceWhenEnter: 10000, btcPriceWhenExit: 10000)
+            let BCHZ19Default = CalculatorEntryData.init(longShortSwitcher: .long, quantity: 30, enterPrice: 0.02800, closePrice: 0.02850, leverageSize: 10, feeType: .twoMarkets, btcPriceWhenEnter: 10000, btcPriceWhenExit: 10000)
+            let EOSZ19Default = CalculatorEntryData.init(longShortSwitcher: .long, quantity: 5000, enterPrice: 0.0003800, closePrice: 0.0003850, leverageSize: 10, feeType: .twoMarkets, btcPriceWhenEnter: 10000, btcPriceWhenExit: 10000)
+            let ETHUSDDefault = CalculatorEntryData.init(longShortSwitcher: .long, quantity: 50, enterPrice: 180, closePrice: 200, leverageSize: 10, feeType: .twoMarkets, btcPriceWhenEnter: 10000, btcPriceWhenExit: 10000)
+            let ETHZ19Default = CalculatorEntryData.init(longShortSwitcher: .long, quantity: 50, enterPrice: 0.02200, closePrice: 0.02250, leverageSize: 10, feeType: .twoMarkets, btcPriceWhenEnter: 10000, btcPriceWhenExit: 10000)
+            let LTCZ19Default = CalculatorEntryData.init(longShortSwitcher: .long, quantity: 100, enterPrice: 0.007000, closePrice: 0.007150, leverageSize: 10, feeType: .twoMarkets, btcPriceWhenEnter: 10000, btcPriceWhenExit: 10000)
+            let TRXZ19Default = CalculatorEntryData.init(longShortSwitcher: .long, quantity: 100000, enterPrice: 0.00000200, closePrice: 0.00000220, leverageSize: 10, feeType: .twoMarkets, btcPriceWhenEnter: 10000, btcPriceWhenExit: 10000)
+            let XRPZ19Default = CalculatorEntryData.init(longShortSwitcher: .long, quantity: 10000, enterPrice: 0.00003350, closePrice: 0.00003500, leverageSize: 10, feeType: .twoMarkets, btcPriceWhenEnter: 10000, btcPriceWhenExit: 10000)
             
             let encoder = JSONEncoder()
             let defaults = UserDefaults.standard

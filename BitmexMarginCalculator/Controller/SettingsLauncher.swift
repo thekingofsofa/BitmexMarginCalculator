@@ -122,7 +122,7 @@ class SettingsLauncher: NSObject, UITableViewDataSource, UITableViewDelegate {
     @objc func switchShowLastPrice() {
         
         Settings.shared.showLastPrice = !Settings.shared.showLastPrice
-        homeController.showLastPrice()
+        homeController.showHideLastPrice()
         UserDefaults.standard.set(Settings.shared.showLastPrice, forKey: "showLastPrice")
     }
     

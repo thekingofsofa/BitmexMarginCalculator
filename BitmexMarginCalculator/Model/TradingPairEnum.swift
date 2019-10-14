@@ -57,21 +57,21 @@ enum TradingPair: String, CaseIterable {
         case .XBTH20:
             return 0.00025
         case .ADAZ19:
-            return 0.005
+            return 0.0005
         case .BCHZ19:
-            return 0.005
+            return 0.0005
         case .EOSZ19:
-            return 0.005
+            return 0.0005
         case .ETHUSD:
-            return 0.005
+            return 0.0005
         case .ETHZ19:
-            return 0.005
+            return 0.0005
         case .LTCZ19:
-            return 0.005
+            return 0.0005
         case .TRXZ19:
-            return 0.005
+            return 0.0005
         case .XRPZ19:
-            return 0.005
+            return 0.0005
         }
     }
     

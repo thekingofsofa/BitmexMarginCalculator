@@ -12,7 +12,7 @@ class ResultView: UIView {
     
     var separatorLine = UIView()
     var quantityBTC = OutputLabelView(titleText: "Quantity BTC", resultText: "")
-    var btcPriceChange = OutputLabelView(titleText: "BTC price change %", resultText: "")
+    var btcPriceChange = OutputLabelView(titleText: "Price change %", resultText: "")
     var profitLossBTC = OutputLabelView(titleText: "Profit/Loss in BTC", resultText: "")
     var profitLossUSD = OutputLabelView(titleText: "Profit/Loss in USD", resultText: "")
     var roe = OutputLabelView(titleText: "ROE %", resultText: "")
