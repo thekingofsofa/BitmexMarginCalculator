@@ -52,11 +52,11 @@ enum Router {
                     URLQueryItem(name: "count", value: "1"),
                     URLQueryItem(name: "reverse", value: "true")]
         case .getXBTH20:
-            return [URLQueryItem(name: "symbol", value: "XBTZ19"),
+            return [URLQueryItem(name: "symbol", value: "XBTH20"),
                     URLQueryItem(name: "count", value: "1"),
                     URLQueryItem(name: "reverse", value: "true")]
         case .getXBTZ19:
-            return [URLQueryItem(name: "symbol", value: "XBTH20"),
+            return [URLQueryItem(name: "symbol", value: "XBTZ19"),
                     URLQueryItem(name: "count", value: "1"),
                     URLQueryItem(name: "reverse", value: "true")]
         case .getETHUSD:

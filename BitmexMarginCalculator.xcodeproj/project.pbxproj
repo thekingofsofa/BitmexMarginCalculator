@@ -10,7 +10,6 @@
 		79045A7B2343C7E200BE160D /* TradingPairEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79045A7A2343C7E200BE160D /* TradingPairEnum.swift */; };
 		7928C171234F22910087C96F /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7928C170234F22910087C96F /* Network.swift */; };
 		7928C173234F30600087C96F /* LastPrice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7928C172234F30600087C96F /* LastPrice.swift */; };
-		7928C175234F81770087C96F /* LastPriceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7928C174234F81770087C96F /* LastPriceView.swift */; };
 		792F3F72234B781300D570F4 /* FeesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792F3F71234B781300D570F4 /* FeesViewController.swift */; };
 		792F3F74234BB55F00D570F4 /* CustomCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792F3F73234BB55F00D570F4 /* CustomCollectionViewCell.swift */; };
 		793401B0233CC81300FB082F /* InfoTextViewDataFiller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 793401AF233CC81300FB082F /* InfoTextViewDataFiller.swift */; };
@@ -18,8 +17,6 @@
 		79732E562302DE7B0035E18F /* SegmentedControlExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79732E552302DE7B0035E18F /* SegmentedControlExtension.swift */; };
 		79862FFD2341E8FB00323FD8 /* LabelWithInfoButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79862FFC2341E8FB00323FD8 /* LabelWithInfoButton.swift */; };
 		79862FFF2341F7AD00323FD8 /* PopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79862FFE2341F7AD00323FD8 /* PopUpViewController.swift */; };
-		798E946123478B3D0054A37F /* NavDropMenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 798E945F23478B3D0054A37F /* NavDropMenuCell.swift */; };
-		798E946223478B3D0054A37F /* NavDropMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 798E946023478B3D0054A37F /* NavDropMenu.swift */; };
 		799D56B6231D670600FB9078 /* DoubleRemoveZerosExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 799D56B5231D670600FB9078 /* DoubleRemoveZerosExtension.swift */; };
 		79A7DAAB2334C43C000FE2B0 /* FontHandling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A7DAAA2334C43C000FE2B0 /* FontHandling.swift */; };
 		79A7DAAD2334CFD7000FE2B0 /* SettingsLauncher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A7DAAC2334CFD7000FE2B0 /* SettingsLauncher.swift */; };
@@ -33,6 +30,9 @@
 		79B97E82232BA1FA008F91FD /* Roboto-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 79B97E7E232BA1FA008F91FD /* Roboto-Bold.ttf */; };
 		79B97E84232BA76C008F91FD /* UITextFieldWithDoneButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B97E83232BA76C008F91FD /* UITextFieldWithDoneButton.swift */; };
 		79CAE3CB2351007C00A1C95A /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CAE3CA2351007C00A1C95A /* Router.swift */; };
+		79D36E292355BAF500528BD3 /* LastPriceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D36E262355BAF500528BD3 /* LastPriceView.swift */; };
+		79D36E2A2355BAF500528BD3 /* NavDropMenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D36E272355BAF500528BD3 /* NavDropMenuCell.swift */; };
+		79D36E2B2355BAF500528BD3 /* NavDropMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D36E282355BAF500528BD3 /* NavDropMenu.swift */; };
 		79D50FEA22F35A2E00719A72 /* TextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D50FE922F35A2E00719A72 /* TextFieldView.swift */; };
 		79D50FED22F35E5B00719A72 /* AutoLayoutEasyExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D50FEC22F35E5B00719A72 /* AutoLayoutEasyExtension.swift */; };
 		79D50FEF22F44D2F00719A72 /* OutputLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D50FEE22F44D2F00719A72 /* OutputLabelView.swift */; };
@@ -48,7 +48,6 @@
 		79045A7A2343C7E200BE160D /* TradingPairEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradingPairEnum.swift; sourceTree = "<group>"; };
 		7928C170234F22910087C96F /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		7928C172234F30600087C96F /* LastPrice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LastPrice.swift; sourceTree = "<group>"; };
-		7928C174234F81770087C96F /* LastPriceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LastPriceView.swift; sourceTree = "<group>"; };
 		792F3F71234B781300D570F4 /* FeesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeesViewController.swift; sourceTree = "<group>"; };
 		792F3F73234BB55F00D570F4 /* CustomCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCollectionViewCell.swift; sourceTree = "<group>"; };
 		793401AF233CC81300FB082F /* InfoTextViewDataFiller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoTextViewDataFiller.swift; sourceTree = "<group>"; };
@@ -56,8 +55,6 @@
 		79732E552302DE7B0035E18F /* SegmentedControlExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentedControlExtension.swift; sourceTree = "<group>"; };
 		79862FFC2341E8FB00323FD8 /* LabelWithInfoButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelWithInfoButton.swift; sourceTree = "<group>"; };
 		79862FFE2341F7AD00323FD8 /* PopUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpViewController.swift; sourceTree = "<group>"; };
-		798E945F23478B3D0054A37F /* NavDropMenuCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavDropMenuCell.swift; sourceTree = "<group>"; };
-		798E946023478B3D0054A37F /* NavDropMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavDropMenu.swift; sourceTree = "<group>"; };
 		799D56B5231D670600FB9078 /* DoubleRemoveZerosExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleRemoveZerosExtension.swift; sourceTree = "<group>"; };
 		79A7DAAA2334C43C000FE2B0 /* FontHandling.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FontHandling.swift; sourceTree = "<group>"; };
 		79A7DAAC2334CFD7000FE2B0 /* SettingsLauncher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsLauncher.swift; sourceTree = "<group>"; };
@@ -71,6 +68,9 @@
 		79B97E7E232BA1FA008F91FD /* Roboto-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Bold.ttf"; sourceTree = "<group>"; };
 		79B97E83232BA76C008F91FD /* UITextFieldWithDoneButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextFieldWithDoneButton.swift; sourceTree = "<group>"; };
 		79CAE3CA2351007C00A1C95A /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
+		79D36E262355BAF500528BD3 /* LastPriceView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LastPriceView.swift; sourceTree = "<group>"; };
+		79D36E272355BAF500528BD3 /* NavDropMenuCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavDropMenuCell.swift; sourceTree = "<group>"; };
+		79D36E282355BAF500528BD3 /* NavDropMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavDropMenu.swift; sourceTree = "<group>"; };
 		79D50FE922F35A2E00719A72 /* TextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldView.swift; sourceTree = "<group>"; };
 		79D50FEC22F35E5B00719A72 /* AutoLayoutEasyExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoLayoutEasyExtension.swift; sourceTree = "<group>"; };
 		79D50FEE22F44D2F00719A72 /* OutputLabelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutputLabelView.swift; sourceTree = "<group>"; };
@@ -102,17 +102,6 @@
 				79D50FEB22F35D1E00719A72 /* Extensions */,
 			);
 			path = Helpers;
-			sourceTree = "<group>";
-		};
-		798E945E23478B3D0054A37F /* NavDropMenu */ = {
-			isa = PBXGroup;
-			children = (
-				798E946023478B3D0054A37F /* NavDropMenu.swift */,
-				798E945F23478B3D0054A37F /* NavDropMenuCell.swift */,
-				7928C174234F81770087C96F /* LastPriceView.swift */,
-			);
-			name = NavDropMenu;
-			path = ../../../NavDropDownMenu/NavDropDownMenu/NavDropMenu;
 			sourceTree = "<group>";
 		};
 		79A7DAA72334C3BB000FE2B0 /* Controller */ = {
@@ -147,10 +136,20 @@
 			path = Network;
 			sourceTree = "<group>";
 		};
+		79D36E252355BAF500528BD3 /* NavDropMenu */ = {
+			isa = PBXGroup;
+			children = (
+				79D36E262355BAF500528BD3 /* LastPriceView.swift */,
+				79D36E272355BAF500528BD3 /* NavDropMenuCell.swift */,
+				79D36E282355BAF500528BD3 /* NavDropMenu.swift */,
+			);
+			path = NavDropMenu;
+			sourceTree = "<group>";
+		};
 		79D50FE422F358A500719A72 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				798E945E23478B3D0054A37F /* NavDropMenu */,
+				79D36E252355BAF500528BD3 /* NavDropMenu */,
 				79B97E83232BA76C008F91FD /* UITextFieldWithDoneButton.swift */,
 				79D50FE922F35A2E00719A72 /* TextFieldView.swift */,
 				79D50FEE22F44D2F00719A72 /* OutputLabelView.swift */,
@@ -293,9 +292,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7928C175234F81770087C96F /* LastPriceView.swift in Sources */,
 				7928C171234F22910087C96F /* Network.swift in Sources */,
 				7936C8B523390D54004AD81A /* NSMutableAttributedString+link.swift in Sources */,
+				79D36E292355BAF500528BD3 /* LastPriceView.swift in Sources */,
 				792F3F74234BB55F00D570F4 /* CustomCollectionViewCell.swift in Sources */,
 				7928C173234F30600087C96F /* LastPrice.swift in Sources */,
 				79732E562302DE7B0035E18F /* SegmentedControlExtension.swift in Sources */,
@@ -304,12 +303,12 @@
 				79FACA2F22F1D27D007F1445 /* MainViewController.swift in Sources */,
 				79B97E84232BA76C008F91FD /* UITextFieldWithDoneButton.swift in Sources */,
 				79EA03E0230A7AB9003DA9AE /* Settings.swift in Sources */,
-				798E946223478B3D0054A37F /* NavDropMenu.swift in Sources */,
 				79D50FF122F46D2E00719A72 /* MarginCalculator.swift in Sources */,
-				798E946123478B3D0054A37F /* NavDropMenuCell.swift in Sources */,
 				79FACA2D22F1D27D007F1445 /* AppDelegate.swift in Sources */,
 				79A7DAB123350919000FE2B0 /* InfoTextViewController.swift in Sources */,
+				79D36E2B2355BAF500528BD3 /* NavDropMenu.swift in Sources */,
 				79A7DAAF2334DE91000FE2B0 /* SettingsTableViewCell.swift in Sources */,
+				79D36E2A2355BAF500528BD3 /* NavDropMenuCell.swift in Sources */,
 				79A7DAB323361812000FE2B0 /* LabelSegmentedView.swift in Sources */,
 				79D50FEF22F44D2F00719A72 /* OutputLabelView.swift in Sources */,
 				79B97E79232A3803008F91FD /* ResultView.swift in Sources */,
