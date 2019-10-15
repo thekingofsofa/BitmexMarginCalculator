@@ -116,6 +116,7 @@ class SettingsLauncher: NSObject, UITableViewDataSource, UITableViewDelegate {
         
         Settings.shared.showFees = !Settings.shared.showFees
         homeController.showHideFees()
+        homeController.calculate()
         UserDefaults.standard.set(Settings.shared.showFees, forKey: "showFees")
     }
     

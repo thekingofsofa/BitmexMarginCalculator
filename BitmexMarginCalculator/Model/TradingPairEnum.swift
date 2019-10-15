@@ -107,21 +107,21 @@ enum TradingPair: String, CaseIterable {
         case .XBTUSD, .XBTZ19, .XBTH20:
             return .getXBTUSD
         case .ADAZ19:
-            return .getADABTC
+            return .getADAZ19
         case .BCHZ19:
-            return .getBCHBTC
+            return .getBCHZ19
         case .EOSZ19:
-            return .getEOSBTC
+            return .getEOSZ19
         case .ETHUSD:
             return .getETHUSD
         case .ETHZ19:
-            return .getETHBTC
+            return .getETHZ19
         case .LTCZ19:
-            return .getLTCBTC
+            return .getLTCZ19
         case .TRXZ19:
-            return .getTRXBTC
+            return .getTRXZ19
         case .XRPZ19:
-            return .getXRPBTC
+            return .getXRPZ19
         }
     }
     

@@ -29,7 +29,6 @@ class ServiceLayer {
         
         let session = URLSession(configuration: .default)
         let dataTask = session.dataTask(with: urlRequest) { data, response, error in
-            // 5.
             
             guard error == nil else {
                 completion(.failure(error!))
