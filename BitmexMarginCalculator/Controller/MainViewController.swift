@@ -58,9 +58,9 @@ class MainViewController: UIViewController {
         super.viewDidLoad()
         setupView()
         setupLayout()
+        setupNavigationBar()
         showHideFees()
         showHideBTCPriceForAltcoins()
-        setupNavigationBar()
         calculate()
         _ = Timer.scheduledTimer(timeInterval: 5.0,
                                  target: self,
@@ -108,30 +108,27 @@ class MainViewController: UIViewController {
         // Manage colors
         guard let backgroundImage = UIImage(named: "background_light") else { return }
         self.view.backgroundColor = UIColor(patternImage: backgroundImage)
-        
+        // Adding views
+        [mainScrollView, lastPriceView, navDropMenu].forEach {
+            view.addSubview($0)
+        }
         // Delegate textfields
         [quantity, entryPrice, exitPrice, leverageSize, btcPriceWhenEnter, btcPriceWhenExit].forEach { $0.textFieldInputView.delegate = self }
-        
-        // Long Short Switcher
+        // Setup long Short Switcher
         longShortSwitcher = UISegmentedControl(items: ["Long", "Short"])
         longShortSwitcher.updateTintColor(firstSection: UIColor(red:0.21, green:0.75, blue:0.00, alpha:1.0), secondSection: UIColor.red)
         longShortSwitcher.addTarget(self, action: #selector(positionSideChanged), for: .valueChanged)
-        
         // Info Buttons
         showInfoButtons()
-        
         // Fees switchers
         enterOrder.segmentedControl.addTarget(self, action: #selector(changeFeeType), for: .valueChanged)
         closeOrder.segmentedControl.addTarget(self, action: #selector(changeFeeType), for: .valueChanged)
-        
         // Load last entered data via UserDefaults
         loadUserDefaults()
         determineFeeType()
-        
         // If keyboard appeard above textfield(iphone 5s,SE), setContentOffset
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
-        
         // Last BTC price view
         setupLastPriceView()
         
@@ -140,9 +137,36 @@ class MainViewController: UIViewController {
         bottomLabel.setScaledCustomFont(forFont: .RobotoLight, textStyle: .footnote)
         bottomLabel.textColor = .gray
         bottomLabel.textAlignment = .center
-        mainScrollView.addSubview(bottomLabel)
     }
     
+    // MARK: Setup NavigationBar
+    private func setupNavigationBar() {
+        let configButton = UIBarButtonItem(image: UIImage(named: "settings"), style: .plain, target: self, action: #selector(configButtonPressed))
+        navigationItem.rightBarButtonItem = configButton
+        navigationItem.titleView = navDropMenu.navBarButton
+        navDropMenu.delegate = self
+    }
+    
+    @objc private func configButtonPressed() {
+        settingsLauncher.showSettings()
+        view.endEditing(true)
+    }
+    
+    func setupLastPriceView() {
+        let traidingPair = Settings.shared.selectedTradingPair
+        lastPriceView.backgroundColor = UIColor(red:0.96, green:0.96, blue:0.96, alpha:1.0)
+        
+        let network = ServiceLayer()
+        network.request(router: Router.getXBTUSD) { (result: Result<[LastPrice]>) in
+            switch result {
+            case .success(let data):
+                print(result)
+                self.lastPriceView.priceLabel.text = "Last \(traidingPair.rawValue) price: \(data[0].price)"
+            case .failure:
+                print(result)
+            }
+        }
+    }
     // MARK: Layout View
     func setupLayout() {
         let entryDataStackView = UIStackView(arrangedSubviews: [longShortSwitcher, quantity, entryPrice, exitPrice, leverageSize, enterOrder, closeOrder, btcPriceWhenEnter, btcPriceWhenExit])
@@ -160,47 +184,43 @@ class MainViewController: UIViewController {
         
         mainStackView = UIStackView(arrangedSubviews: [entryDataStackView, resultBorderView])
         mainStackView.spacing = 12
-        view.addSubview(mainScrollView)
-        mainScrollView.addSubview(mainStackView)
+        [mainStackView, bottomLabel].forEach {
+            mainScrollView.addSubview($0)
+        }
         
         mainScrollView.anchor(top: nil, leading: view.safeAreaLayoutGuide.leadingAnchor, bottom: view.bottomAnchor, trailing: view.safeAreaLayoutGuide.trailingAnchor)
         showHideLastPrice()
         
         mainStackView.anchor(top: mainScrollView.topAnchor, leading: mainScrollView.leadingAnchor, bottom: mainScrollView.bottomAnchor, trailing: mainScrollView.trailingAnchor, padding: .init(top: 12, left: 12, bottom: 28, right: 12))
         mainStackView.widthAnchor.constraint(equalTo: mainScrollView.widthAnchor, constant: -24).isActive = true
+        
+        navDropMenu.anchor(top: view.safeAreaLayoutGuide.topAnchor, leading: view.leadingAnchor, bottom: view.bottomAnchor, trailing: view.trailingAnchor)
         bottomLabel.anchor(top: resultBorderView.bottomAnchor, leading: resultBorderView.leadingAnchor, bottom: nil, trailing: resultBorderView.trailingAnchor, padding: .init(top: 4, left: 12, bottom: 0, right: 12))
     }
     
-    // MARK: Setup NavigationBar
-    private func setupNavigationBar() {
-        let configButton = UIBarButtonItem(image: UIImage(named: "settings"), style: .plain, target: self, action: #selector(configButtonPressed))
-        navigationItem.rightBarButtonItem = configButton
-        navigationItem.titleView = navDropMenu.navBarButton
-        navDropMenu.delegate = self
+    // MARK: Define constraints based on device and orientation
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
         
-        view.addSubview(navDropMenu)
-        navDropMenu.anchor(top: view.safeAreaLayoutGuide.topAnchor, leading: view.leadingAnchor, bottom: view.bottomAnchor, trailing: view.trailingAnchor)
-    }
-    
-    @objc private func configButtonPressed() {
-        settingsLauncher.showSettings()
-    }
-    
-    func setupLastPriceView() {
-        let traidingPair = Settings.shared.selectedTradingPair
-        view.addSubview(lastPriceView)
-        lastPriceView.backgroundColor = UIColor(red:0.96, green:0.96, blue:0.96, alpha:1.0)
-        
-        let network = ServiceLayer()
-        network.request(router: Router.getXBTUSD) { (result: Result<[LastPrice]>) in
-            switch result {
-            case .success(let data):
-                print(result)
-                self.lastPriceView.priceLabel.text = "Last \(traidingPair.rawValue) price: \(data[0].price)"
-            case .failure:
-                print(result)
+        if previousTraitCollection?.verticalSizeClass != traitCollection.verticalSizeClass {
+            if UIDevice.current.userInterfaceIdiom == .phone && traitCollection.verticalSizeClass == .compact {
+                setupConstraintForCompactEnviromnentIphone()
+            } else if UIDevice.current.userInterfaceIdiom == .phone && traitCollection.verticalSizeClass == .regular {
+                setupConstraintForRegularEnviromnentIphone()
             }
         }
+    }
+    
+    func setupConstraintForCompactEnviromnentIphone() {
+        self.mainStackView.axis = .horizontal
+        self.mainStackView.alignment = .top
+        self.mainStackView.distribution = .fillEqually
+    }
+    
+    func setupConstraintForRegularEnviromnentIphone() {
+        self.mainStackView.axis = .vertical
+        self.mainStackView.alignment = .fill
+        self.mainStackView.distribution = .fill
     }
     
     // MARK: Calculator
@@ -233,6 +253,7 @@ class MainViewController: UIViewController {
         resultBorderView.fees.resultLabel.text = String(format: "%.2f", marginCalc.feesInUSD) + "$"
     }
     
+    // MARK: Fees methods
     @objc func changeFeeType() {
         determineFeeType()
         calculate()
@@ -303,49 +324,8 @@ class MainViewController: UIViewController {
         present(infoVC, animated: true, completion: nil)
     }
     
-    // MARK: Define constraints based on device and orientation
-    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        super.traitCollectionDidChange(previousTraitCollection)
-        
-        if previousTraitCollection?.verticalSizeClass != traitCollection.verticalSizeClass {
-            if UIDevice.current.userInterfaceIdiom == .phone && traitCollection.verticalSizeClass == .compact {
-                setupConstraintForCompactEnviromnentIphone()
-            } else if UIDevice.current.userInterfaceIdiom == .phone && traitCollection.verticalSizeClass == .regular {
-                setupConstraintForRegularEnviromnentIphone()
-            }
-        }
-    }
-    
-    func setupConstraintForCompactEnviromnentIphone() {
-        self.mainStackView.axis = .horizontal
-        self.mainStackView.alignment = .top
-        self.mainStackView.distribution = .fillEqually
-    }
-    
-    func setupConstraintForRegularEnviromnentIphone() {
-        self.mainStackView.axis = .vertical
-        self.mainStackView.alignment = .fill
-        self.mainStackView.distribution = .fill
-    }
-    
-    // Method to set setContentOffset, if keyboard appeard above textfield
-    @objc func keyboardWillShow(notification: NSNotification) {
-        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
-            
-            if (view.frame.height - keyboardSize.height) <= (leverageSize.frame.origin.y + leverageSize.frame.height) {
-                self.view.frame.origin.y -= ((leverageSize.frame.origin.y + leverageSize.frame.height) - (view.frame.height - keyboardSize.height)) + leverageSize.frame.height
-            }
-        }
-    }
-    
-    @objc func keyboardWillHide(notification: NSNotification) {
-        if self.view.frame.origin.y != 0 {
-            self.view.frame.origin.y = 0
-        }
-    }
-    
-    // Load UserDefaults method
-    func loadUserDefaults() {
+    // MARK: Load UserDefaults method
+    private func loadUserDefaults() {
         let defaults = UserDefaults.standard
         let selectedPair = Settings.shared.selectedTradingPair.rawValue
         if let savedData = defaults.object(forKey: selectedPair) as? Data {
@@ -396,6 +376,22 @@ extension MainViewController: UITextFieldDelegate {
         let allowedCharacters = CharacterSet(charactersIn:".0123456789 ")//Here change this characters based on your requirement
         let characterSet = CharacterSet(charactersIn: string)
         return allowedCharacters.isSuperset(of: characterSet)
+    }
+    
+    // Method to set setContentOffset, if keyboard appeard above textfield
+    @objc func keyboardWillShow(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+            
+            if (view.frame.height - keyboardSize.height) <= (leverageSize.frame.origin.y + leverageSize.frame.height) {
+                self.view.frame.origin.y -= ((leverageSize.frame.origin.y + leverageSize.frame.height) - (view.frame.height - keyboardSize.height)) + leverageSize.frame.height
+            }
+        }
+    }
+    
+    @objc func keyboardWillHide(notification: NSNotification) {
+        if self.view.frame.origin.y != 0 {
+            self.view.frame.origin.y = 0
+        }
     }
 }
 
