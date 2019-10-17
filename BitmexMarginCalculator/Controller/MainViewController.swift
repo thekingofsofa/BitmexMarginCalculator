@@ -226,10 +226,12 @@ class MainViewController: UIViewController {
     // MARK: Calculator
     func calculate() {
         // Check max leverage
-        if Int(leverageSize.textFieldInputView.text ?? "0")! > Settings.shared.selectedTradingPair.maxLeverage {
-            leverageSize.textFieldInputView.backgroundColor = UIColor(red:1.00, green:0.80, blue:0.80, alpha:1.0)
-        } else {
-            leverageSize.textFieldInputView.backgroundColor = UIColor.white
+        if let leverageSizeInt = Int(self.leverageSize.textFieldInputView.text ?? "0") {
+            if leverageSizeInt > Settings.shared.selectedTradingPair.maxLeverage {
+                leverageSize.textFieldInputView.backgroundColor = UIColor(red:1.00, green:0.80, blue:0.80, alpha:1.0)
+            } else {
+                leverageSize.textFieldInputView.backgroundColor = UIColor.white
+            }
         }
         
         marginCalc.calcEntryData.longShortSwitcher = longShortSwitcher.selectedSegmentIndex == 0 ? .long : .short

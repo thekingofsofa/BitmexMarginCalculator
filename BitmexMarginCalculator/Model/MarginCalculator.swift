@@ -97,7 +97,7 @@ class MarginCalculator {
     }
     
     // Calculate initial margin, entry value
-    func calcInitialMarginInBTC() {
+    private func calcInitialMarginInBTC() {
         let traidingPair = Settings.shared.selectedTradingPair
         switch traidingPair {
         case .XBTUSD, .XBTZ19, .XBTH20:
@@ -117,7 +117,7 @@ class MarginCalculator {
         }
     }
     
-    func calcFees() {
+    private func calcFees() {
         let traidingPair = Settings.shared.selectedTradingPair
         switch traidingPair {
         case .XBTUSD, .XBTZ19, .XBTH20:
@@ -191,7 +191,7 @@ class MarginCalculator {
         }
     }
     
-    func calcProfitLossInBTC() -> Double {
+    private func calcProfitLossInBTC() -> Double {
         
         let traidingPair = Settings.shared.selectedTradingPair
         switch traidingPair {
@@ -215,6 +215,7 @@ class MarginCalculator {
             let defaults = UserDefaults.standard
             let selectedPair = Settings.shared.selectedTradingPair.rawValue
             defaults.set(encoded, forKey: selectedPair)
+            defaults.synchronize()
         }
     }
 }
