@@ -62,45 +62,12 @@ class MainViewController: UIViewController {
         showHideFees()
         showHideBTCPriceForAltcoins()
         calculate()
+        // Get latets price from api
         _ = Timer.scheduledTimer(timeInterval: 5.0,
                                  target: self,
-                                 selector: #selector(execute),
+                                 selector: #selector(getLatestPriceApiCall),
                                  userInfo: nil,
                                  repeats: true)
-    }
-    
-    @objc func execute() {
-        
-        let traidingPair = Settings.shared.selectedTradingPair
-        let network = ServiceLayer()
-        network.request(router: traidingPair.router) { (result: Result<[LastPrice]>) in
-            switch result {
-            case .success(let data):
-                self.lastPriceView.statusIcon.image = UIImage(named: "ic_trending_up.png")
-                UIView.animate(withDuration: 0.3, animations: {
-                    self.lastPriceView.priceLabel.alpha = 0.0
-                }, completion: { (bool) in
-                    let formatLiquidationStringStyle = Settings.shared.selectedTradingPair.formatStyle
-                    let price = Double(truncating: NSDecimalNumber(decimal: data[0].price))
-                    let priceString = String(format: formatLiquidationStringStyle, price)
-                    self.lastPriceView.priceLabel.text = "Last \(traidingPair.rawValue) price: " + priceString
-                    UIView.animate(withDuration: 0.3, animations: {
-                        self.lastPriceView.priceLabel.alpha = 1.0
-                    })
-                })
-            case .failure:
-                self.noInternet()
-                print(result)
-            }
-        }
-    }
-    
-    func noInternet() {
-        // do here
-        DispatchQueue.main.async {
-            self.lastPriceView.priceLabel.text = "No internet connection"
-            self.lastPriceView.statusIcon.image = UIImage(named: "no_connection.png")
-        }
     }
     
     // MARK: Setup View
@@ -225,6 +192,7 @@ class MainViewController: UIViewController {
     
     // MARK: Calculator
     func calculate() {
+        
         // Check max leverage
         if let leverageSizeInt = Int(self.leverageSize.textFieldInputView.text ?? "0") {
             if leverageSizeInt > Settings.shared.selectedTradingPair.maxLeverage {
@@ -234,10 +202,16 @@ class MainViewController: UIViewController {
             }
         }
         
+        let enterPrice = NumberFormatter().number(from: entryPrice.textFieldInputView.text ?? "0")
+        if let enterPrice = enterPrice {
+            marginCalc.calcEntryData.enterPrice = Double(truncating: enterPrice)
+        }
+        let closePrice = NumberFormatter().number(from: exitPrice.textFieldInputView.text ?? "0")
+        if let closePrice = closePrice {
+            marginCalc.calcEntryData.closePrice = Double(truncating: closePrice)
+        }
         marginCalc.calcEntryData.longShortSwitcher = longShortSwitcher.selectedSegmentIndex == 0 ? .long : .short
         marginCalc.calcEntryData.quantity = Double(quantity.textFieldInputView.text!) ?? 0
-        marginCalc.calcEntryData.enterPrice = Double(entryPrice.textFieldInputView.text!) ?? 0
-        marginCalc.calcEntryData.closePrice = Double(exitPrice.textFieldInputView.text!) ?? 0
         marginCalc.calcEntryData.leverageSize = Double(leverageSize.textFieldInputView.text!) ?? 0
         marginCalc.calcEntryData.feeType = feeType
         marginCalc.calcEntryData.btcPriceWhenEnter = Double(btcPriceWhenEnter.textFieldInputView.text!) ?? 0
@@ -375,7 +349,7 @@ extension MainViewController: UITextFieldDelegate {
     // Restricts textfields only to numbers
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         
-        let allowedCharacters = CharacterSet(charactersIn:".0123456789 ")//Here change this characters based on your requirement
+        let allowedCharacters = CharacterSet(charactersIn:",.0123456789 ")//Here change this characters based on your requirement
         let characterSet = CharacterSet(charactersIn: string)
         return allowedCharacters.isSuperset(of: characterSet)
     }
@@ -410,7 +384,45 @@ extension MainViewController: NavDropMenuDelegate {
             let currency = String(Settings.shared.selectedTradingPair.rawValue.prefix(3))
             quantity.textFieldNameLabel.text = "Quantity (\(currency))"
         }
-        
+        getLatestPriceApiCall()
         calculate()
+    }
+}
+
+// MARK: Networking
+
+extension MainViewController {
+    
+    @objc private func getLatestPriceApiCall() {
+        
+        let traidingPair = Settings.shared.selectedTradingPair
+        let network = ServiceLayer()
+        network.request(router: traidingPair.router) { [weak self] (result: Result<[LastPrice]>) in
+            switch result {
+            case .success(let data):
+                self?.lastPriceView.statusIcon.image = UIImage(named: "ic_trending_up.png")
+                UIView.animate(withDuration: 0.3, animations: {
+                    self?.lastPriceView.priceLabel.alpha = 0.0
+                }, completion: { (bool) in
+                    let formatLiquidationStringStyle = Settings.shared.selectedTradingPair.formatStyle
+                    let price = Double(truncating: NSDecimalNumber(decimal: data[0].price))
+                    let priceString = String(format: formatLiquidationStringStyle, price)
+                    self?.lastPriceView.priceLabel.text = "Last \(traidingPair.rawValue) price: " + priceString
+                    UIView.animate(withDuration: 0.3, animations: {
+                        self?.lastPriceView.priceLabel.alpha = 1.0
+                    })
+                })
+            case .failure:
+                self?.noInternet()
+                print(result)
+            }
+        }
+    }
+    
+    private func noInternet() {
+        DispatchQueue.main.async {
+            self.lastPriceView.priceLabel.text = "No internet connection"
+            self.lastPriceView.statusIcon.image = UIImage(named: "no_connection.png")
+        }
     }
 }

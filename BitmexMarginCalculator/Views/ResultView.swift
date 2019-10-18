@@ -31,11 +31,11 @@ class ResultView: UIView {
         self.backgroundColor = .white
         
         // Make gray background for every second element in view
-        var elementsWithBackground = [quantityBTC, btcPriceChange, profitLossBTC, profitLossUSD, roe, liqudationPrice, fees]
-        elementsWithBackground = elementsWithBackground.enumerated().compactMap { index, element in
+        var elements = [quantityBTC, btcPriceChange, profitLossBTC, profitLossUSD, roe, liqudationPrice, fees]
+        elements = elements.enumerated().compactMap { index, element in
             index % 2 != 0 ? element : nil
         }
-        elementsWithBackground.forEach {
+        elements.forEach {
             $0.backgroundColor = UIColor(red:0.88, green:0.90, blue:0.93, alpha:1.0) }
         
         // Creating UIStackView

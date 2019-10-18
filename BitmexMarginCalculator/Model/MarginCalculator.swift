@@ -54,6 +54,8 @@ class MarginCalculator {
     
     func calculate() {
         
+        print(contractValueBTC)
+        print(calcEntryData)
         if Settings.shared.selectedTradingPair == .XBTUSD || Settings.shared.selectedTradingPair == .XBTZ19 || Settings.shared.selectedTradingPair == .XBTH20 {
             calcEntryData.btcPriceWhenEnter = calcEntryData.enterPrice
             calcEntryData.btcPriceWhenExit = calcEntryData.closePrice
@@ -125,7 +127,6 @@ class MarginCalculator {
             // Single fee
             oneMarketFee = contractValueBTC * Settings.shared.selectedTradingPair.takerFee
             oneLimitFee = contractValueBTC * Settings.shared.selectedTradingPair.makerFee
-            
             // Calculate Fees depending on type
             switch calcEntryData.feeType {
             case .twoLimits:
