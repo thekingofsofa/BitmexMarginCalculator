@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		79045A7B2343C7E200BE160D /* TradingPairEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79045A7A2343C7E200BE160D /* TradingPairEnum.swift */; };
+		79196E3F235C7D0B006ADF7E /* BitmexMarginCalculatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79196E3E235C7D0B006ADF7E /* BitmexMarginCalculatorTests.swift */; };
 		7928C171234F22910087C96F /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7928C170234F22910087C96F /* Network.swift */; };
 		7928C173234F30600087C96F /* LastPrice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7928C172234F30600087C96F /* LastPrice.swift */; };
 		792F3F72234B781300D570F4 /* FeesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792F3F71234B781300D570F4 /* FeesViewController.swift */; };
@@ -44,8 +45,21 @@
 		79FACA3722F1D27F007F1445 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 79FACA3522F1D27F007F1445 /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		79196E41235C7D0B006ADF7E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 79FACA2122F1D27D007F1445 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 79FACA2822F1D27D007F1445;
+			remoteInfo = BitmexMarginCalculator;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		79045A7A2343C7E200BE160D /* TradingPairEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradingPairEnum.swift; sourceTree = "<group>"; };
+		79196E3C235C7D0B006ADF7E /* BitmexMarginCalculatorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BitmexMarginCalculatorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		79196E3E235C7D0B006ADF7E /* BitmexMarginCalculatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BitmexMarginCalculatorTests.swift; sourceTree = "<group>"; };
+		79196E40235C7D0B006ADF7E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7928C170234F22910087C96F /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		7928C172234F30600087C96F /* LastPrice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LastPrice.swift; sourceTree = "<group>"; };
 		792F3F71234B781300D570F4 /* FeesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeesViewController.swift; sourceTree = "<group>"; };
@@ -85,6 +99,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		79196E39235C7D0B006ADF7E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		79FACA2622F1D27D007F1445 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -95,6 +116,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		79196E3D235C7D0B006ADF7E /* BitmexMarginCalculatorTests */ = {
+			isa = PBXGroup;
+			children = (
+				79196E3E235C7D0B006ADF7E /* BitmexMarginCalculatorTests.swift */,
+				79196E40235C7D0B006ADF7E /* Info.plist */,
+			);
+			path = BitmexMarginCalculatorTests;
+			sourceTree = "<group>";
+		};
 		7928C16F234F227B0087C96F /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
@@ -190,6 +220,7 @@
 			isa = PBXGroup;
 			children = (
 				79FACA2B22F1D27D007F1445 /* BitmexMarginCalculator */,
+				79196E3D235C7D0B006ADF7E /* BitmexMarginCalculatorTests */,
 				79FACA2A22F1D27D007F1445 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -198,6 +229,7 @@
 			isa = PBXGroup;
 			children = (
 				79FACA2922F1D27D007F1445 /* BitmexMarginCalculator.app */,
+				79196E3C235C7D0B006ADF7E /* BitmexMarginCalculatorTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -221,6 +253,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		79196E3B235C7D0B006ADF7E /* BitmexMarginCalculatorTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 79196E45235C7D0B006ADF7E /* Build configuration list for PBXNativeTarget "BitmexMarginCalculatorTests" */;
+			buildPhases = (
+				79196E38235C7D0B006ADF7E /* Sources */,
+				79196E39235C7D0B006ADF7E /* Frameworks */,
+				79196E3A235C7D0B006ADF7E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				79196E42235C7D0B006ADF7E /* PBXTargetDependency */,
+			);
+			name = BitmexMarginCalculatorTests;
+			productName = BitmexMarginCalculatorTests;
+			productReference = 79196E3C235C7D0B006ADF7E /* BitmexMarginCalculatorTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		79FACA2822F1D27D007F1445 /* BitmexMarginCalculator */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 79FACA3B22F1D27F007F1445 /* Build configuration list for PBXNativeTarget "BitmexMarginCalculator" */;
@@ -248,6 +298,10 @@
 				LastUpgradeCheck = 1010;
 				ORGANIZATIONNAME = "Ivan Barabanshchykov";
 				TargetAttributes = {
+					79196E3B235C7D0B006ADF7E = {
+						CreatedOnToolsVersion = 10.1;
+						TestTargetID = 79FACA2822F1D27D007F1445;
+					};
 					79FACA2822F1D27D007F1445 = {
 						CreatedOnToolsVersion = 10.1;
 					};
@@ -267,11 +321,19 @@
 			projectRoot = "";
 			targets = (
 				79FACA2822F1D27D007F1445 /* BitmexMarginCalculator */,
+				79196E3B235C7D0B006ADF7E /* BitmexMarginCalculatorTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		79196E3A235C7D0B006ADF7E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		79FACA2722F1D27D007F1445 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -288,6 +350,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		79196E38235C7D0B006ADF7E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				79196E3F235C7D0B006ADF7E /* BitmexMarginCalculatorTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		79FACA2522F1D27D007F1445 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -326,6 +396,14 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		79196E42235C7D0B006ADF7E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 79FACA2822F1D27D007F1445 /* BitmexMarginCalculator */;
+			targetProxy = 79196E41235C7D0B006ADF7E /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin PBXVariantGroup section */
 		79FACA3522F1D27F007F1445 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
@@ -338,6 +416,46 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		79196E43235C7D0B006ADF7E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = C2L6Q7FQ8V;
+				INFOPLIST_FILE = BitmexMarginCalculatorTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = BrbApp.BitmexMarginCalculatorTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BitmexMarginCalculator.app/BitmexMarginCalculator";
+			};
+			name = Debug;
+		};
+		79196E44235C7D0B006ADF7E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = C2L6Q7FQ8V;
+				INFOPLIST_FILE = BitmexMarginCalculatorTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = BrbApp.BitmexMarginCalculatorTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BitmexMarginCalculator.app/BitmexMarginCalculator";
+			};
+			name = Release;
+		};
 		79FACA3922F1D27F007F1445 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -495,6 +613,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		79196E45235C7D0B006ADF7E /* Build configuration list for PBXNativeTarget "BitmexMarginCalculatorTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				79196E43235C7D0B006ADF7E /* Debug */,
+				79196E44235C7D0B006ADF7E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		79FACA2422F1D27D007F1445 /* Build configuration list for PBXProject "BitmexMarginCalculator" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

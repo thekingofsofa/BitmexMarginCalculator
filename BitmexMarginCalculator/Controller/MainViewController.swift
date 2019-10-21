@@ -70,8 +70,8 @@ class MainViewController: UIViewController {
                                  repeats: true)
     }
     
-    // MARK: Setup View
-    func setupView() {
+    // MARK: - Setup View
+    private func setupView() {
         // Manage colors
         guard let backgroundImage = UIImage(named: "background_light") else { return }
         self.view.backgroundColor = UIColor(patternImage: backgroundImage)
@@ -106,7 +106,7 @@ class MainViewController: UIViewController {
         bottomLabel.textAlignment = .center
     }
     
-    // MARK: Setup NavigationBar
+    // MARK: Setup navigation bar
     private func setupNavigationBar() {
         let configButton = UIBarButtonItem(image: UIImage(named: "settings"), style: .plain, target: self, action: #selector(configButtonPressed))
         navigationItem.rightBarButtonItem = configButton
@@ -119,7 +119,7 @@ class MainViewController: UIViewController {
         view.endEditing(true)
     }
     
-    func setupLastPriceView() {
+    private func setupLastPriceView() {
         let traidingPair = Settings.shared.selectedTradingPair
         lastPriceView.backgroundColor = UIColor(red:0.96, green:0.96, blue:0.96, alpha:1.0)
         
@@ -134,8 +134,9 @@ class MainViewController: UIViewController {
             }
         }
     }
+    
     // MARK: Layout View
-    func setupLayout() {
+    private func setupLayout() {
         let entryDataStackView = UIStackView(arrangedSubviews: [longShortSwitcher, quantity, entryPrice, exitPrice, leverageSize, enterOrder, closeOrder, btcPriceWhenEnter, btcPriceWhenExit])
         entryDataStackView.distribution = .fillEqually
         entryDataStackView.axis = .vertical
@@ -165,7 +166,7 @@ class MainViewController: UIViewController {
         bottomLabel.anchor(top: resultBorderView.bottomAnchor, leading: resultBorderView.leadingAnchor, bottom: nil, trailing: resultBorderView.trailingAnchor, padding: .init(top: 4, left: 12, bottom: 0, right: 12))
     }
     
-    // MARK: Define constraints based on device and orientation
+    // MARK: - Define constraints based on device and orientation
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
         
@@ -178,19 +179,19 @@ class MainViewController: UIViewController {
         }
     }
     
-    func setupConstraintForCompactEnviromnentIphone() {
+    private func setupConstraintForCompactEnviromnentIphone() {
         self.mainStackView.axis = .horizontal
         self.mainStackView.alignment = .top
         self.mainStackView.distribution = .fillEqually
     }
     
-    func setupConstraintForRegularEnviromnentIphone() {
+    private func setupConstraintForRegularEnviromnentIphone() {
         self.mainStackView.axis = .vertical
         self.mainStackView.alignment = .fill
         self.mainStackView.distribution = .fill
     }
     
-    // MARK: Calculator
+    // MARK: - Calculator
     func calculate() {
         
         // Check max leverage
@@ -260,7 +261,7 @@ class MainViewController: UIViewController {
         }
     }
     
-    // MARK: Show/hide fee method
+    // MARK: - Show/hide fee method
     func showHideLastPrice() {
         mainScrollViewTopConstraint.isActive = false
         if Settings.shared.showLastPrice {
@@ -273,7 +274,7 @@ class MainViewController: UIViewController {
         mainScrollViewTopConstraint.isActive = true
     }
     
-    // MARK: Show/hide btc price when enter and exit for altcoins
+    // MARK: - Show/hide btc price when enter and exit for altcoins
     func showHideBTCPriceForAltcoins() {
         
         let traidingPair = Settings.shared.selectedTradingPair
@@ -287,8 +288,8 @@ class MainViewController: UIViewController {
         }
     }
     
-    // MARK: Show info Button
-    func showInfoButtons() {
+    // MARK: - Show info Button
+    private func showInfoButtons() {
         resultBorderView.liqudationPrice.resultLabel.addInfoButton()
         resultBorderView.liqudationPrice.resultLabel.infoButton.addTarget(self, action: #selector(liquidationInfoButtonPressed), for: .touchUpInside)
     }
@@ -300,7 +301,7 @@ class MainViewController: UIViewController {
         present(infoVC, animated: true, completion: nil)
     }
     
-    // MARK: Load UserDefaults method
+    // MARK: - Load UserDefaults method
     private func loadUserDefaults() {
         let defaults = UserDefaults.standard
         let selectedPair = Settings.shared.selectedTradingPair.rawValue
@@ -334,7 +335,7 @@ class MainViewController: UIViewController {
     }
 }
 
-// MARK: UITextfield methods
+// MARK: - UITextfield methods
 extension MainViewController: UITextFieldDelegate {
     
     func textFieldDidEndEditing(_ textField: UITextField) {
@@ -371,7 +372,7 @@ extension MainViewController: UITextFieldDelegate {
     }
 }
 
-// MARK: NavDropMenuDelegate methods
+// MARK: - NavDropMenuDelegate methods
 extension MainViewController: NavDropMenuDelegate {
     func navDropMenuCellSelected(selectedRowInt: Int) {
         loadUserDefaults()
@@ -389,8 +390,7 @@ extension MainViewController: NavDropMenuDelegate {
     }
 }
 
-// MARK: Networking
-
+// MARK: - Networking
 extension MainViewController {
     
     @objc private func getLatestPriceApiCall() {
