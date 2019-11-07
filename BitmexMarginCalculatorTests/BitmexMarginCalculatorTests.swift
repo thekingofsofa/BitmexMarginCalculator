@@ -64,7 +64,6 @@ class BitmexMarginCalculatorTests: XCTestCase {
                 XCTFail()
             }
         }
-        
         waitForExpectations(timeout: 8, handler: nil)
     }
 }

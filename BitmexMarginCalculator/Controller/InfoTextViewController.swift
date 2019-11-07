@@ -8,17 +8,18 @@
 
 import UIKit
 
-enum InfoTextViewType {
-    case aboutAppPage
-    case aboutLiquidationPage
-}
-
 class InfoTextViewController: UIViewController {
 
+    enum InfoTextViewType {
+        case aboutAppPage
+        case aboutLiquidationPage
+    }
+    
     var textView = UITextView()
     var dataFiller = InfoTextViewDataFiller()
     var pageType = InfoTextViewType.aboutAppPage
     
+    // MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
@@ -29,6 +30,7 @@ class InfoTextViewController: UIViewController {
         self.textView.setContentOffset(CGPoint.zero, animated: false)
     }
     
+    // MARK: - Setup UI
     func setupView() {
         
         // Setup text view

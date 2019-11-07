@@ -31,6 +31,7 @@
 		79B97E82232BA1FA008F91FD /* Roboto-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 79B97E7E232BA1FA008F91FD /* Roboto-Bold.ttf */; };
 		79B97E84232BA76C008F91FD /* UITextFieldWithDoneButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B97E83232BA76C008F91FD /* UITextFieldWithDoneButton.swift */; };
 		79CAE3CB2351007C00A1C95A /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CAE3CA2351007C00A1C95A /* Router.swift */; };
+		79CE5E5B23743B3D00DDC15E /* InputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CE5E5A23743B3D00DDC15E /* InputView.swift */; };
 		79D36E292355BAF500528BD3 /* LastPriceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D36E262355BAF500528BD3 /* LastPriceView.swift */; };
 		79D36E2A2355BAF500528BD3 /* NavDropMenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D36E272355BAF500528BD3 /* NavDropMenuCell.swift */; };
 		79D36E2B2355BAF500528BD3 /* NavDropMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D36E282355BAF500528BD3 /* NavDropMenu.swift */; };
@@ -82,6 +83,7 @@
 		79B97E7E232BA1FA008F91FD /* Roboto-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Bold.ttf"; sourceTree = "<group>"; };
 		79B97E83232BA76C008F91FD /* UITextFieldWithDoneButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextFieldWithDoneButton.swift; sourceTree = "<group>"; };
 		79CAE3CA2351007C00A1C95A /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
+		79CE5E5A23743B3D00DDC15E /* InputView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputView.swift; sourceTree = "<group>"; };
 		79D36E262355BAF500528BD3 /* LastPriceView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LastPriceView.swift; sourceTree = "<group>"; };
 		79D36E272355BAF500528BD3 /* NavDropMenuCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavDropMenuCell.swift; sourceTree = "<group>"; };
 		79D36E282355BAF500528BD3 /* NavDropMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavDropMenu.swift; sourceTree = "<group>"; };
@@ -123,6 +125,27 @@
 				79196E40235C7D0B006ADF7E /* Info.plist */,
 			);
 			path = BitmexMarginCalculatorTests;
+			sourceTree = "<group>";
+		};
+		791A736D237456E500A726CC /* CalcInputViews */ = {
+			isa = PBXGroup;
+			children = (
+				79CE5E5A23743B3D00DDC15E /* InputView.swift */,
+				79D50FE922F35A2E00719A72 /* TextFieldView.swift */,
+				79A7DAB223361812000FE2B0 /* LabelSegmentedView.swift */,
+				79B97E83232BA76C008F91FD /* UITextFieldWithDoneButton.swift */,
+			);
+			path = CalcInputViews;
+			sourceTree = "<group>";
+		};
+		791A736E2374570F00A726CC /* CalcOutputViews */ = {
+			isa = PBXGroup;
+			children = (
+				79B97E78232A3803008F91FD /* ResultView.swift */,
+				79D50FEE22F44D2F00719A72 /* OutputLabelView.swift */,
+				79862FFC2341E8FB00323FD8 /* LabelWithInfoButton.swift */,
+			);
+			path = CalcOutputViews;
 			sourceTree = "<group>";
 		};
 		7928C16F234F227B0087C96F /* Helpers */ = {
@@ -179,14 +202,10 @@
 		79D50FE422F358A500719A72 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				791A736E2374570F00A726CC /* CalcOutputViews */,
+				791A736D237456E500A726CC /* CalcInputViews */,
 				79D36E252355BAF500528BD3 /* NavDropMenu */,
-				79B97E83232BA76C008F91FD /* UITextFieldWithDoneButton.swift */,
-				79D50FE922F35A2E00719A72 /* TextFieldView.swift */,
-				79D50FEE22F44D2F00719A72 /* OutputLabelView.swift */,
-				79B97E78232A3803008F91FD /* ResultView.swift */,
 				79A7DAAE2334DE91000FE2B0 /* SettingsTableViewCell.swift */,
-				79A7DAB223361812000FE2B0 /* LabelSegmentedView.swift */,
-				79862FFC2341E8FB00323FD8 /* LabelWithInfoButton.swift */,
 				792F3F73234BB55F00D570F4 /* CustomCollectionViewCell.swift */,
 			);
 			path = Views;
@@ -300,10 +319,12 @@
 				TargetAttributes = {
 					79196E3B235C7D0B006ADF7E = {
 						CreatedOnToolsVersion = 10.1;
+						LastSwiftMigration = 1110;
 						TestTargetID = 79FACA2822F1D27D007F1445;
 					};
 					79FACA2822F1D27D007F1445 = {
 						CreatedOnToolsVersion = 10.1;
+						LastSwiftMigration = 1110;
 					};
 				};
 			};
@@ -389,6 +410,7 @@
 				79862FFF2341F7AD00323FD8 /* PopUpViewController.swift in Sources */,
 				793401B0233CC81300FB082F /* InfoTextViewDataFiller.swift in Sources */,
 				79D50FEA22F35A2E00719A72 /* TextFieldView.swift in Sources */,
+				79CE5E5B23743B3D00DDC15E /* InputView.swift in Sources */,
 				79A7DAAB2334C43C000FE2B0 /* FontHandling.swift in Sources */,
 				79862FFD2341E8FB00323FD8 /* LabelWithInfoButton.swift in Sources */,
 			);
@@ -430,7 +452,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = BrbApp.BitmexMarginCalculatorTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BitmexMarginCalculator.app/BitmexMarginCalculator";
 			};
@@ -450,7 +472,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = BrbApp.BitmexMarginCalculatorTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BitmexMarginCalculator.app/BitmexMarginCalculator";
 			};
@@ -586,7 +608,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = BroApp.BitMEXMarginCalculator;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -605,7 +627,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = BroApp.BitMEXMarginCalculator;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;

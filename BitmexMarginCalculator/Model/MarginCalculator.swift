@@ -54,8 +54,6 @@ class MarginCalculator {
     
     func calculate() {
         
-        print(contractValueBTC)
-        print(calcEntryData)
         if Settings.shared.selectedTradingPair == .XBTUSD || Settings.shared.selectedTradingPair == .XBTZ19 || Settings.shared.selectedTradingPair == .XBTH20 {
             calcEntryData.btcPriceWhenEnter = calcEntryData.enterPrice
             calcEntryData.btcPriceWhenExit = calcEntryData.closePrice

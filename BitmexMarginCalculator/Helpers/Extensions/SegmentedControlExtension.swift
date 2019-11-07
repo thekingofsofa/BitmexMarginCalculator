@@ -9,6 +9,7 @@
 import UIKit
 
 extension UISegmentedControl {
+    
     // create a 1x1 image with this color
     private func imageWithColor(color: UIColor) -> UIImage {
         let rect = CGRect(x: 0.0, y: 0.0, width:  1.0, height: 1.0)
@@ -62,6 +63,25 @@ extension UISegmentedControl {
                 view.tintColor = secondSection
             }
         }
+        ensureiOS12Style()
     }
 }
 
+extension UISegmentedControl {
+    /// Tint color doesn't have any effect on iOS 13.
+    func ensureiOS12Style() {
+        if #available(iOS 13, *) {
+            let tintColorImage = imageWithColor(color: tintColor)
+            // Must set the background image for normal to something (even clear) else the rest won't work
+            setBackgroundImage(imageWithColor(color: backgroundColor ?? .clear), for: .normal, barMetrics: .default)
+            setBackgroundImage(tintColorImage, for: .selected, barMetrics: .default)
+            setBackgroundImage(imageWithColor(color: tintColor.withAlphaComponent(0.2)), for: .highlighted, barMetrics: .default)
+            setBackgroundImage(tintColorImage, for: [.highlighted, .selected], barMetrics: .default)
+            setTitleTextAttributes([.foregroundColor: tintColor ?? .clear, NSAttributedString.Key.font: UIFont.systemFont(ofSize: 13, weight: .regular)], for: .normal)
+            
+            setDividerImage(tintColorImage, forLeftSegmentState: .normal, rightSegmentState: .normal, barMetrics: .default)
+            layer.borderWidth = 1
+            layer.borderColor = tintColor.cgColor
+        }
+    }
+}

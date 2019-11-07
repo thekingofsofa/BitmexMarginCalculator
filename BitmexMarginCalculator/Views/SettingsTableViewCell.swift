@@ -15,6 +15,7 @@ enum SettingsCellType {
 }
 
 class SettingsTableViewCell: UITableViewCell {
+    
     let titleLabel = UILabel()
     let switcher = UISwitch()
     let separatorLine = UIView()
@@ -50,7 +51,9 @@ class SettingsTableViewCell: UITableViewCell {
         switcher.anchor(top: topAnchor, leading: titleLabel.trailingAnchor, bottom: bottomAnchor, trailing: trailingAnchor, padding: .init(top: 12, left: 0, bottom: 12, right: 24))
         switcher.tintColor = .lightGray
         
-        separatorLine.frame = CGRect(x: 24, y: 10, width: self.frame.width - 48, height: 1)
+        separatorLine.anchor(top: nil, leading: leadingAnchor, bottom: nil, trailing: trailingAnchor, padding: .init(top: 0, left: 24, bottom: 0, right: 24))
+        separatorLine.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
+        separatorLine.heightAnchor.constraint(equalToConstant: 1).isActive = true
         separatorLine.backgroundColor = .black
         
         switch cellType {

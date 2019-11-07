@@ -23,16 +23,6 @@ class Settings {
     }()
     
     var selectedTradingPair = TradingPair.XBTUSD
-    
-    var lastPriceBTC = Double()
-    var lastPriceADA = Double()
-    var lastPriceBCH = Double()
-    var lastPriceEOS = Double()
-    var lastPriceETHUSD = Double()
-    var lastPriceETHBTC = Double()
-    var lastPriceLTC = Double()
-    var lastPriceTRX = Double()
-    var lastPriceXRP = Double()
 }
 
 enum SettingsButtons: String {

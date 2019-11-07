@@ -33,11 +33,22 @@ class FeesViewController: UIViewController {
         return rowData
     }()
     
+    // MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
     }
     
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        coordinator.animate(alongsideTransition: { (_) in
+            self.view.setNeedsLayout()
+            self.view.layoutIfNeeded()
+            self.collectionView.collectionViewLayout.invalidateLayout() // layout update
+        }, completion: nil)
+    }
+    
+    // MARK: - Setup UI
     func setupView() {
         // Manage view
         self.title = "Fees"
@@ -78,16 +89,9 @@ class FeesViewController: UIViewController {
         
         topLabel.widthAnchor.constraint(equalTo: scrollView.widthAnchor, constant: -24).isActive = true
     }
-    
-    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        super.viewWillTransition(to: size, with: coordinator)
-        coordinator.animate(alongsideTransition: { (_) in
-            self.view.setNeedsLayout()
-            self.view.layoutIfNeeded()
-            self.collectionView.collectionViewLayout.invalidateLayout() // layout update
-        }, completion: nil)
-    }
 }
+
+// MARK: - CollectionView DataSource/Delegate methods
 
 extension FeesViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView,

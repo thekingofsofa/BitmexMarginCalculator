@@ -11,12 +11,12 @@ import UIKit
 fileprivate let cellId = "cellId"
 fileprivate let cellHeight: CGFloat = 56
 
-class SettingsLauncher: NSObject, UITableViewDataSource, UITableViewDelegate {
+class SettingsLauncher: NSObject {
     
     var homeController = MainViewController()
     
-    let blackView = UIView()
-    let tableView: UITableView = {
+    private let blackView = UIView()
+    private let tableView: UITableView = {
         let tb = UITableView()
         
         if let backgroundImage = UIImage(named: "background_light") {
@@ -30,9 +30,9 @@ class SettingsLauncher: NSObject, UITableViewDataSource, UITableViewDelegate {
         return tb
     }()
     
-    var tableViewBottomConstraint: NSLayoutConstraint?
+    private var tableViewBottomConstraint: NSLayoutConstraint?
     
-    let cells : [(SettingsCellType, SettingsButtons)] = [(SettingsCellType.withSwither, .showHideLastPrice), (SettingsCellType.withSwither, .showHideFees), (SettingsCellType.separator, .separator), (SettingsCellType.onlyTitle, .aboutApp), (SettingsCellType.onlyTitle, .feesInfo), (SettingsCellType.onlyTitle, .aboutLiqudation), (SettingsCellType.onlyTitle, .cancel)]
+    private let cells : [(SettingsCellType, SettingsButtons)] = [(SettingsCellType.withSwither, .showHideLastPrice), (SettingsCellType.withSwither, .showHideFees), (SettingsCellType.separator, .separator), (SettingsCellType.onlyTitle, .aboutApp), (SettingsCellType.onlyTitle, .feesInfo), (SettingsCellType.onlyTitle, .aboutLiqudation), (SettingsCellType.onlyTitle, .cancel)]
     
     override init() {
         super.init()
@@ -75,6 +75,7 @@ class SettingsLauncher: NSObject, UITableViewDataSource, UITableViewDelegate {
         UIApplication.shared.keyWindow?.layoutIfNeeded()
     }
     
+    // MARK: - Actions
     @objc func handleDismiss() {
         
         UIView.animate(withDuration: 0.3) {
@@ -83,6 +84,25 @@ class SettingsLauncher: NSObject, UITableViewDataSource, UITableViewDelegate {
             UIApplication.shared.keyWindow?.layoutIfNeeded()
         }
     }
+    
+    @objc func switchShowFees() {
+        
+        Settings.shared.showFees = !Settings.shared.showFees
+        homeController.showHideFees()
+        homeController.calculate()
+        UserDefaults.standard.set(Settings.shared.showFees, forKey: "showFees")
+    }
+    
+    @objc func switchShowLastPrice() {
+        
+        Settings.shared.showLastPrice = !Settings.shared.showLastPrice
+        homeController.showHideLastPrice()
+        UserDefaults.standard.set(Settings.shared.showLastPrice, forKey: "showLastPrice")
+    }
+}
+
+// MARK: - UITableViewDataSource/Delegate methods
+extension SettingsLauncher: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
@@ -110,21 +130,6 @@ class SettingsLauncher: NSObject, UITableViewDataSource, UITableViewDelegate {
         }
         
         return cell
-    }
-    
-    @objc func switchShowFees() {
-        
-        Settings.shared.showFees = !Settings.shared.showFees
-        homeController.showHideFees()
-        homeController.calculate()
-        UserDefaults.standard.set(Settings.shared.showFees, forKey: "showFees")
-    }
-    
-    @objc func switchShowLastPrice() {
-        
-        Settings.shared.showLastPrice = !Settings.shared.showLastPrice
-        homeController.showHideLastPrice()
-        UserDefaults.standard.set(Settings.shared.showLastPrice, forKey: "showLastPrice")
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

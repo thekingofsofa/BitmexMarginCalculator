@@ -32,7 +32,7 @@ class ServiceLayer {
             
             guard error == nil else {
                 completion(.failure(error!))
-                print(error?.localizedDescription)
+                print(error!.localizedDescription)
                 return
             }
             guard response != nil else {
@@ -42,10 +42,14 @@ class ServiceLayer {
                 return
             }
             
-            let responseObject = try! JSONDecoder().decode(T.self, from: data)
-            
-            DispatchQueue.main.async {
-                completion(.success(responseObject))
+            do {
+                let responseObject = try JSONDecoder().decode(T.self, from: data)
+                
+                DispatchQueue.main.async {
+                    completion(.success(responseObject))
+                }
+            } catch let error {
+                print(error.localizedDescription)
             }
         }
         dataTask.resume()

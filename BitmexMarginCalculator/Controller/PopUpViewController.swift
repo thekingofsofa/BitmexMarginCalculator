@@ -15,6 +15,7 @@ class PopUpViewController: UIViewController {
     fileprivate let upperDots = UILabel()
     fileprivate let downDots = UILabel()
     
+    // MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor(white: 0.1, alpha: 0.6)
@@ -26,18 +27,12 @@ class PopUpViewController: UIViewController {
         view.addGestureRecognizer(tapGesture)
     }
     
+    // MARK: - Actions
     @objc func viewTapped(_ recognizer: UIGestureRecognizer) {
         dismiss(animated: true, completion: nil)
     }
     
-    private func setupLayout() {
-        textLabel.anchor(top: nil, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor, padding: .init(top: 0, left: 48, bottom: 0, right: 48))
-        textLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
-        upperDots.anchor(top: textLabel.topAnchor, leading: textLabel.leadingAnchor, bottom: textLabel.topAnchor, trailing: textLabel.trailingAnchor, padding: .init(top: -30, left: 12, bottom: 0, right: 12))
-        downDots.anchor(top: textLabel.bottomAnchor, leading: textLabel.leadingAnchor, bottom: textLabel.bottomAnchor, trailing: textLabel.trailingAnchor, padding: .init(top: 0, left: 12, bottom: -30, right: 12))
-        backgroundView.anchor(top: upperDots.topAnchor, leading: textLabel.leadingAnchor, bottom: downDots.bottomAnchor, trailing: textLabel.trailingAnchor, padding: .init(top: -10, left: -24, bottom: -10, right: -24))
-    }
-    
+    // MARK: - Setup UI
     private func setupView() {
         
         backgroundView.backgroundColor = .white
@@ -56,5 +51,13 @@ class PopUpViewController: UIViewController {
         downDots.text = "•   •   •"
         downDots.textAlignment = .center
         downDots.font = downDots.font.withSize(20)
+    }
+    
+    private func setupLayout() {
+        textLabel.anchor(top: nil, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor, padding: .init(top: 0, left: 48, bottom: 0, right: 48))
+        textLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        upperDots.anchor(top: textLabel.topAnchor, leading: textLabel.leadingAnchor, bottom: textLabel.topAnchor, trailing: textLabel.trailingAnchor, padding: .init(top: -30, left: 12, bottom: 0, right: 12))
+        downDots.anchor(top: textLabel.bottomAnchor, leading: textLabel.leadingAnchor, bottom: textLabel.bottomAnchor, trailing: textLabel.trailingAnchor, padding: .init(top: 0, left: 12, bottom: -30, right: 12))
+        backgroundView.anchor(top: upperDots.topAnchor, leading: textLabel.leadingAnchor, bottom: downDots.bottomAnchor, trailing: textLabel.trailingAnchor, padding: .init(top: -10, left: -24, bottom: -10, right: -24))
     }
 }
