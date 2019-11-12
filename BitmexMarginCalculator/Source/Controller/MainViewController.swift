@@ -114,7 +114,7 @@ class MainViewController: UIViewController {
         let traidingPair = Settings.shared.selectedTradingPair
         
         let network = ServiceLayer()
-        network.request(router: Router.getXBTUSD) { (result: Result<[LastPrice]>) in
+        network.request(router: Router.getLastPrice(tradePair: "XBTUSD")) { (result: Result<[LastPrice]>) in
             switch result {
             case .success(let data):
                 print(result)

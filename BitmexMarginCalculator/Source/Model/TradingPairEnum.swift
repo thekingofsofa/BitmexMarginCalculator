@@ -104,28 +104,8 @@ enum TradingPair: String, CaseIterable {
     
     var router: Router {
         switch self {
-        case .XBTUSD:
-            return .getXBTUSD
-        case .XBTZ19:
-            return .getXBTZ19
-        case .XBTH20:
-            return .getXBTH20
-        case .ADAZ19:
-            return .getADAZ19
-        case .BCHZ19:
-            return .getBCHZ19
-        case .EOSZ19:
-            return .getEOSZ19
-        case .ETHUSD:
-            return .getETHUSD
-        case .ETHZ19:
-            return .getETHZ19
-        case .LTCZ19:
-            return .getLTCZ19
-        case .TRXZ19:
-            return .getTRXZ19
-        case .XRPZ19:
-            return .getXRPZ19
+        case .XBTUSD, .XBTZ19, .XBTH20, .ADAZ19, .BCHZ19, .EOSZ19, .ETHUSD, .ETHZ19, .LTCZ19, .TRXZ19, .XRPZ19:
+            return .getLastPrice(tradePair: self.rawValue)
         }
     }
     

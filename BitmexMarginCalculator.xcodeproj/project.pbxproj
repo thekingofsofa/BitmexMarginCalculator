@@ -25,6 +25,7 @@
 		79A7DAAF2334DE91000FE2B0 /* SettingsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A7DAAE2334DE91000FE2B0 /* SettingsTableViewCell.swift */; };
 		79A7DAB123350919000FE2B0 /* InfoTextViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A7DAB023350919000FE2B0 /* InfoTextViewController.swift */; };
 		79A7DAB323361812000FE2B0 /* LabelSegmentedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A7DAB223361812000FE2B0 /* LabelSegmentedView.swift */; };
+		79B7F99C237B4F16000E7EAE /* BuckedData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B7F99B237B4F16000E7EAE /* BuckedData.swift */; };
 		79B97E79232A3803008F91FD /* ResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B97E78232A3803008F91FD /* ResultView.swift */; };
 		79B97E7F232BA1FA008F91FD /* Roboto-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 79B97E7B232BA1FA008F91FD /* Roboto-Medium.ttf */; };
 		79B97E80232BA1FA008F91FD /* Roboto-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 79B97E7C232BA1FA008F91FD /* Roboto-Light.ttf */; };
@@ -79,6 +80,7 @@
 		79A7DAAE2334DE91000FE2B0 /* SettingsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewCell.swift; sourceTree = "<group>"; };
 		79A7DAB023350919000FE2B0 /* InfoTextViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoTextViewController.swift; sourceTree = "<group>"; };
 		79A7DAB223361812000FE2B0 /* LabelSegmentedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelSegmentedView.swift; sourceTree = "<group>"; };
+		79B7F99B237B4F16000E7EAE /* BuckedData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuckedData.swift; sourceTree = "<group>"; };
 		79B97E78232A3803008F91FD /* ResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultView.swift; sourceTree = "<group>"; };
 		79B97E7B232BA1FA008F91FD /* Roboto-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Medium.ttf"; sourceTree = "<group>"; };
 		79B97E7C232BA1FA008F91FD /* Roboto-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Light.ttf"; sourceTree = "<group>"; };
@@ -235,6 +237,7 @@
 				793401AF233CC81300FB082F /* InfoTextViewDataFiller.swift */,
 				79045A7A2343C7E200BE160D /* TradingPairEnum.swift */,
 				7928C172234F30600087C96F /* LastPrice.swift */,
+				79B7F99B237B4F16000E7EAE /* BuckedData.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -433,6 +436,7 @@
 				79862FFF2341F7AD00323FD8 /* PopUpViewController.swift in Sources */,
 				793401B0233CC81300FB082F /* InfoTextViewDataFiller.swift in Sources */,
 				79D50FEA22F35A2E00719A72 /* TextFieldView.swift in Sources */,
+				79B7F99C237B4F16000E7EAE /* BuckedData.swift in Sources */,
 				7945FD62237A04D800999F49 /* UIApplication+currentWindow.swift in Sources */,
 				79CE5E5B23743B3D00DDC15E /* InputView.swift in Sources */,
 				79A7DAAB2334C43C000FE2B0 /* FontHandling.swift in Sources */,
