@@ -41,8 +41,6 @@ class TextFieldView: UIView {
         textFieldInputView.returnKeyType = .done
         textFieldInputView.layer.masksToBounds = true
         textFieldInputView.layer.cornerRadius = 8.0
-        textFieldInputView.layer.borderColor = UIColor.grayLight.cgColor
-        textFieldInputView.layer.borderWidth = 1
         
         let leftPaddingView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: 6.0, height: 2.0))
         textFieldInputView.leftView = leftPaddingView
