@@ -25,7 +25,7 @@ class ResultView: UIView {
     }
     
     func setupView() {
-        self.layer.borderColor = UIColor.black.cgColor
+        self.layer.borderColor = UIColor.grayLight.cgColor
         self.layer.borderWidth = 1.0
         self.layer.cornerRadius = 8.0
         self.backgroundColor = .white
@@ -36,7 +36,7 @@ class ResultView: UIView {
             index % 2 != 0 ? element : nil
         }
         elements.forEach {
-            $0.backgroundColor = UIColor(red:0.88, green:0.90, blue:0.93, alpha:1.0) }
+            $0.backgroundColor = UIColor.silverAlpha }
         
         // Creating UIStackView
         let resultDataStackView = UIStackView(arrangedSubviews: [quantityBTC, btcPriceChange, profitLossBTC, profitLossUSD, roe, liqudationPrice, fees])
@@ -50,7 +50,7 @@ class ResultView: UIView {
         separatorLine.anchor(top: topAnchor, leading: nil, bottom: bottomAnchor, trailing: nil, padding: .init(top: 0, left: 0, bottom: 0, right: 0))
         separatorLine.widthAnchor.constraint(equalToConstant: 1.0).isActive = true
         separatorLine.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
-        separatorLine.backgroundColor = .black
+        separatorLine.backgroundColor = .grayLight
         
         // Layout constraints
         resultDataStackView.anchor(top: topAnchor, leading: leadingAnchor, bottom: bottomAnchor, trailing: trailingAnchor)

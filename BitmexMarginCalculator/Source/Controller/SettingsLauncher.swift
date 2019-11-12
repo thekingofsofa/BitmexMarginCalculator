@@ -42,8 +42,7 @@ class SettingsLauncher: NSObject {
     }
     
     func showSettings() {
-        
-        if let window = UIApplication.shared.keyWindow {
+        if let window = UIApplication.shared.currentWindow {
             window.addSubview(blackView)
             window.addSubview(tableView)
             setupLayout()
@@ -64,15 +63,17 @@ class SettingsLauncher: NSObject {
     
     func setupLayout() {
         let height = cellHeight * CGFloat(cells.count)
-        
-        tableView.anchor(top: nil, leading: homeController.view.leadingAnchor, bottom: nil, trailing: homeController.view.trailingAnchor)
-        tableView.heightAnchor.constraint(equalToConstant: height).isActive = true
-        tableViewBottomConstraint = tableView.bottomAnchor.constraint(equalTo: homeController.view.bottomAnchor, constant: height)
-        tableViewBottomConstraint?.isActive = true
-        
-        blackView.anchor(top: homeController.view.topAnchor, leading: homeController.view.leadingAnchor, bottom: homeController.view.bottomAnchor, trailing: homeController.view.trailingAnchor)
-        
-        UIApplication.shared.keyWindow?.layoutIfNeeded()
+        if let window = UIApplication.shared.currentWindow {
+            
+            tableView.anchor(top: nil, leading: window.leadingAnchor, bottom: nil, trailing: window.trailingAnchor)
+            tableView.heightAnchor.constraint(equalToConstant: height).isActive = true
+            tableViewBottomConstraint = tableView.bottomAnchor.constraint(equalTo: window.bottomAnchor, constant: height)
+            tableViewBottomConstraint?.isActive = true
+            
+            blackView.anchor(top: window.topAnchor, leading: window.leadingAnchor, bottom: window.bottomAnchor, trailing: window.trailingAnchor)
+            
+            UIApplication.shared.currentWindow?.layoutIfNeeded()
+        }
     }
     
     // MARK: - Actions
@@ -81,7 +82,7 @@ class SettingsLauncher: NSObject {
         UIView.animate(withDuration: 0.3) {
             self.blackView.alpha = 0.0
             self.tableViewBottomConstraint?.constant = cellHeight * CGFloat(self.cells.count)
-            UIApplication.shared.keyWindow?.layoutIfNeeded()
+            UIApplication.shared.currentWindow?.layoutIfNeeded()
         }
     }
     
@@ -158,6 +159,7 @@ extension SettingsLauncher: UITableViewDataSource, UITableViewDelegate {
             case .cancel:
                 handleDismiss()
             case .feesInfo:
+                handleDismiss()
                 let vc = FeesViewController()
                 homeController.navigationController?.pushViewController(vc, animated: true)
             }

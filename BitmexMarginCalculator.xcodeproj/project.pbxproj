@@ -15,7 +15,8 @@
 		792F3F74234BB55F00D570F4 /* CustomCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792F3F73234BB55F00D570F4 /* CustomCollectionViewCell.swift */; };
 		793401B0233CC81300FB082F /* InfoTextViewDataFiller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 793401AF233CC81300FB082F /* InfoTextViewDataFiller.swift */; };
 		7936C8B523390D54004AD81A /* NSMutableAttributedString+link.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7936C8B423390D54004AD81A /* NSMutableAttributedString+link.swift */; };
-		79732E562302DE7B0035E18F /* SegmentedControlExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79732E552302DE7B0035E18F /* SegmentedControlExtension.swift */; };
+		7945FD60237A022100999F49 /* UINavStatusBarPrefferedStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7945FD5F237A022100999F49 /* UINavStatusBarPrefferedStyle.swift */; };
+		7945FD62237A04D800999F49 /* UIApplication+currentWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7945FD61237A04D800999F49 /* UIApplication+currentWindow.swift */; };
 		79862FFD2341E8FB00323FD8 /* LabelWithInfoButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79862FFC2341E8FB00323FD8 /* LabelWithInfoButton.swift */; };
 		79862FFF2341F7AD00323FD8 /* PopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79862FFE2341F7AD00323FD8 /* PopUpViewController.swift */; };
 		799D56B6231D670600FB9078 /* DoubleRemoveZerosExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 799D56B5231D670600FB9078 /* DoubleRemoveZerosExtension.swift */; };
@@ -40,6 +41,7 @@
 		79D50FEF22F44D2F00719A72 /* OutputLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D50FEE22F44D2F00719A72 /* OutputLabelView.swift */; };
 		79D50FF122F46D2E00719A72 /* MarginCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D50FF022F46D2E00719A72 /* MarginCalculator.swift */; };
 		79EA03E0230A7AB9003DA9AE /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79EA03DF230A7AB9003DA9AE /* Settings.swift */; };
+		79ECEE2A2379CE7B005CF782 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79ECEE292379CE7B005CF782 /* Colors.swift */; };
 		79FACA2D22F1D27D007F1445 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79FACA2C22F1D27D007F1445 /* AppDelegate.swift */; };
 		79FACA2F22F1D27D007F1445 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79FACA2E22F1D27D007F1445 /* MainViewController.swift */; };
 		79FACA3422F1D27F007F1445 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 79FACA3322F1D27F007F1445 /* Assets.xcassets */; };
@@ -67,7 +69,8 @@
 		792F3F73234BB55F00D570F4 /* CustomCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCollectionViewCell.swift; sourceTree = "<group>"; };
 		793401AF233CC81300FB082F /* InfoTextViewDataFiller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoTextViewDataFiller.swift; sourceTree = "<group>"; };
 		7936C8B423390D54004AD81A /* NSMutableAttributedString+link.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSMutableAttributedString+link.swift"; sourceTree = "<group>"; };
-		79732E552302DE7B0035E18F /* SegmentedControlExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentedControlExtension.swift; sourceTree = "<group>"; };
+		7945FD5F237A022100999F49 /* UINavStatusBarPrefferedStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UINavStatusBarPrefferedStyle.swift; sourceTree = "<group>"; };
+		7945FD61237A04D800999F49 /* UIApplication+currentWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+currentWindow.swift"; sourceTree = "<group>"; };
 		79862FFC2341E8FB00323FD8 /* LabelWithInfoButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelWithInfoButton.swift; sourceTree = "<group>"; };
 		79862FFE2341F7AD00323FD8 /* PopUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpViewController.swift; sourceTree = "<group>"; };
 		799D56B5231D670600FB9078 /* DoubleRemoveZerosExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleRemoveZerosExtension.swift; sourceTree = "<group>"; };
@@ -92,6 +95,7 @@
 		79D50FEE22F44D2F00719A72 /* OutputLabelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutputLabelView.swift; sourceTree = "<group>"; };
 		79D50FF022F46D2E00719A72 /* MarginCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarginCalculator.swift; sourceTree = "<group>"; };
 		79EA03DF230A7AB9003DA9AE /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
+		79ECEE292379CE7B005CF782 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		79FACA2922F1D27D007F1445 /* BitmexMarginCalculator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BitmexMarginCalculator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		79FACA2C22F1D27D007F1445 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		79FACA2E22F1D27D007F1445 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -192,7 +196,6 @@
 		79D36E252355BAF500528BD3 /* NavDropMenu */ = {
 			isa = PBXGroup;
 			children = (
-				79D36E262355BAF500528BD3 /* LastPriceView.swift */,
 				79D36E272355BAF500528BD3 /* NavDropMenuCell.swift */,
 				79D36E282355BAF500528BD3 /* NavDropMenu.swift */,
 			);
@@ -202,6 +205,7 @@
 		79D50FE422F358A500719A72 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				79D36E262355BAF500528BD3 /* LastPriceView.swift */,
 				791A736E2374570F00A726CC /* CalcOutputViews */,
 				791A736D237456E500A726CC /* CalcInputViews */,
 				79D36E252355BAF500528BD3 /* NavDropMenu */,
@@ -215,10 +219,10 @@
 			isa = PBXGroup;
 			children = (
 				79D50FEC22F35E5B00719A72 /* AutoLayoutEasyExtension.swift */,
-				79732E552302DE7B0035E18F /* SegmentedControlExtension.swift */,
 				799D56B5231D670600FB9078 /* DoubleRemoveZerosExtension.swift */,
 				79A7DAAA2334C43C000FE2B0 /* FontHandling.swift */,
 				7936C8B423390D54004AD81A /* NSMutableAttributedString+link.swift */,
+				7945FD61237A04D800999F49 /* UIApplication+currentWindow.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -233,6 +237,31 @@
 				7928C172234F30600087C96F /* LastPrice.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		79F902642379C0FB00749D3C /* SupportingFiles */ = {
+			isa = PBXGroup;
+			children = (
+				79FACA2C22F1D27D007F1445 /* AppDelegate.swift */,
+				79FACA3322F1D27F007F1445 /* Assets.xcassets */,
+				79FACA3522F1D27F007F1445 /* LaunchScreen.storyboard */,
+				79B97E7A232BA1FA008F91FD /* fonts */,
+				79FACA3822F1D27F007F1445 /* Info.plist */,
+				79ECEE292379CE7B005CF782 /* Colors.swift */,
+				7945FD5F237A022100999F49 /* UINavStatusBarPrefferedStyle.swift */,
+			);
+			path = SupportingFiles;
+			sourceTree = "<group>";
+		};
+		79F902672379C17700749D3C /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				7928C16F234F227B0087C96F /* Helpers */,
+				79EA03E1230A7CB9003DA9AE /* Model */,
+				79D50FE422F358A500719A72 /* Views */,
+				79A7DAA72334C3BB000FE2B0 /* Controller */,
+			);
+			path = Source;
 			sourceTree = "<group>";
 		};
 		79FACA2022F1D27D007F1445 = {
@@ -256,15 +285,8 @@
 		79FACA2B22F1D27D007F1445 /* BitmexMarginCalculator */ = {
 			isa = PBXGroup;
 			children = (
-				7928C16F234F227B0087C96F /* Helpers */,
-				79EA03E1230A7CB9003DA9AE /* Model */,
-				79D50FE422F358A500719A72 /* Views */,
-				79A7DAA72334C3BB000FE2B0 /* Controller */,
-				79FACA2C22F1D27D007F1445 /* AppDelegate.swift */,
-				79FACA3322F1D27F007F1445 /* Assets.xcassets */,
-				79FACA3522F1D27F007F1445 /* LaunchScreen.storyboard */,
-				79B97E7A232BA1FA008F91FD /* fonts */,
-				79FACA3822F1D27F007F1445 /* Info.plist */,
+				79F902672379C17700749D3C /* Source */,
+				79F902642379C0FB00749D3C /* SupportingFiles */,
 			);
 			path = BitmexMarginCalculator;
 			sourceTree = "<group>";
@@ -388,12 +410,13 @@
 				79D36E292355BAF500528BD3 /* LastPriceView.swift in Sources */,
 				792F3F74234BB55F00D570F4 /* CustomCollectionViewCell.swift in Sources */,
 				7928C173234F30600087C96F /* LastPrice.swift in Sources */,
-				79732E562302DE7B0035E18F /* SegmentedControlExtension.swift in Sources */,
+				79ECEE2A2379CE7B005CF782 /* Colors.swift in Sources */,
 				799D56B6231D670600FB9078 /* DoubleRemoveZerosExtension.swift in Sources */,
 				792F3F72234B781300D570F4 /* FeesViewController.swift in Sources */,
 				79FACA2F22F1D27D007F1445 /* MainViewController.swift in Sources */,
 				79B97E84232BA76C008F91FD /* UITextFieldWithDoneButton.swift in Sources */,
 				79EA03E0230A7AB9003DA9AE /* Settings.swift in Sources */,
+				7945FD60237A022100999F49 /* UINavStatusBarPrefferedStyle.swift in Sources */,
 				79D50FF122F46D2E00719A72 /* MarginCalculator.swift in Sources */,
 				79FACA2D22F1D27D007F1445 /* AppDelegate.swift in Sources */,
 				79A7DAB123350919000FE2B0 /* InfoTextViewController.swift in Sources */,
@@ -410,6 +433,7 @@
 				79862FFF2341F7AD00323FD8 /* PopUpViewController.swift in Sources */,
 				793401B0233CC81300FB082F /* InfoTextViewDataFiller.swift in Sources */,
 				79D50FEA22F35A2E00719A72 /* TextFieldView.swift in Sources */,
+				7945FD62237A04D800999F49 /* UIApplication+currentWindow.swift in Sources */,
 				79CE5E5B23743B3D00DDC15E /* InputView.swift in Sources */,
 				79A7DAAB2334C43C000FE2B0 /* FontHandling.swift in Sources */,
 				79862FFD2341E8FB00323FD8 /* LabelWithInfoButton.swift in Sources */,
@@ -600,8 +624,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = C2L6Q7FQ8V;
-				INFOPLIST_FILE = BitmexMarginCalculator/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				INFOPLIST_FILE = "$(SRCROOT)/BitmexMarginCalculator/SupportingFiles/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -619,8 +643,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = C2L6Q7FQ8V;
-				INFOPLIST_FILE = BitmexMarginCalculator/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				INFOPLIST_FILE = "$(SRCROOT)/BitmexMarginCalculator/SupportingFiles/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

@@ -25,7 +25,7 @@ class LabelSegmentedView: UIView {
         titleLabel.setScaledCustomFont(forFont: .RobotoRegular, textStyle: .body)
         
         segmentedControl = UISegmentedControl(items: segmentedOptions)
-        segmentedControl.updateTintColor(firstSection: UIColor(red:0.21, green:0.75, blue:0.00, alpha:1.0), secondSection: .red)
+        segmentedControl.tintColor = .silver
         
         let stackView = UIStackView(arrangedSubviews: [titleLabel, segmentedControl])
         stackView.distribution = .fillEqually

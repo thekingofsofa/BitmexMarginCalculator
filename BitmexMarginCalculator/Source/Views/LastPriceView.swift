@@ -12,7 +12,6 @@ class LastPriceView: UIView {
     
     let statusIcon = UIImageView()
     let priceLabel = UILabel()
-    let bottomBorder = UIView()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -21,7 +20,12 @@ class LastPriceView: UIView {
     
     private func setupView() {
         
-        [statusIcon, priceLabel, bottomBorder].forEach {
+        self.backgroundColor = .white
+        self.layer.borderColor = UIColor.grayLight.cgColor
+        self.layer.borderWidth = 1.0
+        self.layer.cornerRadius = 6.0
+        
+        [statusIcon, priceLabel].forEach {
             addSubview($0)
         }
         
@@ -32,9 +36,6 @@ class LastPriceView: UIView {
         statusIcon.widthAnchor.constraint(lessThanOrEqualToConstant: 24).isActive = true
         priceLabel.setScaledCustomFont(forFont: .RobotoRegular, textStyle: .body)
         priceLabel.anchor(top: self.topAnchor, leading: statusIcon.trailingAnchor, bottom: self.bottomAnchor, trailing: self.trailingAnchor, padding: .init(top: 4, left: 12, bottom: 4, right: 12))
-        bottomBorder.backgroundColor = UIColor(red:0.68, green:0.68, blue:0.68, alpha:1.0)
-        bottomBorder.anchor(top: nil, leading: self.leadingAnchor, bottom: self.bottomAnchor, trailing: self.trailingAnchor)
-        bottomBorder.heightAnchor.constraint(equalToConstant: 0.5).isActive = true
     }
     
     

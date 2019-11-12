@@ -41,7 +41,9 @@ class NavDropMenu: UIView {
     
     private func setupNavBarButton() {
         navBarTitle.text = Settings.shared.selectedTradingPair.rawValue
-        navBarArrow.image = UIImage(named: "arrow")
+        navBarTitle.font = UIFont(name: "Roboto-Medium", size: 17)
+        navBarTitle.textColor = .white
+        navBarArrow.image = UIImage(named: "arrow_white")
         navBarArrow.contentMode = .scaleAspectFit
         let navBarButtonStackView = UIStackView(arrangedSubviews: [navBarTitle, navBarArrow])
         navBarButtonStackView.distribution = .fill
@@ -68,9 +70,9 @@ class NavDropMenu: UIView {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellId)
-        tableView.backgroundColor = .clear
         tableView.bounces = false
         tableView.tableFooterView = UIView()
+        tableView.separatorColor = .grayLight
         // Layout TableView
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.heightAnchor.constraint(equalToConstant: cellHeight * CGFloat(items.count)).isActive = true

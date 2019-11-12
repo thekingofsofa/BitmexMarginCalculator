@@ -21,9 +21,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window!.rootViewController = nc
         window!.makeKeyAndVisible()
         
-        UINavigationBar.appearance().tintColor = UIColor.black
-        UIBarButtonItem.appearance().setTitleTextAttributes([ NSAttributedString.Key.foregroundColor : UIColor.black ], for: .normal)
-        UIBarButtonItem.appearance().setTitleTextAttributes([ NSAttributedString.Key.foregroundColor : UIColor.gray ], for: .highlighted)
+        UINavigationBar.appearance().barTintColor = .black
+        UINavigationBar.appearance().tintColor = .white
+        UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+        UINavigationBar.appearance().isTranslucent = false
         
         let defaults = UserDefaults.standard
         let selectedPair = TradingPair.XBTUSD.rawValue

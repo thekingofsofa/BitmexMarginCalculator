@@ -56,7 +56,6 @@ class BitmexMarginCalculatorTests: XCTestCase {
         network.request(router: Router.getXBTUSD) { (result: Result<[LastPrice]>) in
             switch result {
             case .success(let data):
-                print(result)
                 XCTAssert(data[0].price > 0)
                 XCTAssertEqual(mainController.lastPriceView.priceLabel.text, "Last \(traidingPair.rawValue) price: \(data[0].price)")
                 sessionLastPriceExpectation.fulfill()

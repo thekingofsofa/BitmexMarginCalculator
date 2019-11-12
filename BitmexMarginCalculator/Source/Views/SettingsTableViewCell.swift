@@ -46,12 +46,13 @@ class SettingsTableViewCell: UITableViewCell {
     func configureCell(text: String, cellType: SettingsCellType) {
         titleLabel.text = text
         titleLabel.setScaledCustomFont(forFont: .RobotoRegular, textStyle: .body)
-        titleLabel.anchor(top: topAnchor, leading: leadingAnchor, bottom: bottomAnchor, trailing: nil, padding: .init(top: 12, left: 24, bottom: 12, right: 0))
+        titleLabel.anchor(top: topAnchor, leading: safeAreaLayoutGuide.leadingAnchor, bottom: bottomAnchor, trailing: nil, padding: .init(top: 12, left: 24, bottom: 12, right: 0))
         
-        switcher.anchor(top: topAnchor, leading: titleLabel.trailingAnchor, bottom: bottomAnchor, trailing: trailingAnchor, padding: .init(top: 12, left: 0, bottom: 12, right: 24))
+        switcher.anchor(top: topAnchor, leading: titleLabel.trailingAnchor, bottom: bottomAnchor, trailing: safeAreaLayoutGuide.trailingAnchor, padding: .init(top: 12, left: 0, bottom: 12, right: 24))
         switcher.tintColor = .lightGray
+        switcher.onTintColor = .orangeMain
         
-        separatorLine.anchor(top: nil, leading: leadingAnchor, bottom: nil, trailing: trailingAnchor, padding: .init(top: 0, left: 24, bottom: 0, right: 24))
+        separatorLine.anchor(top: nil, leading: safeAreaLayoutGuide.leadingAnchor, bottom: nil, trailing: safeAreaLayoutGuide.trailingAnchor, padding: .init(top: 0, left: 24, bottom: 0, right: 24))
         separatorLine.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
         separatorLine.heightAnchor.constraint(equalToConstant: 1).isActive = true
         separatorLine.backgroundColor = .black
