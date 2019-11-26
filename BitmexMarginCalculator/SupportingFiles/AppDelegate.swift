@@ -18,8 +18,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow(frame: UIScreen.main.bounds)
         let mainViewController = MainViewController()
         let nc = UINavigationController(rootViewController: mainViewController)
-        window!.rootViewController = nc
-        window!.makeKeyAndVisible()
+        window?.rootViewController = nc
+        window?.makeKeyAndVisible()
         
         UINavigationBar.appearance().barTintColor = .black
         UINavigationBar.appearance().tintColor = .white

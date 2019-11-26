@@ -28,6 +28,7 @@ class MainViewController: UIViewController {
     private var mainScrollView = UIScrollView()
     private var mainStackView = UIStackView()
     private var mainStackViewTopConstraint = NSLayoutConstraint()
+    private var lastPriceViewHeightConstraint = NSLayoutConstraint()
     
     // MARK: - Life Cycle
     override func viewDidLoad() {
@@ -38,12 +39,6 @@ class MainViewController: UIViewController {
         showHideFees()
         showHideBTCPriceForAltcoins()
         calculate()
-        // Get latets price from api
-        _ = Timer.scheduledTimer(timeInterval: 5.0,
-                                 target: self,
-                                 selector: #selector(getLatestPriceApiCall),
-                                 userInfo: nil,
-                                 repeats: true)
     }
     
     // MARK: Define constraints based on device and orientation
@@ -55,6 +50,12 @@ class MainViewController: UIViewController {
                 setupConstraintForCompactEnviromnentIphone()
             } else if UIDevice.current.userInterfaceIdiom == .phone && traitCollection.verticalSizeClass == .regular {
                 setupConstraintForRegularEnviromnentIphone()
+            }
+            if !lastPriceView.isCollapsed {
+                DispatchQueue.main.async() {
+                    self.lastPriceView.chart.redrawChart()
+                    self.lastPriceView.layoutIfNeeded()
+                }
             }
         }
     }
@@ -111,6 +112,8 @@ class MainViewController: UIViewController {
     
     // MARK: Setup lastPrice top view
     private func setupLastPriceView() {
+        lastPriceView.collapseAction = collapseLastPriceView
+        
         let traidingPair = Settings.shared.selectedTradingPair
         
         let network = ServiceLayer()
@@ -141,7 +144,8 @@ class MainViewController: UIViewController {
         }
         
         lastPriceView.anchor(top: mainScrollView.topAnchor, leading: mainScrollView.leadingAnchor, bottom: nil, trailing: mainScrollView.trailingAnchor, padding: .init(top: 12, left: 12, bottom: 0, right: 12))
-        lastPriceView.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        lastPriceViewHeightConstraint = lastPriceView.heightAnchor.constraint(equalToConstant: 54)
+        lastPriceViewHeightConstraint.isActive = true
         
         mainScrollView.anchor(top: view.safeAreaLayoutGuide.topAnchor, leading: view.safeAreaLayoutGuide.leadingAnchor, bottom: view.bottomAnchor, trailing: view.safeAreaLayoutGuide.trailingAnchor)
         mainStackView.anchor(top: nil, leading: mainScrollView.leadingAnchor, bottom: mainScrollView.bottomAnchor, trailing: mainScrollView.trailingAnchor, padding: .init(top: 12, left: 12, bottom: 28, right: 12))
@@ -203,6 +207,17 @@ class MainViewController: UIViewController {
     }
     
     // MARK: - Actions
+    @objc func collapseLastPriceView() {
+        if lastPriceView.isCollapsed {
+            lastPriceViewHeightConstraint.constant = 54
+        } else {
+            lastPriceViewHeightConstraint.constant = 300
+        }
+        UIView.animate(withDuration: 0.5) {
+            self.view.layoutIfNeeded()
+        }
+    }
+    
     @objc func positionSideChanged(_ sender: UISegmentedControl) {
         switch sender.selectedSegmentIndex{
         case 0:
@@ -373,44 +388,7 @@ extension MainViewController: NavDropMenuDelegate {
             let currency = String(Settings.shared.selectedTradingPair.rawValue.prefix(3))
             inputCalcView.quantity.textFieldNameLabel.text = "Quantity (\(currency))"
         }
-        getLatestPriceApiCall()
+        lastPriceView.checkIfCollapsed()
         calculate()
-    }
-}
-
-// MARK: - Networking
-extension MainViewController {
-    
-    @objc private func getLatestPriceApiCall() {
-        
-        let traidingPair = Settings.shared.selectedTradingPair
-        let network = ServiceLayer()
-        network.request(router: traidingPair.router) { [weak self] (result: Result<[LastPrice]>) in
-            switch result {
-            case .success(let data):
-                self?.lastPriceView.statusIcon.image = UIImage(named: "ic_trending_up.png")
-                UIView.animate(withDuration: 0.3, animations: {
-                    self?.lastPriceView.priceLabel.alpha = 0.0
-                }, completion: { (bool) in
-                    let formatLiquidationStringStyle = Settings.shared.selectedTradingPair.formatStyle
-                    let price = Double(truncating: NSDecimalNumber(decimal: data[0].price))
-                    let priceString = String(format: formatLiquidationStringStyle, price)
-                    self?.lastPriceView.priceLabel.text = "Last \(traidingPair.rawValue) price: " + priceString
-                    UIView.animate(withDuration: 0.3, animations: {
-                        self?.lastPriceView.priceLabel.alpha = 1.0
-                    })
-                })
-            case .failure:
-                self?.noInternet()
-                print(result)
-            }
-        }
-    }
-    
-    private func noInternet() {
-        DispatchQueue.main.async {
-            self.lastPriceView.priceLabel.text = "No internet connection"
-            self.lastPriceView.statusIcon.image = UIImage(named: "no_connection.png")
-        }
     }
 }

@@ -19,13 +19,15 @@
 		7945FD62237A04D800999F49 /* UIApplication+currentWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7945FD61237A04D800999F49 /* UIApplication+currentWindow.swift */; };
 		79862FFD2341E8FB00323FD8 /* LabelWithInfoButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79862FFC2341E8FB00323FD8 /* LabelWithInfoButton.swift */; };
 		79862FFF2341F7AD00323FD8 /* PopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79862FFE2341F7AD00323FD8 /* PopUpViewController.swift */; };
+		798C3C25238C135400DE315B /* DateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 798C3C24238C135400DE315B /* DateFormatter.swift */; };
+		798C3C27238C136200DE315B /* ChartDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 798C3C26238C136200DE315B /* ChartDataModel.swift */; };
+		798C3C29238C155600DE315B /* IBCandlestickChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 798C3C28238C155600DE315B /* IBCandlestickChartView.swift */; };
 		799D56B6231D670600FB9078 /* DoubleRemoveZerosExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 799D56B5231D670600FB9078 /* DoubleRemoveZerosExtension.swift */; };
 		79A7DAAB2334C43C000FE2B0 /* FontHandling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A7DAAA2334C43C000FE2B0 /* FontHandling.swift */; };
 		79A7DAAD2334CFD7000FE2B0 /* SettingsLauncher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A7DAAC2334CFD7000FE2B0 /* SettingsLauncher.swift */; };
 		79A7DAAF2334DE91000FE2B0 /* SettingsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A7DAAE2334DE91000FE2B0 /* SettingsTableViewCell.swift */; };
 		79A7DAB123350919000FE2B0 /* InfoTextViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A7DAB023350919000FE2B0 /* InfoTextViewController.swift */; };
 		79A7DAB323361812000FE2B0 /* LabelSegmentedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A7DAB223361812000FE2B0 /* LabelSegmentedView.swift */; };
-		79B7F99C237B4F16000E7EAE /* BuckedData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B7F99B237B4F16000E7EAE /* BuckedData.swift */; };
 		79B97E79232A3803008F91FD /* ResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B97E78232A3803008F91FD /* ResultView.swift */; };
 		79B97E7F232BA1FA008F91FD /* Roboto-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 79B97E7B232BA1FA008F91FD /* Roboto-Medium.ttf */; };
 		79B97E80232BA1FA008F91FD /* Roboto-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 79B97E7C232BA1FA008F91FD /* Roboto-Light.ttf */; };
@@ -74,13 +76,15 @@
 		7945FD61237A04D800999F49 /* UIApplication+currentWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+currentWindow.swift"; sourceTree = "<group>"; };
 		79862FFC2341E8FB00323FD8 /* LabelWithInfoButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelWithInfoButton.swift; sourceTree = "<group>"; };
 		79862FFE2341F7AD00323FD8 /* PopUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpViewController.swift; sourceTree = "<group>"; };
+		798C3C24238C135400DE315B /* DateFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DateFormatter.swift; path = ../../../../../TestChart/TestChart/DateFormatter.swift; sourceTree = "<group>"; };
+		798C3C26238C136200DE315B /* ChartDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChartDataModel.swift; path = ../../../../TestChart/TestChart/ChartDataModel.swift; sourceTree = "<group>"; };
+		798C3C28238C155600DE315B /* IBCandlestickChartView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IBCandlestickChartView.swift; sourceTree = "<group>"; };
 		799D56B5231D670600FB9078 /* DoubleRemoveZerosExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleRemoveZerosExtension.swift; sourceTree = "<group>"; };
 		79A7DAAA2334C43C000FE2B0 /* FontHandling.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FontHandling.swift; sourceTree = "<group>"; };
 		79A7DAAC2334CFD7000FE2B0 /* SettingsLauncher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsLauncher.swift; sourceTree = "<group>"; };
 		79A7DAAE2334DE91000FE2B0 /* SettingsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewCell.swift; sourceTree = "<group>"; };
 		79A7DAB023350919000FE2B0 /* InfoTextViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoTextViewController.swift; sourceTree = "<group>"; };
 		79A7DAB223361812000FE2B0 /* LabelSegmentedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelSegmentedView.swift; sourceTree = "<group>"; };
-		79B7F99B237B4F16000E7EAE /* BuckedData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuckedData.swift; sourceTree = "<group>"; };
 		79B97E78232A3803008F91FD /* ResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultView.swift; sourceTree = "<group>"; };
 		79B97E7B232BA1FA008F91FD /* Roboto-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Medium.ttf"; sourceTree = "<group>"; };
 		79B97E7C232BA1FA008F91FD /* Roboto-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Light.ttf"; sourceTree = "<group>"; };
@@ -207,6 +211,7 @@
 		79D50FE422F358A500719A72 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				798C3C28238C155600DE315B /* IBCandlestickChartView.swift */,
 				79D36E262355BAF500528BD3 /* LastPriceView.swift */,
 				791A736E2374570F00A726CC /* CalcOutputViews */,
 				791A736D237456E500A726CC /* CalcInputViews */,
@@ -220,6 +225,7 @@
 		79D50FEB22F35D1E00719A72 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				798C3C24238C135400DE315B /* DateFormatter.swift */,
 				79D50FEC22F35E5B00719A72 /* AutoLayoutEasyExtension.swift */,
 				799D56B5231D670600FB9078 /* DoubleRemoveZerosExtension.swift */,
 				79A7DAAA2334C43C000FE2B0 /* FontHandling.swift */,
@@ -236,8 +242,8 @@
 				79EA03DF230A7AB9003DA9AE /* Settings.swift */,
 				793401AF233CC81300FB082F /* InfoTextViewDataFiller.swift */,
 				79045A7A2343C7E200BE160D /* TradingPairEnum.swift */,
+				798C3C26238C136200DE315B /* ChartDataModel.swift */,
 				7928C172234F30600087C96F /* LastPrice.swift */,
-				79B7F99B237B4F16000E7EAE /* BuckedData.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -408,6 +414,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				798C3C29238C155600DE315B /* IBCandlestickChartView.swift in Sources */,
 				7928C171234F22910087C96F /* Network.swift in Sources */,
 				7936C8B523390D54004AD81A /* NSMutableAttributedString+link.swift in Sources */,
 				79D36E292355BAF500528BD3 /* LastPriceView.swift in Sources */,
@@ -432,12 +439,13 @@
 				79A7DAAD2334CFD7000FE2B0 /* SettingsLauncher.swift in Sources */,
 				79CAE3CB2351007C00A1C95A /* Router.swift in Sources */,
 				79D50FED22F35E5B00719A72 /* AutoLayoutEasyExtension.swift in Sources */,
+				798C3C25238C135400DE315B /* DateFormatter.swift in Sources */,
 				79045A7B2343C7E200BE160D /* TradingPairEnum.swift in Sources */,
 				79862FFF2341F7AD00323FD8 /* PopUpViewController.swift in Sources */,
 				793401B0233CC81300FB082F /* InfoTextViewDataFiller.swift in Sources */,
 				79D50FEA22F35A2E00719A72 /* TextFieldView.swift in Sources */,
-				79B7F99C237B4F16000E7EAE /* BuckedData.swift in Sources */,
 				7945FD62237A04D800999F49 /* UIApplication+currentWindow.swift in Sources */,
+				798C3C27238C136200DE315B /* ChartDataModel.swift in Sources */,
 				79CE5E5B23743B3D00DDC15E /* InputView.swift in Sources */,
 				79A7DAAB2334C43C000FE2B0 /* FontHandling.swift in Sources */,
 				79862FFD2341E8FB00323FD8 /* LabelWithInfoButton.swift in Sources */,
@@ -634,6 +642,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = BroApp.BitMEXMarginCalculator;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -653,6 +662,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = BroApp.BitMEXMarginCalculator;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;

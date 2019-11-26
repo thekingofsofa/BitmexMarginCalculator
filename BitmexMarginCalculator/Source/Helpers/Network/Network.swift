@@ -8,50 +8,72 @@
 
 import Foundation
 
+class NetworkRequestLimiter {
+    static let shared = NetworkRequestLimiter()
+    var counter = 0
+    var maxRequests = 29
+    
+    func countRequest() -> Bool {
+        if counter >= maxRequests {
+            return false
+        } else {
+            counter += 1
+            DispatchQueue.global().asyncAfter(deadline: .now() + 60) {
+                self.counter -= 1
+            }
+            return true
+        }
+    }
+}
+
 enum Result<T> {
     case success(T)
-    case failure(Error)
+    case failure(NSError)
 }
 
 class ServiceLayer {
     
     func request<T: Codable>(router: Router, completion: @escaping (Result<T>) -> Void) {
         
-        var components = URLComponents()
-        components.scheme = router.scheme
-        components.host = router.host
-        components.path = router.path
-        components.queryItems = router.parameters
-        
-        guard let url = components.url else { return }
-        var urlRequest = URLRequest(url: url)
-        urlRequest.httpMethod = router.method
-        
-        let session = URLSession(configuration: .default)
-        let dataTask = session.dataTask(with: urlRequest) { data, response, error in
+        if NetworkRequestLimiter.shared.countRequest() {
+            var components = URLComponents()
+            components.scheme = router.scheme
+            components.host = router.host
+            components.path = router.path
+            components.queryItems = router.parameters
             
-            guard error == nil else {
-                completion(.failure(error!))
-                print(error!.localizedDescription)
-                return
-            }
-            guard response != nil else {
-                return
-            }
-            guard let data = data else {
-                return
-            }
+            guard let url = components.url else { return }
+            var urlRequest = URLRequest(url: url)
+            urlRequest.httpMethod = router.method
             
-            do {
-                let responseObject = try JSONDecoder().decode(T.self, from: data)
+            let session = URLSession(configuration: .default)
+            let dataTask = session.dataTask(with: urlRequest) { data, response, error in
                 
-                DispatchQueue.main.async {
-                    completion(.success(responseObject))
+                guard error == nil else {
+                    completion(.failure(error! as NSError))
+                    return
                 }
-            } catch let error {
-                print(error.localizedDescription)
+                guard response != nil else {
+                    return
+                }
+                guard let data = data else {
+                    return
+                }
+                
+                do {
+                    let responseObject = try JSONDecoder().decode(T.self, from: data)
+                    
+                    DispatchQueue.main.async {
+                        completion(.success(responseObject))
+                    }
+                } catch let error {
+                    print(error.localizedDescription)
+                }
             }
+            dataTask.resume()
+        } else {
+            let error = NSError(domain:"Too many requests", code: -1000, userInfo: nil)
+            completion(.failure(error))
         }
-        dataTask.resume()
     }
 }

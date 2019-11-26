@@ -46,9 +46,9 @@ enum Router {
                     URLQueryItem(name: "reverse", value: "true")]
         case .getBucketData(let timeFrame, let tradePair):
             return [URLQueryItem(name: "binSize", value: timeFrame),
-                    URLQueryItem(name: "partial", value: "false"),
+                    URLQueryItem(name: "partial", value: "true"),
                     URLQueryItem(name: "symbol", value: tradePair),
-                    URLQueryItem(name: "count", value: "100"),
+                    URLQueryItem(name: "count", value: "300"),
                     URLQueryItem(name: "reverse", value: "true")]
         }
     }
