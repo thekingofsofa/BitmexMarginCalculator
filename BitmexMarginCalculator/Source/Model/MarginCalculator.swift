@@ -45,7 +45,7 @@ class MarginCalculator {
     var profitLossUSD = Double()
     var newBalanceInBTC = Double()
     var roe = Double()
-    var liqudationPrice = Double()
+    var liquidationPrice = Double()
     var oneMarketFee = Double()
     var oneLimitFee = Double()
     var feesInBTC = Double()
@@ -54,7 +54,7 @@ class MarginCalculator {
     
     func calculate() {
         
-        if Settings.shared.selectedTradingPair == .XBTUSD || Settings.shared.selectedTradingPair == .XBTZ19 || Settings.shared.selectedTradingPair == .XBTH20 {
+        if Settings.shared.selectedTradingPair == .XBTUSD || Settings.shared.selectedTradingPair == .XBTH21 || Settings.shared.selectedTradingPair == .XBTM21 {
             calcEntryData.btcPriceWhenEnter = calcEntryData.enterPrice
             calcEntryData.btcPriceWhenExit = calcEntryData.closePrice
         }
@@ -82,15 +82,15 @@ class MarginCalculator {
         newBalanceInBTC = initialMarginBTC + profitLossBTC
         roe = ((newBalanceInBTC - initialMarginBTC) / initialMarginBTC) * 100
         
-        // Calculate liqudation and profit depending on position side
+        // Calculate liquidation and profit depending on position side
         if calcEntryData.longShortSwitcher == PositionSide.long {
-            liqudationPrice = (calcEntryData.enterPrice - (calcEntryData.enterPrice / (calcEntryData.leverageSize + 1))) + (calcEntryData.enterPrice - (calcEntryData.enterPrice / (calcEntryData.leverageSize + 1))) * 0.005
+            liquidationPrice = (calcEntryData.enterPrice - (calcEntryData.enterPrice / (calcEntryData.leverageSize + 1))) + (calcEntryData.enterPrice - (calcEntryData.enterPrice / (calcEntryData.leverageSize + 1))) * 0.005
         } else {
             priceChangePercentage = -priceChangePercentage
             profitLossBTC = -profitLossBTC
             profitLossUSD = -profitLossUSD
             roe = -roe
-            liqudationPrice = (calcEntryData.enterPrice + (calcEntryData.enterPrice / (calcEntryData.leverageSize - 1))) - (calcEntryData.enterPrice - (calcEntryData.enterPrice / (calcEntryData.leverageSize - 1))) * 0.005
+            liquidationPrice = (calcEntryData.enterPrice + (calcEntryData.enterPrice / (calcEntryData.leverageSize - 1))) - (calcEntryData.enterPrice - (calcEntryData.enterPrice / (calcEntryData.leverageSize - 1))) * 0.005
         }
         
         saveEnteredData()
@@ -100,16 +100,16 @@ class MarginCalculator {
     private func calcInitialMarginInBTC() {
         let traidingPair = Settings.shared.selectedTradingPair
         switch traidingPair {
-        case .XBTUSD, .XBTZ19, .XBTH20:
+        case .XBTUSD, .XBTH21, .XBTM21:
             
             contractValueBTC = calcEntryData.quantity / calcEntryData.enterPrice
             initialMarginBTC = contractValueBTC / calcEntryData.leverageSize
             
-        case .ADAZ19, .BCHZ19, .EOSZ19, .ETHZ19, .LTCZ19, .TRXZ19, .XRPZ19:
-            
-            contractValueBTC = calcEntryData.enterPrice * calcEntryData.quantity
-            initialMarginBTC = (calcEntryData.enterPrice * calcEntryData.quantity) / calcEntryData.leverageSize
-            
+//        case .ADAZ19, .BCHZ19, .EOSZ19, .ETHZ19, .LTCZ19, .TRXZ19, .XRPZ19:
+//
+//            contractValueBTC = calcEntryData.enterPrice * calcEntryData.quantity
+//            initialMarginBTC = (calcEntryData.enterPrice * calcEntryData.quantity) / calcEntryData.leverageSize
+//
         case .ETHUSD:
             
             contractValueBTC = (calcEntryData.enterPrice * calcEntryData.quantity) / calcEntryData.btcPriceWhenEnter
@@ -120,7 +120,7 @@ class MarginCalculator {
     private func calcFees() {
         let traidingPair = Settings.shared.selectedTradingPair
         switch traidingPair {
-        case .XBTUSD, .XBTZ19, .XBTH20:
+        case .XBTUSD, .XBTH21, .XBTM21:
             
             // Single fee
             oneMarketFee = contractValueBTC * Settings.shared.selectedTradingPair.takerFee
@@ -140,30 +140,29 @@ class MarginCalculator {
                 feesInBTC = oneMarketFee + oneLimitFee
                 feesInUSD = calcEntryData.enterPrice * oneMarketFee + calcEntryData.closePrice * oneLimitFee
             }
-        case .ADAZ19, .BCHZ19, .EOSZ19, .ETHZ19, .LTCZ19, .TRXZ19, .XRPZ19:
-            
-            
-            // Single fee
-            let limitFeeOnEnter = calcEntryData.enterPrice * calcEntryData.quantity * Settings.shared.selectedTradingPair.makerFee
-            let limitFeeOnExit = calcEntryData.closePrice * calcEntryData.quantity * Settings.shared.selectedTradingPair.makerFee
-            let marketFeeOnEnter = calcEntryData.enterPrice * calcEntryData.quantity * Settings.shared.selectedTradingPair.takerFee
-            let marketFeeOnExit = calcEntryData.closePrice * calcEntryData.quantity * Settings.shared.selectedTradingPair.takerFee
-            
-            // Calculate Fees depending on type
-            switch calcEntryData.feeType {
-            case .twoLimits:
-                feesInBTC = limitFeeOnEnter + limitFeeOnExit
-                feesInUSD = limitFeeOnEnter * calcEntryData.btcPriceWhenEnter + limitFeeOnExit * calcEntryData.btcPriceWhenExit
-            case .enteredLimitClosedMarket:
-                feesInBTC = limitFeeOnEnter + marketFeeOnExit
-                feesInUSD = limitFeeOnEnter * calcEntryData.btcPriceWhenEnter + marketFeeOnExit * calcEntryData.btcPriceWhenExit
-            case .twoMarkets:
-                feesInBTC = marketFeeOnEnter + marketFeeOnExit
-                feesInUSD = marketFeeOnEnter * calcEntryData.btcPriceWhenEnter + marketFeeOnExit * calcEntryData.btcPriceWhenExit
-            case .enteredMarketClosedLimit:
-                feesInBTC = marketFeeOnEnter + limitFeeOnExit
-                feesInUSD = marketFeeOnEnter * calcEntryData.btcPriceWhenEnter + limitFeeOnExit * calcEntryData.btcPriceWhenExit
-            }
+//        case .ADAZ19, .BCHZ19, .EOSZ19, .ETHZ19, .LTCZ19, .TRXZ19, .XRPZ19:
+//
+//            // Single fee
+//            let limitFeeOnEnter = calcEntryData.enterPrice * calcEntryData.quantity * Settings.shared.selectedTradingPair.makerFee
+//            let limitFeeOnExit = calcEntryData.closePrice * calcEntryData.quantity * Settings.shared.selectedTradingPair.makerFee
+//            let marketFeeOnEnter = calcEntryData.enterPrice * calcEntryData.quantity * Settings.shared.selectedTradingPair.takerFee
+//            let marketFeeOnExit = calcEntryData.closePrice * calcEntryData.quantity * Settings.shared.selectedTradingPair.takerFee
+//
+//            // Calculate Fees depending on type
+//            switch calcEntryData.feeType {
+//            case .twoLimits:
+//                feesInBTC = limitFeeOnEnter + limitFeeOnExit
+//                feesInUSD = limitFeeOnEnter * calcEntryData.btcPriceWhenEnter + limitFeeOnExit * calcEntryData.btcPriceWhenExit
+//            case .enteredLimitClosedMarket:
+//                feesInBTC = limitFeeOnEnter + marketFeeOnExit
+//                feesInUSD = limitFeeOnEnter * calcEntryData.btcPriceWhenEnter + marketFeeOnExit * calcEntryData.btcPriceWhenExit
+//            case .twoMarkets:
+//                feesInBTC = marketFeeOnEnter + marketFeeOnExit
+//                feesInUSD = marketFeeOnEnter * calcEntryData.btcPriceWhenEnter + marketFeeOnExit * calcEntryData.btcPriceWhenExit
+//            case .enteredMarketClosedLimit:
+//                feesInBTC = marketFeeOnEnter + limitFeeOnExit
+//                feesInUSD = marketFeeOnEnter * calcEntryData.btcPriceWhenEnter + limitFeeOnExit * calcEntryData.btcPriceWhenExit
+//            }
         case .ETHUSD:
             
             // Single fee
@@ -194,13 +193,13 @@ class MarginCalculator {
         
         let traidingPair = Settings.shared.selectedTradingPair
         switch traidingPair {
-        case .XBTUSD, .XBTZ19, .XBTH20:
+        case .XBTUSD, .XBTH21, .XBTM21:
             
             return (calcEntryData.quantity * ((1 / calcEntryData.enterPrice) - (1 /  calcEntryData.closePrice)))
             
-        case .ADAZ19, .BCHZ19, .EOSZ19, .ETHZ19, .LTCZ19, .TRXZ19, .XRPZ19:
-            
-            return (calcEntryData.closePrice - calcEntryData.enterPrice) * calcEntryData.quantity
+//        case .ADAZ19, .BCHZ19, .EOSZ19, .ETHZ19, .LTCZ19, .TRXZ19, .XRPZ19:
+//            
+//            return (calcEntryData.closePrice - calcEntryData.enterPrice) * calcEntryData.quantity
             
         case .ETHUSD:
             

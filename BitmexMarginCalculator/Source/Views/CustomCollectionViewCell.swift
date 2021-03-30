@@ -15,7 +15,7 @@ class CustomCollectionViewCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        titleLabel.setScaledCustomFont(forFont: .RobotoRegular, textStyle: .body)
+        titleLabel.setScaledCustomFont(forFont: .robotoRegular, textStyle: .body)
         titleLabel.textAlignment = .center
         titleLabel.adjustsFontSizeToFitWidth = true
         titleLabel.numberOfLines = 0

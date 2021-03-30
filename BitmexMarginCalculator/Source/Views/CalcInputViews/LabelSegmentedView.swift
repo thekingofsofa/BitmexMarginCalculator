@@ -22,7 +22,7 @@ class LabelSegmentedView: UIView {
     func setupView(titleText: String, segmentedOptions: [String]) {
         
         titleLabel.text = titleText
-        titleLabel.setScaledCustomFont(forFont: .RobotoRegular, textStyle: .body)
+        titleLabel.setScaledCustomFont(forFont: .robotoRegular, textStyle: .body)
         
         segmentedControl = UISegmentedControl(items: segmentedOptions)
         segmentedControl.tintColor = .silver

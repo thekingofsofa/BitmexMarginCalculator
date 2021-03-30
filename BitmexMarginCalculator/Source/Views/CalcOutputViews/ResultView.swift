@@ -16,7 +16,7 @@ class ResultView: UIView {
     var profitLossBTC = OutputLabelView(titleText: "Profit/Loss in BTC", resultText: "")
     var profitLossUSD = OutputLabelView(titleText: "Profit/Loss in USD", resultText: "")
     var roe = OutputLabelView(titleText: "ROE %", resultText: "")
-    var liqudationPrice = OutputLabelView(titleText: "Liqudation price", resultText: "")
+    var liquidationPrice = OutputLabelView(titleText: "Liquidation price", resultText: "")
     var fees = OutputLabelView(titleText: "Fee", resultText: "")
     
     override init(frame: CGRect) {
@@ -31,7 +31,7 @@ class ResultView: UIView {
         self.backgroundColor = .white
         
         // Make gray background for every second element in view
-        var elements = [quantityBTC, btcPriceChange, profitLossBTC, profitLossUSD, roe, liqudationPrice, fees]
+        var elements = [quantityBTC, btcPriceChange, profitLossBTC, profitLossUSD, roe, liquidationPrice, fees]
         elements = elements.enumerated().compactMap { index, element in
             index % 2 != 0 ? element : nil
         }
@@ -39,7 +39,7 @@ class ResultView: UIView {
             $0.backgroundColor = UIColor.silverAlpha }
         
         // Creating UIStackView
-        let resultDataStackView = UIStackView(arrangedSubviews: [quantityBTC, btcPriceChange, profitLossBTC, profitLossUSD, roe, liqudationPrice, fees])
+        let resultDataStackView = UIStackView(arrangedSubviews: [quantityBTC, btcPriceChange, profitLossBTC, profitLossUSD, roe, liquidationPrice, fees])
         resultDataStackView.distribution = .fillEqually
         resultDataStackView.axis = .vertical
         resultDataStackView.spacing = 0
@@ -54,7 +54,7 @@ class ResultView: UIView {
         
         // Layout constraints
         resultDataStackView.anchor(top: topAnchor, leading: leadingAnchor, bottom: bottomAnchor, trailing: trailingAnchor)
-        [quantityBTC, btcPriceChange, profitLossBTC, profitLossUSD, roe, liqudationPrice, fees].forEach {
+        [quantityBTC, btcPriceChange, profitLossBTC, profitLossUSD, roe, liquidationPrice, fees].forEach {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.heightAnchor.constraint(equalToConstant: 40).isActive = true
         }

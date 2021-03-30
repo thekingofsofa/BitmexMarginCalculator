@@ -72,7 +72,7 @@ class ServiceLayer {
             }
             dataTask.resume()
         } else {
-            let error = NSError(domain:"Too many requests", code: -1000, userInfo: nil)
+            let error = NSError(domain: "Too many requests", code: -1000, userInfo: nil)
             completion(.failure(error))
         }
     }

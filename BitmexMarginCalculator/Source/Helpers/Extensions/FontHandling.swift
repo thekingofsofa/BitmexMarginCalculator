@@ -8,14 +8,6 @@
 
 import UIKit
 
-enum FontName: String {
-    
-    case RobotoBold             = "Roboto-Bold"
-    case RobotoLight            = "Roboto-Light"
-    case RobotoMedium           = "Roboto-Medium"
-    case RobotoRegular          = "Roboto-Regular"
-}
-
 extension UIView {
     
     func getScaledFont(forFont name: FontName, textStyle: UIFont.TextStyle) -> UIFont {

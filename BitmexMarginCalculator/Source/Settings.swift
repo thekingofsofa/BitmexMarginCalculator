@@ -29,7 +29,7 @@ enum SettingsButtons: String {
     case showHideLastPrice
     case showHideFees
     case aboutApp
-    case aboutLiqudation
+    case aboutLiquidation
     case feesInfo
     case cancel
     case separator
@@ -42,8 +42,8 @@ enum SettingsButtons: String {
             return "Calculate fees"
         case .aboutApp:
             return "About app"
-        case .aboutLiqudation:
-            return "How liqudation works?"
+        case .aboutLiquidation:
+            return "How liquidation works?"
         case .cancel:
             return "Cancel"
         case .separator:

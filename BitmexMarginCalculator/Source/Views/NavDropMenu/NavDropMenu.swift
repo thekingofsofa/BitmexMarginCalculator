@@ -8,8 +8,8 @@
 
 import UIKit
 
-fileprivate let cellId = "cellId"
-fileprivate let cellHeight: CGFloat = 42
+private let cellReuseId = "cellReuseId"
+private let cellHeight: CGFloat = 42
 
 class NavDropMenu: UIView {
     
@@ -23,7 +23,7 @@ class NavDropMenu: UIView {
     var tableView = UITableView()
     var tableViewBottomConstraint = NSLayoutConstraint()
     
-    var delegate: NavDropMenuDelegate?
+    weak var delegate: NavDropMenuDelegate?
     
     init(items: [String]) {
         super.init(frame: CGRect.zero)
@@ -40,11 +40,13 @@ class NavDropMenu: UIView {
     }
     
     private func setupNavBarButton() {
+        
         navBarTitle.text = Settings.shared.selectedTradingPair.rawValue
-        navBarTitle.font = UIFont(name: "Roboto-Medium", size: 17)
+        navBarTitle.font = UIFont(name: FontName.robotoMedium.rawValue, size: 17)
         navBarTitle.textColor = .white
         navBarArrow.image = UIImage(named: "arrow_white")
         navBarArrow.contentMode = .scaleAspectFit
+        
         let navBarButtonStackView = UIStackView(arrangedSubviews: [navBarTitle, navBarArrow])
         navBarButtonStackView.distribution = .fill
         navBarButtonStackView.axis = .horizontal
@@ -55,6 +57,7 @@ class NavDropMenu: UIView {
     }
     
     private func setupBlackView() {
+        
         blackView.backgroundColor = UIColor(white: 0, alpha: 0.5)
         blackView.alpha = 0
         blackView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleDismiss)))
@@ -67,9 +70,10 @@ class NavDropMenu: UIView {
     }
     
     private func setupTableView() {
+        
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellId)
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellReuseId)
         tableView.bounces = false
         tableView.tableFooterView = UIView()
         tableView.separatorColor = .grayLight
@@ -84,12 +88,13 @@ class NavDropMenu: UIView {
     }
     
     @objc func showHideMenu() {
+        
         if !viewDropped {
             self.isUserInteractionEnabled = true
             viewDropped = true
             tableViewBottomConstraint.constant = cellHeight * CGFloat(items.count)
             
-            UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseOut, animations: {
+            UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseOut, animations: {
                 self.blackView.alpha = 1.0
                 self.navBarArrow.transform = self.navBarArrow.transform.rotated(by: 180 * CGFloat(Double.pi/180))
 
@@ -106,11 +111,12 @@ class NavDropMenu: UIView {
     }
     
     @objc func handleDismiss() {
+        
         tableViewBottomConstraint.constant = 0
         viewDropped = false
         self.isUserInteractionEnabled = false
         
-        UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseOut, animations: {
+        UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseOut, animations: {
             self.blackView.alpha = 0
             self.navBarArrow.transform = self.navBarArrow.transform.rotated(by: 180 * CGFloat(Double.pi/180))
             self.layoutIfNeeded()
@@ -125,14 +131,17 @@ class NavDropMenu: UIView {
 extension NavDropMenu: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
         return cellHeight
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
         return items.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         let cell = UITableViewCell()
         cell.textLabel?.text = items[indexPath.row]
         cell.textLabel?.adjustsFontSizeToFitWidth = true
@@ -143,6 +152,7 @@ extension NavDropMenu: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
         Settings.shared.selectedTradingPair = TradingPair(rawValue: items[indexPath.row]) ?? .XBTUSD
         self.navBarTitle.text = Settings.shared.selectedTradingPair.rawValue
         delegate?.navDropMenuCellSelected(selectedRowInt: indexPath.row)
@@ -150,6 +160,7 @@ extension NavDropMenu: UITableViewDelegate, UITableViewDataSource {
     }
 }
 
-protocol NavDropMenuDelegate {
+protocol NavDropMenuDelegate: class {
+    
     func navDropMenuCellSelected(selectedRowInt: Int)
 }

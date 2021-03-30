@@ -33,7 +33,7 @@ class TextFieldView: UIView {
         
         textFieldNameLabel.text = textFieldName
         textFieldNameLabel.adjustsFontSizeToFitWidth = true
-        textFieldNameLabel.setScaledCustomFont(forFont: .RobotoRegular, textStyle: .body)
+        textFieldNameLabel.setScaledCustomFont(forFont: .robotoRegular, textStyle: .body)
         
         textFieldInputView.font = textFieldNameLabel.font
         textFieldInputView.backgroundColor = .orangeLightAlpha

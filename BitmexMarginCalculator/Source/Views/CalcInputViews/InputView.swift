@@ -8,9 +8,6 @@
 
 import UIKit
 
-fileprivate let cellId = "cellId"
-fileprivate let cellHeight: CGFloat = 56
-
 class InputView: UIView {
     
     var entryDataStackView: UIStackView!

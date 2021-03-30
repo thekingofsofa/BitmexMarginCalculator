@@ -38,7 +38,7 @@ class PopUpViewController: UIViewController {
         backgroundView.backgroundColor = .white
         backgroundView.layer.cornerRadius = 12
         
-        textLabel.setScaledCustomFont(forFont: .RobotoRegular, textStyle: .body)
+        textLabel.setScaledCustomFont(forFont: .robotoRegular, textStyle: .body)
         let infoTextViewDataFiller = InfoTextViewDataFiller()
         textLabel.text = infoTextViewDataFiller.liquidationPriceNotice()
         textLabel.numberOfLines = 0

@@ -8,8 +8,8 @@
 
 import UIKit
 
-fileprivate let cellId = "cellId"
-fileprivate let cellHeight: CGFloat = 56
+private let cellId = "cellId"
+private let cellHeight: CGFloat = 56
 
 class SettingsLauncher: NSObject {
     
@@ -32,7 +32,7 @@ class SettingsLauncher: NSObject {
     
     private var tableViewBottomConstraint: NSLayoutConstraint?
     
-    private let cells : [(SettingsCellType, SettingsButtons)] = [(SettingsCellType.withSwither, .showHideLastPrice), (SettingsCellType.withSwither, .showHideFees), (SettingsCellType.separator, .separator), (SettingsCellType.onlyTitle, .aboutApp), (SettingsCellType.onlyTitle, .feesInfo), (SettingsCellType.onlyTitle, .aboutLiqudation), (SettingsCellType.onlyTitle, .cancel)]
+    private let cells: [(SettingsCellType, SettingsButtons)] = [(SettingsCellType.withSwither, .showHideLastPrice), (SettingsCellType.withSwither, .showHideFees), (SettingsCellType.separator, .separator), (SettingsCellType.onlyTitle, .aboutApp), (SettingsCellType.onlyTitle, .feesInfo), (SettingsCellType.onlyTitle, .aboutLiquidation), (SettingsCellType.onlyTitle, .cancel)]
     
     override init() {
         super.init()
@@ -92,6 +92,7 @@ class SettingsLauncher: NSObject {
         homeController.showHideFees()
         homeController.calculate()
         UserDefaults.standard.set(Settings.shared.showFees, forKey: "showFees")
+        UserDefaults.standard.synchronize()
     }
     
     @objc func switchShowLastPrice() {
@@ -99,6 +100,7 @@ class SettingsLauncher: NSObject {
         Settings.shared.showLastPrice = !Settings.shared.showLastPrice
         homeController.showHideLastPrice()
         UserDefaults.standard.set(Settings.shared.showLastPrice, forKey: "showLastPrice")
+        UserDefaults.standard.synchronize()
     }
 }
 
@@ -119,7 +121,8 @@ extension SettingsLauncher: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! SettingsTableViewCell
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as? SettingsTableViewCell else { return UITableViewCell() }
+        
         cell.configureCell(text: cells[indexPath.row].1.title, cellType: cells[indexPath.row].0)
         
         if indexPath.row == 0 {
@@ -151,7 +154,7 @@ extension SettingsLauncher: UITableViewDataSource, UITableViewDelegate {
                 let vc = InfoTextViewController()
                 vc.pageType = .aboutAppPage
                 homeController.navigationController?.pushViewController(vc, animated: true)
-            case .aboutLiqudation:
+            case .aboutLiquidation:
                 handleDismiss()
                 let vc = InfoTextViewController()
                 vc.pageType = .aboutLiquidationPage

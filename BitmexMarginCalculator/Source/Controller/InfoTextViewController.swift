@@ -35,7 +35,10 @@ class InfoTextViewController: UIViewController {
         
         // Setup text view
         self.view.addSubview(textView)
-        textView.anchor(top: view.safeAreaLayoutGuide.topAnchor, leading: view.safeAreaLayoutGuide.leadingAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, trailing: view.safeAreaLayoutGuide.trailingAnchor)
+        textView.anchor(top: view.safeAreaLayoutGuide.topAnchor,
+                        leading: view.safeAreaLayoutGuide.leadingAnchor,
+                        bottom: view.safeAreaLayoutGuide.bottomAnchor,
+                        trailing: view.safeAreaLayoutGuide.trailingAnchor)
         // Manage colors
         guard let backgroundImage = UIImage(named: "background_light") else { return }
         self.view.backgroundColor = UIColor(patternImage: backgroundImage)
@@ -53,6 +56,6 @@ class InfoTextViewController: UIViewController {
             self.title = "About Liquidation"
             textView.attributedText = dataFiller.loadAboutLiquidationPage()
         }
-        textView.setScaledCustomFont(forFont: .RobotoRegular, textStyle: .body)
+        textView.setScaledCustomFont(forFont: .robotoRegular, textStyle: .body)
     }
 }

@@ -15,18 +15,22 @@ class InfoTextViewDataFiller {
         let paragraph = NSMutableParagraphStyle()
         paragraph.firstLineHeadIndent = 18
         // create an NSMutableAttributedString that we'll append everything to
-        let fullString = NSMutableAttributedString(string: "BitMEX Margin Calculator is designed to conveniently calculate the position on smartphone. Beware, trading with a large leverage is very risky!\n\nThis app is under MIT license, you are welcome to visit it’s Github page. Also there you can find Privacy Policy", attributes: [NSAttributedString.Key.paragraphStyle : paragraph])
+        let fullString = NSMutableAttributedString(string: ["BitMEX Margin Calculator is designed to conveniently ",
+                                                   "calculate the position on smartphone. Beware, trading with a ",
+                                                   "large leverage is very risky!\n\nThis app is under MIT license, ",
+            "you are welcome to visit it’s Github page. Also there you can find Privacy Policy"].joined(),
+                                                   attributes: [NSAttributedString.Key.paragraphStyle: paragraph])
         fullString.setAsLink(textToFind: "Github page", linkURL: "https://github.com/thekingofsofa/BitmexMarginCalculator")
         fullString.setAsLink(textToFind: "Privacy Policy", linkURL: "https://github.com/thekingofsofa/BitmexMarginCalculator/blob/master/BitmexMarginCalculator/PrivacyPolicy.md")
         return fullString
     }
     
-    func loadAboutLiquidationPage() -> NSMutableAttributedString  {
+    func loadAboutLiquidationPage() -> NSMutableAttributedString {
         
         let paragraph = NSMutableParagraphStyle()
         paragraph.firstLineHeadIndent = 18
         // create an NSMutableAttributedString that we'll append everything to
-        let fullString = NSMutableAttributedString(string: "Maybe you already noticed that Liquidation price is not equal to 100% lost of your margin, that’s because liquidation engine of BitMEX closing your position way before your Bankruptcy price, depending on how high your leverage is.\n\n", attributes: [NSAttributedString.Key.paragraphStyle : paragraph])
+        let fullString = NSMutableAttributedString(string: "Maybe you already noticed that Liquidation price is not equal to 100% lost of your margin, that’s because liquidation engine of BitMEX closing your position way before your Bankruptcy price, depending on how high your leverage is.\n\n", attributes: [NSAttributedString.Key.paragraphStyle: paragraph])
         
         // create our NSTextAttachment
         let imageAttachment = NSTextAttachment()
@@ -48,7 +52,7 @@ class InfoTextViewDataFiller {
         let paragraph = NSMutableParagraphStyle()
         paragraph.firstLineHeadIndent = 18
         // create an NSMutableAttributedString that we'll append everything to
-        let fullString = NSMutableAttributedString(string: "For more detail information read Bitmex documentation.", attributes: [NSAttributedString.Key.paragraphStyle : paragraph])
+        let fullString = NSMutableAttributedString(string: "For more detail information read Bitmex documentation.", attributes: [NSAttributedString.Key.paragraphStyle: paragraph])
         return fullString
     }
 }

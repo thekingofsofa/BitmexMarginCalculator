@@ -67,7 +67,7 @@ class FeesViewController: UIViewController {
         
         // Setup bottom view
         let dataFiller = InfoTextViewDataFiller()
-        topLabel.setScaledCustomFont(forFont: .RobotoRegular, textStyle: .body)
+        topLabel.setScaledCustomFont(forFont: .robotoRegular, textStyle: .body)
         topLabel.numberOfLines = 0
         topLabel.attributedText = dataFiller.feesNotice()
         
@@ -157,7 +157,7 @@ extension FeesViewController: UICollectionViewDataSource, UICollectionViewDelega
         }
         
         if indexPath.section % 2 == 1 {
-            cell.backgroundColor = UIColor(red:0.88, green:0.90, blue:0.93, alpha:1.0)
+            cell.backgroundColor = UIColor(red: 0.88, green: 0.90, blue: 0.93, alpha: 1.0)
         } else {
             cell.backgroundColor = .white
         }

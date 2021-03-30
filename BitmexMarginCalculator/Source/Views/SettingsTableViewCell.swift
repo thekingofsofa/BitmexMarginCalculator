@@ -9,6 +9,7 @@
 import UIKit
 
 enum SettingsCellType {
+    
     case onlyTitle
     case withSwither
     case separator
@@ -45,7 +46,7 @@ class SettingsTableViewCell: UITableViewCell {
     
     func configureCell(text: String, cellType: SettingsCellType) {
         titleLabel.text = text
-        titleLabel.setScaledCustomFont(forFont: .RobotoRegular, textStyle: .body)
+        titleLabel.setScaledCustomFont(forFont: .robotoRegular, textStyle: .body)
         titleLabel.anchor(top: topAnchor, leading: safeAreaLayoutGuide.leadingAnchor, bottom: bottomAnchor, trailing: nil, padding: .init(top: 12, left: 24, bottom: 12, right: 0))
         
         switcher.anchor(top: topAnchor, leading: titleLabel.trailingAnchor, bottom: bottomAnchor, trailing: safeAreaLayoutGuide.trailingAnchor, padding: .init(top: 12, left: 0, bottom: 12, right: 24))

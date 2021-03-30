@@ -34,8 +34,8 @@ class OutputLabelView: UIView {
         
         stackView.anchor(top: topAnchor, leading: leadingAnchor, bottom: bottomAnchor, trailing: trailingAnchor, padding: .init(top: 0, left: 12, bottom: 0, right: 12))
         
-        titleLabel.setScaledCustomFont(forFont: .RobotoRegular, textStyle: .body)
-        resultLabel.setScaledCustomFont(forFont: .RobotoRegular, textStyle: .body)
+        titleLabel.setScaledCustomFont(forFont: .robotoRegular, textStyle: .body)
+        resultLabel.setScaledCustomFont(forFont: .robotoRegular, textStyle: .body)
         titleLabel.text = titleText
         titleLabel.adjustsFontSizeToFitWidth = true
         resultLabel.text = resultText

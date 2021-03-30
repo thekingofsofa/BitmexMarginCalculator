@@ -13,7 +13,7 @@ class IBCandlestickChartView: UIView {
     private var candlestickWidth: CGFloat = 10.0
     private let spaceBetweenCandlestick: CGFloat = 1.0
     private var numberOfVerticals: Int = 8
-    private var upColor: UIColor = UIColor(red:0.00, green:0.77, blue:0.03, alpha:1.0)
+    private var upColor: UIColor = UIColor(red: 0.00, green: 0.77, blue: 0.03, alpha: 1.0)
     private var downColor: UIColor = UIColor.red
     private var titlesFont = UIFont.systemFont(ofSize: 12.0, weight: .regular)
     private let rightInset: CGFloat = 60
@@ -32,7 +32,12 @@ class IBCandlestickChartView: UIView {
         let ratio = graphWidth / CGFloat(values.count)
         let visiblePointStart = 0 - panOffset
         let visibleValuesCount = Int((self.bounds.width - rightInset) / (candlestickWidth + spaceBetweenCandlestick))
-        return Array(values[abs(Int(visiblePointStart / ratio))...abs(Int(visiblePointStart / ratio) + visibleValuesCount)])
+        let startIndex = abs(Int(visiblePointStart / ratio))
+        let endIndex = abs(Int(visiblePointStart / ratio) + visibleValuesCount)
+        if startIndex >= endIndex {
+            return Array()
+        }
+        return Array(values[startIndex...endIndex])
     }
     
     public func draw(values: [(close: Double, open: Double, high: Double, low: Double, volume: Double)],
@@ -40,8 +45,8 @@ class IBCandlestickChartView: UIView {
         
         self.layer.sublayers?.removeAll()
         self.values = values
-        self.max = visibleValues.map{ $0.high }.max() ?? 0.0
-        self.min = visibleValues.map{ $0.low }.min() ?? 0.0
+        self.max = visibleValues.map { $0.high }.max() ?? 0.0
+        self.min = visibleValues.map { $0.low }.min() ?? 0.0
         self.backgroundColor = .white
         self.layer.cornerRadius = 6.0
         self.dates = dates
@@ -55,7 +60,9 @@ class IBCandlestickChartView: UIView {
     }
     
     // MARK: - Setup Gesture Recognizers
+    
     private func setupGestureRecognizer() {
+        
         self.addGestureRecognizer(UIPinchGestureRecognizer(target: self, action: #selector(handlePinchGesture(recognizer:))))
         self.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(handlePanRecognizer(recognizer:))))
     }
@@ -163,9 +170,10 @@ class IBCandlestickChartView: UIView {
     }
     
     func redrawChart() {
+        
         self.layer.sublayers?.removeAll()
-        self.max = visibleValues.map{ $0.high }.max() ?? 0.0
-        self.min = visibleValues.map{ $0.low }.min() ?? 0.0
+        self.max = visibleValues.map { $0.high }.max() ?? 0.0
+        self.min = visibleValues.map { $0.low }.min() ?? 0.0
         drawChart(values: values)
         drawBackgroundLines()
         drawBorderLines()
@@ -213,7 +221,6 @@ class IBCandlestickChartView: UIView {
             verticalX = self.bounds.maxX - (CGFloat(index) * (spaceBetweenVerticalLines)) - rightInset - 40 - panOffset
             
             let title = UILabel(frame: CGRect(x: verticalX, y: bounds.maxY - 40, width: 80, height: 30))
-
             
             if let date = filteredDates[index].iso8601 {
                 let format = DateFormatter()
@@ -295,6 +302,7 @@ class IBCandlestickChartView: UIView {
     }
     
     private func drawLastValuePointer() {
+        
         guard let lastValue = values.first?.close else { return }
         let y = getY(lastValue) + CGFloat(topInset)
         let layerHeight: CGFloat = 20

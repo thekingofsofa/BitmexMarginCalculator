@@ -14,7 +14,7 @@ class MainViewController: UIViewController {
     var feeType = FeeType.twoMarkets
     
     var navDropMenu = NavDropMenu(items: Settings.shared.listOfAllTradingPairs)
-    var lastPriceView = LastPriceView()
+//    var lastPriceView = LastPriceView()
     var inputCalcView = InputView()
     var outputCalcView = ResultView()
     var bottomLabel = UILabel()
@@ -25,6 +25,7 @@ class MainViewController: UIViewController {
         return launcher
     }()
     
+    private var lastPriceVC = LastPriceViewController()
     private var mainScrollView = UIScrollView()
     private var mainStackView = UIStackView()
     private var mainStackViewTopConstraint = NSLayoutConstraint()
@@ -33,6 +34,7 @@ class MainViewController: UIViewController {
     // MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         setupView()
         setupLayout()
         setupNavigationBar()
@@ -51,10 +53,10 @@ class MainViewController: UIViewController {
             } else if UIDevice.current.userInterfaceIdiom == .phone && traitCollection.verticalSizeClass == .regular {
                 setupConstraintForRegularEnviromnentIphone()
             }
-            if !lastPriceView.isCollapsed {
-                DispatchQueue.main.async() {
-                    self.lastPriceView.chart.redrawChart()
-                    self.lastPriceView.layoutIfNeeded()
+            if !lastPriceVC.lastPriceView.isCollapsed {
+                DispatchQueue.main.async {
+                    self.lastPriceVC.lastPriceView.chart.redrawChart()
+                    self.lastPriceVC.lastPriceView.layoutIfNeeded()
                 }
             }
         }
@@ -71,14 +73,16 @@ class MainViewController: UIViewController {
         }
         mainStackView = UIStackView(arrangedSubviews: [inputCalcView, outputCalcView])
         mainStackView.spacing = 12
-        [lastPriceView, mainStackView, bottomLabel].forEach {
+        addChild(lastPriceVC)
+        [lastPriceVC.view, mainStackView, bottomLabel].forEach {
             mainScrollView.addSubview($0)
         }
+        lastPriceVC.didMove(toParent: self)
         // Last BTC price view
         setupLastPriceView()
         // Bottom label
         bottomLabel.text = "All currency units denominated in XBT"
-        bottomLabel.setScaledCustomFont(forFont: .RobotoLight, textStyle: .footnote)
+        bottomLabel.setScaledCustomFont(forFont: .robotoLight, textStyle: .footnote)
         bottomLabel.textColor = .gray
         bottomLabel.textAlignment = .center
         // Info Buttons
@@ -112,26 +116,14 @@ class MainViewController: UIViewController {
     
     // MARK: Setup lastPrice top view
     private func setupLastPriceView() {
-        lastPriceView.collapseAction = collapseLastPriceView
         
-        let traidingPair = Settings.shared.selectedTradingPair
-        
-        let network = ServiceLayer()
-        network.request(router: Router.getLastPrice(tradePair: "XBTUSD")) { (result: Result<[LastPrice]>) in
-            switch result {
-            case .success(let data):
-                print(result)
-                self.lastPriceView.priceLabel.text = "Last \(traidingPair.rawValue) price: \(data[0].price)"
-            case .failure:
-                print(result)
-            }
-        }
+        lastPriceVC.lastPriceView.collapseAction = collapseLastPriceView
     }
     
     // MARK: Setup info Button
     private func setupInfoButtons() {
-        outputCalcView.liqudationPrice.resultLabel.addInfoButton()
-        outputCalcView.liqudationPrice.resultLabel.infoButton.addTarget(self, action: #selector(liquidationInfoButtonPressed), for: .touchUpInside)
+        outputCalcView.liquidationPrice.resultLabel.addInfoButton()
+        outputCalcView.liquidationPrice.resultLabel.infoButton.addTarget(self, action: #selector(liquidationInfoButtonPressed), for: .touchUpInside)
     }
     
     // MARK: Layout View
@@ -143,8 +135,8 @@ class MainViewController: UIViewController {
             setupConstraintForRegularEnviromnentIphone()
         }
         
-        lastPriceView.anchor(top: mainScrollView.topAnchor, leading: mainScrollView.leadingAnchor, bottom: nil, trailing: mainScrollView.trailingAnchor, padding: .init(top: 12, left: 12, bottom: 0, right: 12))
-        lastPriceViewHeightConstraint = lastPriceView.heightAnchor.constraint(equalToConstant: 54)
+        lastPriceVC.view.anchor(top: mainScrollView.topAnchor, leading: mainScrollView.leadingAnchor, bottom: nil, trailing: mainScrollView.trailingAnchor, padding: .init(top: 12, left: 12, bottom: 0, right: 12))
+        lastPriceViewHeightConstraint = lastPriceVC.view.heightAnchor.constraint(equalToConstant: 54)
         lastPriceViewHeightConstraint.isActive = true
         
         mainScrollView.anchor(top: view.safeAreaLayoutGuide.topAnchor, leading: view.safeAreaLayoutGuide.leadingAnchor, bottom: view.bottomAnchor, trailing: view.safeAreaLayoutGuide.trailingAnchor)
@@ -173,7 +165,7 @@ class MainViewController: UIViewController {
         // Check max leverage
         if let leverageSizeInt = Int(self.inputCalcView.leverageSize.textFieldInputView.text ?? "0") {
             if leverageSizeInt > Settings.shared.selectedTradingPair.maxLeverage {
-                inputCalcView.leverageSize.textFieldInputView.backgroundColor = UIColor(red:1.00, green:0.80, blue:0.80, alpha:1.0)
+                inputCalcView.leverageSize.textFieldInputView.backgroundColor = UIColor(red: 1.00, green: 0.80, blue: 0.80, alpha: 1.0)
             } else {
                 inputCalcView.leverageSize.textFieldInputView.backgroundColor = UIColor.orangeLightAlpha
             }
@@ -202,13 +194,13 @@ class MainViewController: UIViewController {
         outputCalcView.profitLossBTC.resultLabel.text = String(format: "%.4f", marginCalc.profitLossBTC)
         outputCalcView.profitLossUSD.resultLabel.text = String(format: "%.2f", marginCalc.profitLossUSD) + "$"
         outputCalcView.roe.resultLabel.text = String(format: "%.2f", marginCalc.roe) + "%"
-        outputCalcView.liqudationPrice.resultLabel.text = String(format: formatLiquidationStringStyle, marginCalc.liqudationPrice)
+        outputCalcView.liquidationPrice.resultLabel.text = String(format: formatLiquidationStringStyle, marginCalc.liquidationPrice)
         outputCalcView.fees.resultLabel.text = String(format: "%.2f", marginCalc.feesInUSD) + "$"
     }
     
     // MARK: - Actions
     @objc func collapseLastPriceView() {
-        if lastPriceView.isCollapsed {
+        if lastPriceVC.lastPriceView.isCollapsed {
             lastPriceViewHeightConstraint.constant = 54
         } else {
             lastPriceViewHeightConstraint.constant = 300
@@ -219,7 +211,7 @@ class MainViewController: UIViewController {
     }
     
     @objc func positionSideChanged(_ sender: UISegmentedControl) {
-        switch sender.selectedSegmentIndex{
+        switch sender.selectedSegmentIndex {
         case 0:
             marginCalc.calcEntryData.longShortSwitcher = .long
             marginCalc.saveEnteredData()
@@ -256,7 +248,7 @@ class MainViewController: UIViewController {
             feeType = FeeType.twoLimits
         } else if inputCalcView.enterOrder.segmentedControl.selectedSegmentIndex == 0 && inputCalcView.closeOrder.segmentedControl.selectedSegmentIndex == 1 {
             feeType = FeeType.enteredLimitClosedMarket
-        }  else if inputCalcView.enterOrder.segmentedControl.selectedSegmentIndex == 1 && inputCalcView.closeOrder.segmentedControl.selectedSegmentIndex == 1 {
+        } else if inputCalcView.enterOrder.segmentedControl.selectedSegmentIndex == 1 && inputCalcView.closeOrder.segmentedControl.selectedSegmentIndex == 1 {
             feeType = FeeType.twoMarkets
         } else if inputCalcView.enterOrder.segmentedControl.selectedSegmentIndex == 1 && inputCalcView.closeOrder.segmentedControl.selectedSegmentIndex == 0 {
             feeType = FeeType.enteredMarketClosedLimit
@@ -280,11 +272,11 @@ class MainViewController: UIViewController {
     func showHideLastPrice() {
         mainStackViewTopConstraint.isActive = false
         if Settings.shared.showLastPrice {
-            mainStackViewTopConstraint = mainStackView.topAnchor.constraint(equalTo: lastPriceView.bottomAnchor)
-            lastPriceView.isHidden = false
+            mainStackViewTopConstraint = mainStackView.topAnchor.constraint(equalTo: lastPriceVC.view.bottomAnchor)
+            lastPriceVC.view.isHidden = false
         } else {
             mainStackViewTopConstraint = mainStackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor)
-            lastPriceView.isHidden = true
+            lastPriceVC.view.isHidden = true
         }
         mainStackViewTopConstraint.constant = 12
         mainStackViewTopConstraint.isActive = true
@@ -294,10 +286,10 @@ class MainViewController: UIViewController {
     func showHideBTCPriceForAltcoins() {
         let traidingPair = Settings.shared.selectedTradingPair
         switch traidingPair {
-        case .XBTUSD, .XBTZ19, .XBTH20:
+        case .XBTUSD, .XBTH21, .XBTM21:
             inputCalcView.btcPriceWhenEnter.isHidden = true
             inputCalcView.btcPriceWhenExit.isHidden = true
-        case .ADAZ19, .BCHZ19, .EOSZ19, .ETHZ19, .LTCZ19, .TRXZ19, .XRPZ19, .ETHUSD:
+        case .ETHUSD:
             inputCalcView.btcPriceWhenEnter.isHidden = false
             inputCalcView.btcPriceWhenExit.isHidden = false
         }
@@ -352,7 +344,7 @@ extension MainViewController: UITextFieldDelegate {
     // Restricts textfields only to numbers
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         
-        let allowedCharacters = CharacterSet(charactersIn:",.0123456789 ")//Here change this characters based on your requirement
+        let allowedCharacters = CharacterSet(charactersIn: ",.0123456789 ")//Here change this characters based on your requirement
         let characterSet = CharacterSet(charactersIn: string)
         return allowedCharacters.isSuperset(of: characterSet)
     }
@@ -377,18 +369,22 @@ extension MainViewController: UITextFieldDelegate {
 
 // MARK: - NavDropMenuDelegate methods
 extension MainViewController: NavDropMenuDelegate {
+    
     func navDropMenuCellSelected(selectedRowInt: Int) {
+        
         loadUserDefaults()
         showHideBTCPriceForAltcoins()
         
         switch Settings.shared.selectedTradingPair {
-        case .XBTUSD, .XBTH20, .XBTZ19:
+        case .XBTUSD, .XBTH21, .XBTM21:
             inputCalcView.quantity.textFieldNameLabel.text = "Quantity ($)"
-        case .ADAZ19, .BCHZ19, .EOSZ19, .ETHUSD, .ETHZ19, .LTCZ19, .TRXZ19, .XRPZ19:
+        case .ETHUSD:
             let currency = String(Settings.shared.selectedTradingPair.rawValue.prefix(3))
             inputCalcView.quantity.textFieldNameLabel.text = "Quantity (\(currency))"
         }
-        lastPriceView.checkIfCollapsed()
+//        lastPriceVC.changeSubscribeArgumentsForWebsocket()
+        lastPriceVC.lastPriceView.checkIfCollapsed()
+        lastPriceVC.restartFeeding()
         calculate()
     }
 }

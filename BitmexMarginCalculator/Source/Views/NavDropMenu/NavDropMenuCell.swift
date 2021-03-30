@@ -29,7 +29,7 @@ class NavDropMenuCell: UITableViewCell {
     
     func setupCell() {
         titleLabel.textAlignment = .center
-        titleLabel.setScaledCustomFont(forFont: .RobotoRegular, textStyle: .body)
+        titleLabel.setScaledCustomFont(forFont: .robotoRegular, textStyle: .body)
         titleLabel.numberOfLines = 0
     }
     
